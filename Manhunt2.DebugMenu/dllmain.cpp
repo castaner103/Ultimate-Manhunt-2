@@ -63,6 +63,47 @@ signed int __fastcall OverwriteGetHardcodedExecutoinLevel(int ptr)
 	return result;
 }
 
+
+int explodeHead_ebx;
+int explodeHead_unk;
+int explodeHead_true = 0x5097FC;
+int explodeHead_false = 0x5097C1;
+
+void __declspec(naked) HookExtraWeaponCheck() {
+	_asm {
+		mov explodeHead_ebx, ebx
+		mov explodeHead_unk, eax
+		pushad
+	}
+//	if (explodeHead_ebx == CT_SAWNOFF || explodeHead_ebx == CT_SHOTGUN || explodeHead_ebx == CT_SHOTGUN_TORCH)
+	if (explodeHead_ebx == 52 || explodeHead_ebx == 46 || explodeHead_ebx == 47)
+	{
+		if (explodeHead_unk != *(char*)0x69939C)
+		{
+			// decrease headshot distance for shotguns
+			Memory::VP::Patch<float>(0x6991C0, 10.0);
+			_asm
+			{
+				popad
+				jmp explodeHead_true
+			}
+		}
+
+	}
+	else
+	{
+		// increase headshot distance for everything else
+		Memory::VP::Patch<float>(0x6991C0, 100.0);
+		_asm {
+			popad
+			jmp  explodeHead_false
+		}
+	}
+
+}
+
+
+
 extern "C"
 {
 	__declspec(dllexport) void InitializeASI()
@@ -105,26 +146,14 @@ extern "C"
 		printf(". OK\n");
 
 
+
 		/*
 			Enable headshot for any shooter weapon
-			Based on Ermaccer Code (https://github.com/ermaccer/Manhunt2.CleanHeadshots/blob/022ca6c7346e5d4645cff08f50c9da14fe2d0771/source/dllmain.cpp)
-
-			What we do here:
-			Pseudocode from the game:
-				302:	if ( v22 != &unk_69939C && a3 )
-			are replaced to:
-				goto 303
-
-			Overall we replace the cmp with a jmp
-
-		//activate head explosion for any firearm weapon
-		// replace CMP instruction with JMP
-		printf("Enable any headshot ..");
-		Memory::VP::Patch<char>(0x5097F1, 0xE9);
-		// jump to 0x5097FC (its the true case)
-		Memory::VP::Patch<int>(0x5097F1 + 1, (int)0x5097FC - ((int)0x5097F1 + 5));
-		printf(". OK\n");
+			Ermaccer Code (https://github.com/ermaccer/Manhunt2.CleanHeadshots/blob/022ca6c7346e5d4645cff08f50c9da14fe2d0771/source/dllmain.cpp)
 		*/
+		Memory::VP::Patch<char>(0x5097F1, 0xE9);
+		Memory::VP::Patch<int>(0x5097F1 + 1, (int)HookExtraWeaponCheck - ((int)0x5097F1 + 5));
+
 	}
 }
 
