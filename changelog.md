@@ -1,5 +1,9 @@
 # Changelog
 
+####/Manhunt2.DebugMenu/dllmain.cpp
+* Issue: Core Feature 1 - 3 State Execution Firearm
+
+
 ####/global/resource1.glg
 
 * Remove Execution Camera Shakes.
@@ -13,3 +17,5 @@
 
 Related Files: 
 * /levels/A01_Escape_Asylum/A01_Escape_Asylum#mls/modified/Issue_A01-6_JumpScare
+
+
