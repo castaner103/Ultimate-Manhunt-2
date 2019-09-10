@@ -113,6 +113,12 @@ extern "C"
 		freopen("CONIN$", "r", stdin);
 		freopen("CONOUT$", "w", stdout);
 		freopen("CONOUT$", "w", stderr);
+
+
+		printf("Enable 60 FPS patch ..");
+		Memory::VP::Patch(0x40D2A3, 0x412B);
+		printf(". OK\n");
+
 		
 		printf("Init SDK Menu ..");
 		CreateThread(nullptr, 0, reinterpret_cast<LPTHREAD_START_ROUTINE>(Init), nullptr, 0, nullptr);

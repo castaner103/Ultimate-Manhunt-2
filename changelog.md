@@ -3,7 +3,7 @@
 ####/Manhunt2.DebugMenu/dllmain.cpp
 * Issue: Core Feature 1 - 3 State Execution Firearm
 * Issue: Core Feature 2 - Normal headshots
-
+* Issue: Core Feature 9 - 60 FPS Patch
 
 ####/global/resource1.glg
 
