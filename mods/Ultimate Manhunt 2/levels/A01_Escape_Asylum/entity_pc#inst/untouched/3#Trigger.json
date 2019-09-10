@@ -1,0 +1,28 @@
+{
+    "record": "Trigger",
+    "internalName": "Trigger",
+    "entityClass": "Trigger_Inst",
+    "position": {
+        "x": -8.593326568603516,
+        "y": 0.004999999888241291,
+        "z": 64.31619262695312
+    },
+    "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0,
+        "w": 1
+    },
+    "parameters": [
+        {
+            "parameterId": "02952f00",
+            "type": "int",
+            "value": 0
+        },
+        {
+            "parameterId": "dbc52e00",
+            "type": "flo",
+            "value": 1
+        }
+    ]
+}

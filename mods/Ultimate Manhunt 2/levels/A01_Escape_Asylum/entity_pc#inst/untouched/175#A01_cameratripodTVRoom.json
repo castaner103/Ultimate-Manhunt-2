@@ -1,0 +1,38 @@
+{
+    "record": "A01_cameratripod",
+    "internalName": "A01_cameratripodTVRoom",
+    "entityClass": "Base_Inst",
+    "position": {
+        "x": 2.8870010375976562,
+        "y": 22.613000869750977,
+        "z": 54.43199920654297
+    },
+    "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0,
+        "w": 1
+    },
+    "parameters": [
+        {
+            "parameterId": "bcd42800",
+            "type": "int",
+            "value": 100
+        },
+        {
+            "parameterId": "bf4d0100",
+            "type": "flo",
+            "value": 0
+        },
+        {
+            "parameterId": "ecbdb0d9",
+            "type": "boo",
+            "value": 0
+        },
+        {
+            "parameterId": "05098c97",
+            "type": "flo",
+            "value": 0
+        }
+    ]
+}

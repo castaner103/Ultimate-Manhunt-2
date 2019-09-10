@@ -1,0 +1,38 @@
+{
+    "record": "PFX",
+    "internalName": "PFXIntroRain",
+    "entityClass": "Base_Inst",
+    "position": {
+        "x": -70.52647399902344,
+        "y": 63.09690475463867,
+        "z": 64.45258331298828
+    },
+    "rotation": {
+        "x": -0.49622398614883423,
+        "y": 0.5089390277862549,
+        "z": -0.5128369927406311,
+        "w": -0.48139500617980957
+    },
+    "parameters": [
+        {
+            "parameterId": "bcd42800",
+            "type": "int",
+            "value": 100
+        },
+        {
+            "parameterId": "bf4d0100",
+            "type": "flo",
+            "value": 0
+        },
+        {
+            "parameterId": "ecbdb0d9",
+            "type": "boo",
+            "value": 0
+        },
+        {
+            "parameterId": "05098c97",
+            "type": "flo",
+            "value": 0
+        }
+    ]
+}

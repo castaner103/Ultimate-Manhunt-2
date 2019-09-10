@@ -1,0 +1,63 @@
+{
+    "record": "EntitySound_(ES)",
+    "internalName": "EntitySoundDRIP2_(ES)02",
+    "entityClass": "Sound",
+    "position": {
+        "x": -4.543506145477295,
+        "y": 0.1735440045595169,
+        "z": 10.298945426940918
+    },
+    "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0,
+        "w": 1
+    },
+    "parameters": [
+        {
+            "parameterId": "51652b86",
+            "type": "boo",
+            "value": 0
+        },
+        {
+            "parameterId": "bd8d6c2a",
+            "type": "int",
+            "value": 8
+        },
+        {
+            "parameterId": "f6847fd9",
+            "type": "str",
+            "value": "WATERDRIP"
+        },
+        {
+            "parameterId": "19ead097",
+            "type": "int",
+            "value": 1
+        },
+        {
+            "parameterId": "e8c705c4",
+            "type": "int",
+            "value": 5
+        },
+        {
+            "parameterId": "78565cce",
+            "type": "int",
+            "value": 40
+        },
+        {
+            "parameterId": "f5d32758",
+            "type": "int",
+            "value": 100
+        },
+        {
+            "parameterId": "7b5b3ea1",
+            "type": "flo",
+            "value": 0
+        },
+        {
+            "parameterId": "8509822f",
+            "type": "flo",
+            "value": 1
+        }
+    ]
+}

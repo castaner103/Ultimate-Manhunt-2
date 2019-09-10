@@ -1,0 +1,17 @@
+{
+    "record": "PFX",
+    "internalName": "PFXBurntPile02",
+    "entityClass": "",
+    "position": {
+        "x": -10.502771377563477,
+        "y": 0.012722999788820744,
+        "z": 40.706050872802734
+    },
+    "rotation": {
+        "x": 0,
+        "y": "-0",
+        "z": "-0",
+        "w": 1
+    },
+    "parameters": []
+}

@@ -1,0 +1,68 @@
+{
+    "record": "asylum_cell_door2Crack",
+    "internalName": "E1_Cell_Door_(D)04",
+    "entityClass": "MHDoor",
+    "position": {
+        "x": -17.755695343017578,
+        "y": 7.048902988433838,
+        "z": 27.418630599975586
+    },
+    "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": -0.7071070075035095,
+        "w": 0.7071070075035095
+    },
+    "parameters": [
+        {
+            "parameterId": "8f9a5664",
+            "type": "int",
+            "value": 3
+        },
+        {
+            "parameterId": "6cb9a0b8",
+            "type": "int",
+            "value": 4
+        },
+        {
+            "parameterId": "421db23f",
+            "type": "int",
+            "value": 100
+        },
+        {
+            "parameterId": "890948d2",
+            "type": "str",
+            "value": "0,20,0,-1"
+        },
+        {
+            "parameterId": "543cecfb",
+            "type": "boo",
+            "value": 1
+        },
+        {
+            "parameterId": "79ffe893",
+            "type": "flo",
+            "value": 0
+        },
+        {
+            "parameterId": "885de242",
+            "type": "flo",
+            "value": 0
+        },
+        {
+            "parameterId": "63b19fbc",
+            "type": "int",
+            "value": 0
+        },
+        {
+            "parameterId": "add18d93",
+            "type": "boo",
+            "value": 0
+        },
+        {
+            "parameterId": "5248fa51",
+            "type": "boo",
+            "value": 0
+        }
+    ]
+}

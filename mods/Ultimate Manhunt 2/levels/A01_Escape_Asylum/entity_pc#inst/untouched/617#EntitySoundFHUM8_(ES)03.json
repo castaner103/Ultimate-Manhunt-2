@@ -1,0 +1,63 @@
+{
+    "record": "EntitySound_(ES)",
+    "internalName": "EntitySoundFHUM8_(ES)03",
+    "entityClass": "Sound",
+    "position": {
+        "x": 1.7931849956512451,
+        "y": 27.63852310180664,
+        "z": -6.686009883880615
+    },
+    "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0,
+        "w": 1
+    },
+    "parameters": [
+        {
+            "parameterId": "51652b86",
+            "type": "boo",
+            "value": 0
+        },
+        {
+            "parameterId": "bd8d6c2a",
+            "type": "int",
+            "value": 8
+        },
+        {
+            "parameterId": "f6847fd9",
+            "type": "str",
+            "value": "TRANSFORMER2"
+        },
+        {
+            "parameterId": "19ead097",
+            "type": "int",
+            "value": 1
+        },
+        {
+            "parameterId": "e8c705c4",
+            "type": "int",
+            "value": 8
+        },
+        {
+            "parameterId": "78565cce",
+            "type": "int",
+            "value": 85
+        },
+        {
+            "parameterId": "f5d32758",
+            "type": "int",
+            "value": 100
+        },
+        {
+            "parameterId": "7b5b3ea1",
+            "type": "flo",
+            "value": 0
+        },
+        {
+            "parameterId": "8509822f",
+            "type": "flo",
+            "value": 1
+        }
+    ]
+}

@@ -1,0 +1,58 @@
+{
+    "record": "asylum_elevator_door_(SD)",
+    "internalName": "Upt_Elevator_DoorUL_(SD)",
+    "entityClass": "Door_Inst",
+    "position": {
+        "x": -29.766836166381836,
+        "y": 25.24718475341797,
+        "z": 37.267478942871094
+    },
+    "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": -0.7071070075035095,
+        "w": 0.7071070075035095
+    },
+    "parameters": [
+        {
+            "parameterId": "bcd42800",
+            "type": "int",
+            "value": 100
+        },
+        {
+            "parameterId": "bf4d0100",
+            "type": "flo",
+            "value": 0
+        },
+        {
+            "parameterId": "ecbdb0d9",
+            "type": "boo",
+            "value": 0
+        },
+        {
+            "parameterId": "05098c97",
+            "type": "flo",
+            "value": 0
+        },
+        {
+            "parameterId": "02952f00",
+            "type": "int",
+            "value": 0
+        },
+        {
+            "parameterId": "32a503b7",
+            "type": "boo",
+            "value": 0
+        },
+        {
+            "parameterId": "bd897f86",
+            "type": "boo",
+            "value": 1
+        },
+        {
+            "parameterId": "4ea6c7e9",
+            "type": "str",
+            "value": "0"
+        }
+    ]
+}

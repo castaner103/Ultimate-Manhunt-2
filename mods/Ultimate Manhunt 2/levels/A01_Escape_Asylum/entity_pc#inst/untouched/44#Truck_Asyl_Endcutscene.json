@@ -1,0 +1,38 @@
+{
+    "record": "Truck_Asyl_Endcutscene",
+    "internalName": "Truck_Asyl_Endcutscene",
+    "entityClass": "Base_Inst",
+    "position": {
+        "x": 30.07857894897461,
+        "y": 16.082565307617188,
+        "z": 37.50284194946289
+    },
+    "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0.10024300217628479,
+        "w": 0.9949629902839661
+    },
+    "parameters": [
+        {
+            "parameterId": "bcd42800",
+            "type": "int",
+            "value": 100
+        },
+        {
+            "parameterId": "bf4d0100",
+            "type": "flo",
+            "value": 0
+        },
+        {
+            "parameterId": "ecbdb0d9",
+            "type": "boo",
+            "value": 0
+        },
+        {
+            "parameterId": "05098c97",
+            "type": "flo",
+            "value": 0
+        }
+    ]
+}

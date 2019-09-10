@@ -1,0 +1,17 @@
+{
+    "record": "EmptyLight01",
+    "internalName": "EmptyLight09",
+    "entityClass": "",
+    "position": {
+        "x": -11.164772987365723,
+        "y": 26.491474151611328,
+        "z": -6.670053005218506
+    },
+    "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0,
+        "w": 1
+    },
+    "parameters": []
+}

@@ -1,0 +1,28 @@
+{
+    "record": "Gen_Save_Point",
+    "internalName": "save_point_02",
+    "entityClass": "Trigger_Inst",
+    "position": {
+        "x": -4.292026996612549,
+        "y": 25.178281784057617,
+        "z": -5.990816116333008
+    },
+    "rotation": {
+        "x": "-0",
+        "y": "-0",
+        "z": -0.7071070075035095,
+        "w": 0.7071070075035095
+    },
+    "parameters": [
+        {
+            "parameterId": "02952f00",
+            "type": "int",
+            "value": 0
+        },
+        {
+            "parameterId": "dbc52e00",
+            "type": "flo",
+            "value": 1
+        }
+    ]
+}

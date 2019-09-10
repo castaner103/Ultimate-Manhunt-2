@@ -1,0 +1,38 @@
+{
+    "record": "Syringe_(CT)",
+    "internalName": "Bag_(CT)01",
+    "entityClass": "Base_Inst",
+    "position": {
+        "x": 20.87042999267578,
+        "y": 24.799354553222656,
+        "z": -5.137067794799805
+    },
+    "rotation": {
+        "x": -0.0012469999492168427,
+        "y": 0.01083299983292818,
+        "z": -0.010463999584317207,
+        "w": 0.9998859763145447
+    },
+    "parameters": [
+        {
+            "parameterId": "bcd42800",
+            "type": "int",
+            "value": 100
+        },
+        {
+            "parameterId": "bf4d0100",
+            "type": "flo",
+            "value": 0
+        },
+        {
+            "parameterId": "ecbdb0d9",
+            "type": "boo",
+            "value": 0
+        },
+        {
+            "parameterId": "05098c97",
+            "type": "flo",
+            "value": 0
+        }
+    ]
+}

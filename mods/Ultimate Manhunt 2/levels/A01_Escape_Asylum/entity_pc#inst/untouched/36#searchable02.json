@@ -1,0 +1,38 @@
+{
+    "record": "searchable",
+    "internalName": "searchable02",
+    "entityClass": "Base_Inst",
+    "position": {
+        "x": 4.748283863067627,
+        "y": 17.151180267333984,
+        "z": 28.853797912597656
+    },
+    "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0,
+        "w": 1
+    },
+    "parameters": [
+        {
+            "parameterId": "bcd42800",
+            "type": "int",
+            "value": 100
+        },
+        {
+            "parameterId": "bf4d0100",
+            "type": "flo",
+            "value": 0
+        },
+        {
+            "parameterId": "ecbdb0d9",
+            "type": "boo",
+            "value": 0
+        },
+        {
+            "parameterId": "05098c97",
+            "type": "flo",
+            "value": 0
+        }
+    ]
+}

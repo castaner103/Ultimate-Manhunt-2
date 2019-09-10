@@ -1,0 +1,38 @@
+{
+    "record": "PFX",
+    "internalName": "PFXShoot",
+    "entityClass": "Base_Inst",
+    "position": {
+        "x": -19.469768524169922,
+        "y": 4.1467390060424805,
+        "z": 42.103599548339844
+    },
+    "rotation": {
+        "x": -0.5196899771690369,
+        "y": 0.5162310004234314,
+        "z": 0.4951710104942322,
+        "w": 0.46715500950813293
+    },
+    "parameters": [
+        {
+            "parameterId": "bcd42800",
+            "type": "int",
+            "value": 100
+        },
+        {
+            "parameterId": "bf4d0100",
+            "type": "flo",
+            "value": 0
+        },
+        {
+            "parameterId": "ecbdb0d9",
+            "type": "boo",
+            "value": 0
+        },
+        {
+            "parameterId": "05098c97",
+            "type": "flo",
+            "value": 0
+        }
+    ]
+}

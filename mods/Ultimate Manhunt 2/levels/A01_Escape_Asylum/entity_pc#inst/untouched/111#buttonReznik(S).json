@@ -1,0 +1,38 @@
+{
+    "record": "EST_Garage_Button_(S)",
+    "internalName": "buttonReznik(S)",
+    "entityClass": "Base_Inst",
+    "position": {
+        "x": -34.89155197143555,
+        "y": 5.943291187286377,
+        "z": 55.19686508178711
+    },
+    "rotation": {
+        "x": "-0",
+        "y": "-0",
+        "z": "-0",
+        "w": 1
+    },
+    "parameters": [
+        {
+            "parameterId": "bcd42800",
+            "type": "int",
+            "value": 100
+        },
+        {
+            "parameterId": "bf4d0100",
+            "type": "flo",
+            "value": 0
+        },
+        {
+            "parameterId": "ecbdb0d9",
+            "type": "boo",
+            "value": 0
+        },
+        {
+            "parameterId": "05098c97",
+            "type": "flo",
+            "value": 0
+        }
+    ]
+}

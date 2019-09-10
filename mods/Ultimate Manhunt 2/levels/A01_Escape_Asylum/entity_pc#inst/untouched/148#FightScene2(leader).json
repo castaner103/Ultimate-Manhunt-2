@@ -1,0 +1,83 @@
+{
+    "record": "insane_BwhedH",
+    "internalName": "FightScene2(leader)",
+    "entityClass": "Leader_Inst",
+    "position": {
+        "x": -28.463001251220703,
+        "y": 5.959231853485107,
+        "z": 23.593759536743164
+    },
+    "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": -0.7071070075035095,
+        "w": 0.7071070075035095
+    },
+    "parameters": [
+        {
+            "parameterId": "bcd42800",
+            "type": "int",
+            "value": 100
+        },
+        {
+            "parameterId": "bf4d0100",
+            "type": "flo",
+            "value": 0
+        },
+        {
+            "parameterId": "ecbdb0d9",
+            "type": "boo",
+            "value": 0
+        },
+        {
+            "parameterId": "05098c97",
+            "type": "flo",
+            "value": 0
+        },
+        {
+            "parameterId": "b3f90806",
+            "type": "int",
+            "value": 0
+        },
+        {
+            "parameterId": "b4f90806",
+            "type": "int",
+            "value": 0
+        },
+        {
+            "parameterId": "b5f90806",
+            "type": "int",
+            "value": 0
+        },
+        {
+            "parameterId": "weapon",
+            "type": "int",
+            "value": "not defined"
+        },
+        {
+            "parameterId": "5c0ac4ce",
+            "type": "int",
+            "value": 7
+        },
+        {
+            "parameterId": "775a62a7",
+            "type": "int",
+            "value": 0
+        },
+        {
+            "parameterId": "7eb4d520",
+            "type": "int",
+            "value": 0
+        },
+        {
+            "parameterId": "7c1309af",
+            "type": "boo",
+            "value": 0
+        },
+        {
+            "parameterId": "28347608",
+            "type": "int",
+            "value": 0
+        }
+    ]
+}

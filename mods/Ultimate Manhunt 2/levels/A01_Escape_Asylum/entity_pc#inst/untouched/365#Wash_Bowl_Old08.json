@@ -1,0 +1,173 @@
+{
+    "record": "Wash_Bowl_Old",
+    "internalName": "Wash_Bowl_Old08",
+    "entityClass": "MHBasic",
+    "position": {
+        "x": -34.10820007324219,
+        "y": 0.5657370090484619,
+        "z": 48.58233642578125
+    },
+    "rotation": {
+        "x": 0.026176000013947487,
+        "y": -0.008724000304937363,
+        "z": -0.9996190071105957,
+        "w": 0.0002280000044265762
+    },
+    "parameters": [
+        {
+            "parameterId": "8f9a5664",
+            "type": "int",
+            "value": 3
+        },
+        {
+            "parameterId": "6cb9a0b8",
+            "type": "int",
+            "value": 4
+        },
+        {
+            "parameterId": "421db23f",
+            "type": "int",
+            "value": 100
+        },
+        {
+            "parameterId": "890948d2",
+            "type": "str",
+            "value": "0,20,0,-1"
+        },
+        {
+            "parameterId": "8a0948d2",
+            "type": "str",
+            "value": ""
+        },
+        {
+            "parameterId": "8b0948d2",
+            "type": "str",
+            "value": ""
+        },
+        {
+            "parameterId": "8c0948d2",
+            "type": "str",
+            "value": ""
+        },
+        {
+            "parameterId": "aab57d84",
+            "type": "str",
+            "value": ""
+        },
+        {
+            "parameterId": "94af5ed1",
+            "type": "boo",
+            "value": 0
+        },
+        {
+            "parameterId": "32a503b7",
+            "type": "boo",
+            "value": 1
+        },
+        {
+            "parameterId": "8c552d2b",
+            "type": "boo",
+            "value": 0
+        },
+        {
+            "parameterId": "be38809f",
+            "type": "boo",
+            "value": 0
+        },
+        {
+            "parameterId": "add18d93",
+            "type": "boo",
+            "value": 0
+        },
+        {
+            "parameterId": "f0ef8626",
+            "type": "boo",
+            "value": 0
+        },
+        {
+            "parameterId": "564860cc",
+            "type": "boo",
+            "value": 0
+        },
+        {
+            "parameterId": "15d86efb",
+            "type": "boo",
+            "value": 0
+        },
+        {
+            "parameterId": "5248fa51",
+            "type": "boo",
+            "value": 0
+        },
+        {
+            "parameterId": "f99bec77",
+            "type": "boo",
+            "value": 0
+        },
+        {
+            "parameterId": "bb6def2c",
+            "type": "boo",
+            "value": 0
+        },
+        {
+            "parameterId": "9afa2bb7",
+            "type": "boo",
+            "value": 0
+        },
+        {
+            "parameterId": "d165ac23",
+            "type": "boo",
+            "value": 0
+        },
+        {
+            "parameterId": "29424c42",
+            "type": "boo",
+            "value": 0
+        },
+        {
+            "parameterId": "6220faf6",
+            "type": "boo",
+            "value": 0
+        },
+        {
+            "parameterId": "e1746506",
+            "type": "boo",
+            "value": 0
+        },
+        {
+            "parameterId": "e3746506",
+            "type": "boo",
+            "value": 0
+        },
+        {
+            "parameterId": "743c962b",
+            "type": "boo",
+            "value": 0
+        },
+        {
+            "parameterId": "1c98f13d",
+            "type": "flo",
+            "value": 0
+        },
+        {
+            "parameterId": "94e706e6",
+            "type": "boo",
+            "value": 0
+        },
+        {
+            "parameterId": "3d4ea211",
+            "type": "boo",
+            "value": 0
+        },
+        {
+            "parameterId": "3e2bf86c",
+            "type": "boo",
+            "value": 0
+        },
+        {
+            "parameterId": "21c6e310",
+            "type": "boo",
+            "value": 0
+        }
+    ]
+}

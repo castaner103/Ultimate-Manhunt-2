@@ -26,3 +26,10 @@
 #### levels/A01_Escape_Asylum/A01_Escape_Asylum#mls/modified/46#playerscript.srce
 
 * Issue: A01-4 Alternative end cutscene
+
+
+#### levels/A01_Escape_Asylum/entity_pc#inst/modified/Issue_A01-3_DeadInCell
+
+* Issue: A01-3 Dead body in cell
+levels/A01_Escape_Asylum/A01_Escape_Asylum#mls/modified/0#levelscript.srce
+

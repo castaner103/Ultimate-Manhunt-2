@@ -1,0 +1,38 @@
+{
+    "record": "Null",
+    "internalName": "RadioPlayer",
+    "entityClass": "Base_Inst",
+    "position": {
+        "x": -3.4041099548339844,
+        "y": 18.783565521240234,
+        "z": 22.195594787597656
+    },
+    "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": -0.05465000122785568,
+        "w": 0.9985060095787048
+    },
+    "parameters": [
+        {
+            "parameterId": "bcd42800",
+            "type": "int",
+            "value": 100
+        },
+        {
+            "parameterId": "bf4d0100",
+            "type": "flo",
+            "value": 0
+        },
+        {
+            "parameterId": "ecbdb0d9",
+            "type": "boo",
+            "value": 0
+        },
+        {
+            "parameterId": "05098c97",
+            "type": "flo",
+            "value": 0
+        }
+    ]
+}

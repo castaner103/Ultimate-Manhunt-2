@@ -1,0 +1,58 @@
+{
+    "record": "asylum_doorA_(D)",
+    "internalName": "asylum_doorA_(D)",
+    "entityClass": "Door_Inst",
+    "position": {
+        "x": 40.76756286621094,
+        "y": 17.21036148071289,
+        "z": 34.9815559387207
+    },
+    "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0,
+        "w": 1
+    },
+    "parameters": [
+        {
+            "parameterId": "bcd42800",
+            "type": "int",
+            "value": 100
+        },
+        {
+            "parameterId": "bf4d0100",
+            "type": "flo",
+            "value": 0
+        },
+        {
+            "parameterId": "ecbdb0d9",
+            "type": "boo",
+            "value": 0
+        },
+        {
+            "parameterId": "05098c97",
+            "type": "flo",
+            "value": 0
+        },
+        {
+            "parameterId": "02952f00",
+            "type": "int",
+            "value": 0
+        },
+        {
+            "parameterId": "32a503b7",
+            "type": "boo",
+            "value": 1
+        },
+        {
+            "parameterId": "bd897f86",
+            "type": "boo",
+            "value": 1
+        },
+        {
+            "parameterId": "4ea6c7e9",
+            "type": "str",
+            "value": "0"
+        }
+    ]
+}

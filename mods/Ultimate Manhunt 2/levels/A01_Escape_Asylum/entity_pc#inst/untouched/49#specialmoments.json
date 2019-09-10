@@ -1,0 +1,38 @@
+{
+    "record": "Null",
+    "internalName": "specialmoments",
+    "entityClass": "Base_Inst",
+    "position": {
+        "x": -12.739678382873535,
+        "y": 24.092191696166992,
+        "z": 11.479472160339355
+    },
+    "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0,
+        "w": 1
+    },
+    "parameters": [
+        {
+            "parameterId": "bcd42800",
+            "type": "int",
+            "value": 100
+        },
+        {
+            "parameterId": "bf4d0100",
+            "type": "flo",
+            "value": 0
+        },
+        {
+            "parameterId": "ecbdb0d9",
+            "type": "boo",
+            "value": 0
+        },
+        {
+            "parameterId": "05098c97",
+            "type": "flo",
+            "value": 0
+        }
+    ]
+}

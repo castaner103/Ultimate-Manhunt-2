@@ -1,0 +1,38 @@
+{
+    "record": "PFX",
+    "internalName": "elev_switch_faulty_fx",
+    "entityClass": "Base_Inst",
+    "position": {
+        "x": -29.898189544677734,
+        "y": 6.979979038238525,
+        "z": 37.8670768737793
+    },
+    "rotation": {
+        "x": 0,
+        "y": "-0",
+        "z": -0.7071070075035095,
+        "w": 0.7071070075035095
+    },
+    "parameters": [
+        {
+            "parameterId": "bcd42800",
+            "type": "int",
+            "value": 100
+        },
+        {
+            "parameterId": "bf4d0100",
+            "type": "flo",
+            "value": 0
+        },
+        {
+            "parameterId": "ecbdb0d9",
+            "type": "boo",
+            "value": 0
+        },
+        {
+            "parameterId": "05098c97",
+            "type": "flo",
+            "value": 0
+        }
+    ]
+}

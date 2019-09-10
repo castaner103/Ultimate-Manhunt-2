@@ -1,0 +1,148 @@
+{
+    "record": "industrial_lightB(L)",
+    "internalName": "industrial_lightB(L)36",
+    "entityClass": "Light_Inst",
+    "position": {
+        "x": -11.555364608764648,
+        "y": 4.683426856994629,
+        "z": 22.639516830444336
+    },
+    "rotation": {
+        "x": 0.5,
+        "y": -0.5,
+        "z": -0.5,
+        "w": -0.5
+    },
+    "parameters": [
+        {
+            "parameterId": "5846b304",
+            "type": "boo",
+            "value": 1
+        },
+        {
+            "parameterId": "4fe68d23",
+            "type": "boo",
+            "value": 1
+        },
+        {
+            "parameterId": "ba69a65d",
+            "type": "int",
+            "value": 3
+        },
+        {
+            "parameterId": "0c62150c",
+            "type": "int",
+            "value": 20
+        },
+        {
+            "parameterId": "b439eab7",
+            "type": "int",
+            "value": 1
+        },
+        {
+            "parameterId": "e92552f6",
+            "type": "flo",
+            "value": 0.44999998807907104
+        },
+        {
+            "parameterId": "ff64b3d2",
+            "type": "flo",
+            "value": 0.5
+        },
+        {
+            "parameterId": "363d8ec0",
+            "type": "flo",
+            "value": 0.550000011920929
+        },
+        {
+            "parameterId": "66ff2476",
+            "type": "boo",
+            "value": 1
+        },
+        {
+            "parameterId": "fa04936e",
+            "type": "boo",
+            "value": 0
+        },
+        {
+            "parameterId": "cd066eb5",
+            "type": "boo",
+            "value": 1
+        },
+        {
+            "parameterId": "78658efc",
+            "type": "boo",
+            "value": 1
+        },
+        {
+            "parameterId": "f45114fb",
+            "type": "boo",
+            "value": 0
+        },
+        {
+            "parameterId": "d76afd1a",
+            "type": "flo",
+            "value": 1.5
+        },
+        {
+            "parameterId": "8357b601",
+            "type": "int",
+            "value": 170
+        },
+        {
+            "parameterId": "a706d9b0",
+            "type": "int",
+            "value": 0
+        },
+        {
+            "parameterId": "738f4ffa",
+            "type": "int",
+            "value": 4294967295
+        },
+        {
+            "parameterId": "257857a2",
+            "type": "boo",
+            "value": 0
+        },
+        {
+            "parameterId": "a1903346",
+            "type": "int",
+            "value": 1000
+        },
+        {
+            "parameterId": "7fc8ce3b",
+            "type": "int",
+            "value": 1000
+        },
+        {
+            "parameterId": "4d0ac9ed",
+            "type": "int",
+            "value": 0
+        },
+        {
+            "parameterId": "37459972",
+            "type": "int",
+            "value": 0
+        },
+        {
+            "parameterId": "d790e1e4",
+            "type": "boo",
+            "value": 0
+        },
+        {
+            "parameterId": "ef337ffd",
+            "type": "boo",
+            "value": 0
+        },
+        {
+            "parameterId": "bf4d0100",
+            "type": "flo",
+            "value": 0
+        },
+        {
+            "parameterId": "ecbdb0d9",
+            "type": "boo",
+            "value": 0
+        }
+    ]
+}

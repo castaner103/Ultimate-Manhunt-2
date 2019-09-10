@@ -1,0 +1,58 @@
+{
+    "record": "LighteningFlash",
+    "internalName": "LighteningFlash_(L)",
+    "entityClass": "MHLight",
+    "position": {
+        "x": 16.68018341064453,
+        "y": 23.593000411987305,
+        "z": 4.252262115478516
+    },
+    "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0,
+        "w": 1
+    },
+    "parameters": [
+        {
+            "parameterId": "421db23f",
+            "type": "int",
+            "value": 100
+        },
+        {
+            "parameterId": "6cb9a0b8",
+            "type": "int",
+            "value": 4
+        },
+        {
+            "parameterId": "890948d2",
+            "type": "str",
+            "value": "0,20,0,-1"
+        },
+        {
+            "parameterId": "8a0948d2",
+            "type": "str",
+            "value": ""
+        },
+        {
+            "parameterId": "5248fa51",
+            "type": "boo",
+            "value": 0
+        },
+        {
+            "parameterId": "8f9a5664",
+            "type": "int",
+            "value": 18
+        },
+        {
+            "parameterId": "15d86efb",
+            "type": "boo",
+            "value": 0
+        },
+        {
+            "parameterId": "add18d93",
+            "type": "boo",
+            "value": 0
+        }
+    ]
+}
