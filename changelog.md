@@ -4,6 +4,7 @@
 * Issue: Core Feature 1 - 3 State Execution Firearm
 * Issue: Core Feature 2 - Normal headshots
 * Issue: Core Feature 9 - 60 FPS Patch
+* Issue: Core Feature 24 - Blood stay longer on wall and floor
 
 ####/global/resource1.glg
 
