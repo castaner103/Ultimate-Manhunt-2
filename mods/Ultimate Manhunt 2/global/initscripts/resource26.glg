@@ -1,0 +1,1697 @@
+
+# PS2 menu script
+
+#[UWEP] added default settings and default text scale
+#global default menu settings
+RECORD DEFAULTS
+	# this is the default for all text scale values for all items/texts etc. which 
+	# either have no text scale specified, or whose scale values are 0.
+	#
+	# Note that DEFAULT_TEXT_SCALE can also be specified within a *PAGE* record.
+	# In this case, the given default text scale is only valid within that page
+	# for all item declarations that follow it.
+	#
+	DEFAULT_TEXT_SCALE 0.90,1.05
+	
+	# [UWEP] added font configurability
+	#
+	# Allows to specify the default font used for newly created screen items.
+	# 
+	# like DEFAULT_TEXT_SCALE, this DEFAULT_TEXT_FONT can also be specified
+	# within a page, where it's scope ends at the end of a *PAGE* record.
+	#
+	# font ID's:
+	# 0 ... debug font. do not use
+	# 1 ... 'default' font (helvetica)
+	# 2 ... 'menu' font (typewriter font)
+	# 3 ... reserved
+	#
+	DEFAULT_TEXT_FONT 2
+	
+	# [UWEP] added font colour configurability
+	# 
+	# allows to set the text colour that is used by default for newly created
+	# screen items.
+	#
+	# the syntax is:
+	#
+	# DEFAULT_COLOR <R>, <G>, <B>, <A>
+	#
+	# where <R>, <G>, <B> and <A> are the red, green, blue and alpha components
+	# of the font colour, ranging from 0 to 255.
+	#
+	# like DEFAULT_TEXT_SCALE, this DEFAULT_TEXT_FONT can also be specified
+	# within a page, where it's scope ends at the end of a *PAGE* record.
+	#
+	DEFAULT_COLOR 200, 210, 175, 170
+	
+	# [UWEP] added new default settings for FLEXTEXT items
+
+	# this sets the default text effect used for effect capable text fields
+	# FLEXTEXT, GOALFLEXTEXT and LEVELNAMEFLEXTEXT
+	#
+	# possible values:
+	# * NONE
+	# * SHADOW
+	# * OUTLINE
+	#
+	# this can also be specified within a page record
+	#
+	DEFAULT_TEXT_EFFECT NONE
+	
+	# this sets the default vertical text align for text items that support
+	# alignment: FLEXTEXT, GOALFLEXTEXT and LEVELNAMEFLEXTEXT
+	#
+	# Note that these items define a box in which the text is layed out - 
+	# the alignment values align the text within that box.
+	#
+	# possible values:
+	# * TOP
+	# * CENTER
+	# * BOTTOM
+	# * JUSTIFY	(this streches the text so that it aligns to both the top and the
+	#           bottom border of the box)
+	#
+	# this can also be specified within a page record
+	#
+	DEFAULT_VALIGN TOP
+	
+	# this sets the default horizontal text align for text items that support
+	# alignment
+	# (FLEXTEXT, GOALFLEXTEXT and LEVELNAMEFLEXTEXT)
+	#
+	# Note that these items define a box in which the text is layed out - 
+	# the alignment values align the text within that box.
+	#
+	# possible values:
+	# * LEFT
+	# * CENTER
+	# * RIGHT
+	# * JUSTIFY	(this streches the text so that it aligns to both the left and the
+	#           right border of the box)
+	#
+	# this can also be specified within a page record
+	#
+	DEFAULT_HALIGN LEFT	
+	
+	# [UWEP] added selection frame configurability
+	#
+	# this can be used to set the offset of the highlight frame drawn
+	# around a selected text item. The offsets are measured from the 
+	# text's bounding box outwards
+	#
+	# the selection texts are calculated this way
+	# the syntax for SELECTION_OFFSET is:
+	# 
+	# SELECTION_OFFSET <left>, <top>, <right>, <bottom>
+	#
+	# The selection frame's coordinates are calculated this way (assume
+	# that tbbox is the text's bounding box):
+	#
+	# selX1 = ttbbox.x1 - left
+	# selY1 = ttbbox.y1 - top
+	# selX2 = ttbbox.x2 + right
+	# selY2 = ttbbox.y2 + bottom
+	# 
+	SELECTION_OFFSET 0.003, -0.012, 0.003, -0.003
+	
+	# [UWEP] B*22729 - Align name of save and save details
+	# the offset between a savegame slot line and the SLOTINFO displayed
+	# at that location.
+	SAVEGAMES_PAGE_SLOTINFO_YOFFSET -0.02
+	
+	# [UWEP] B*16686: made the button info position configurable here,
+	# and put in reasonable defaults that fix the issue (texts were not
+	# in safe area)
+	#
+	# the following settings change the button info texts in a menu page
+	# (text position, scale, and gap between separate button info texts,
+	# if more than one is specified)
+	BUTTONINFO_SCALE 0.8,0.87
+	BUTTONINFO_POS	0.08,0.88
+	BUTTONINFO_GAP	0.03	
+	BUTTONINFO_TEXT_EFFECT SHADOW
+	BUTTONINFO_COLOR 195,205,170,180
+
+	COLORRAMP_NAME 		"FE_genramps"
+	COLORRAMP_RAMP_ID	3
+	COLORRAMP_SECONDS_IN	0.10
+	COLORRAMP_SECONDS_ON	0.10
+	COLORRAMP_SECONDS_OUT	0.10
+	COLORRAMP_FREQUENCY	1
+END
+
+RECORD BACKGROUNDANIM
+	BGK_ANIM_NAME	"main_bkgrnd_anim"
+	LOOPED		on
+
+	FRAME		start_bkgrnd		2800
+	
+	FRAME		start_bkgrnd02		80
+	FRAME		start_bkgrnd		3800
+	
+	FRAME		start_bkgrnd03		40
+	FRAME		start_bkgrnd		3200
+	FRAME		start_bkgrnd04		40
+END
+
+RECORD BACKGROUNDANIM
+	BGK_ANIM_NAME	"knife_bkgrnd_anim"
+	LOOPED		off
+
+	FRAME		front_sett_bkgrnd	1000
+	FRAME		front_sett_bkgrnd02	80
+END
+
+RECORD BACKGROUNDANIM
+	BGK_ANIM_NAME	"selection_bkgrnd_anim"
+	LOOPED		off
+
+	FRAME		front_sel_ep_bkgrnd	1000
+	FRAME		front_sel_ep_bkgrnd02	80
+END
+
+RECORD BACKGROUNDANIM
+	BGK_ANIM_NAME	"load_bkgrnd_anim"
+	LOOPED		off
+
+	FRAME		front_sett_bkgrnd	1000
+	FRAME		front_sett_bkgrnd02	80
+END
+
+RECORD BACKGROUNDANIM
+	BGK_ANIM_NAME	"pills_bkgrnd_anim"
+	LOOPED		off
+
+	FRAME		front_load_bkgrnd	1000
+	FRAME		front_load_bkgrnd02	80
+END
+
+
+RECORD EFFECTDATA
+	EFFECTTYPE		"TEXT_WARP"
+	
+	OFFSET			0.09,0
+	ALPHAMOD		0.3
+END	
+
+RECORD EFFECTDATA
+	EFFECTTYPE		"TEXT_BOLD_DUP"
+	
+	OFFSET			0.005,0.001
+END	
+
+RECORD EFFECTDATA
+	EFFECTTYPE		"TEXT_ALPHA_DUP"
+	
+	OFFSET			0.01,0.002
+	ALPHAMOD		0.2		
+END	
+
+RECORD EFFECTDATA
+	EFFECTTYPE		"RANDOM_OVERLAY"
+	
+	SIZERANGE		1.2,1.3
+	TIMERANGE		2.9,4.9
+	EXPOSURETIME		0.01
+	
+	TEX1			"FE_scratches01"
+	TEX2			"FE_scratches02"
+	TEX3			"FE_scratches03"
+	TEX4			"FE_scratches04"
+	TEX5			"FE_scratches05"
+	
+END
+
+RECORD LAYEREDBACKGROUND
+
+	NAME		"BKGD_start"
+
+	LAYER1MULTX	1.4
+	SIZEMULT 	1.1
+	
+	LAYER1		"FE_start_layer01"	3	1		0.1,0.1
+	LAYER2		"FE_start_layer02"	4	1		0.1,0.1
+	LAYER3		"FE_start_layer03"	5	1		0.2,0.2
+	LAYER_BW	"FE_start_layer03_bw" 	0.5    			25
+
+	
+EYE_INSET	"FE_start_eye"		0.30,0.3		0.4,0.38
+
+END 
+
+RECORD LAYEREDBACKGROUND
+	NAME		"BKGD_mainmenu"
+
+	LAYER1MULTX	1.4
+	SIZEMULT 	1.1
+	
+	LAYER1		"FE_mainmenu_layer01"	3	1		0.1,0.1
+	LAYER2		"FE_mainmenu_layer02"	4	1		0.1,0.1
+	LAYER3		"FE_mainmenu_layer03"	5	1		0.2,0.2
+	LAYER_BW	"FE_mainmenu_layer03_bw" 	0.5    		25
+END
+
+RECORD LAYEREDBACKGROUND
+	NAME 		"BKGD_episodel"
+
+	LAYER1MULTX	1.4
+	SIZEMULT 	1.1
+	
+	LAYER1		"FE_episodesel_layer01"	2	1		0.1,0.1
+	LAYER2		"FE_episodesel_layer02"	4	1		0.1,0.1
+	LAYER3		"FE_episodesel_layer03"	5	1		0.2,0.2
+	LAYER_BW	"FE_episodesel_layer03_bw"      1               25
+
+	TV_INSET_CREATE
+
+	TV_FLASH_INSET	"aflash01"	0.28,-0.2	0.16,0.28
+	TV_FLASH_INSET	"aflash02"	0.05,-0.43	0.35,0.35
+	TV_FLASH_INSET	"aflash03"	-0.14,-0.1	0.18,0.35
+	TV_FLASH_INSET	"aflash04"	0.41,0.45	0.32,0.46
+
+	TV_FLASH_TIME_ON		0.5
+	TV_FLASH_TIME_OFF		10.0
+	TV_FLASH_DISPLAY_PROBABILITY1 	25.0
+	TV_FLASH_DISPLAY_PROBABILITY2 	15.0
+END
+
+RECORD LAYEREDBACKGROUND
+	NAME		"BKGD_playbright"
+
+	LAYER1MULTX	1.4
+	SIZEMULT 	1.1
+	
+	LAYER1		"FE_play_layer01"		2	1		0.1,0.1
+	LAYER2		"FE_play_layer02"		4	1		0.1,0.1
+	LAYER3		"FE_play_layer03"		5	1		0.2,0.2
+	LAYER_BW	"FE_play_layer03_bw"		0.5			25
+END
+
+RECORD LAYEREDBACKGROUND
+	NAME		"BKGD_settings"
+
+	LAYER1MULTX	1.4
+	SIZEMULT 	1.1
+	
+	LAYER1		"FE_settings_layer01"	3	1		0.1,0.1
+	LAYER2		"FE_settings_layer02"	4	1		0.1,0.1
+	LAYER3		"FE_settings_layer03"	5	1		0.2,0.2
+	LAYER_BW	"FE_settings_layer03_bw"	1		25
+END
+
+###############################################################################
+########################## start language selection ###########################
+###############################################################################
+
+RECORD START_LANGUAGE_SELECTION_PAGE
+	PAGENAME	"start language selection"
+	BACKGROUND	"front_sett_bkgrnd02"		0.6,0 	0.37,0.97
+	CENTERITEMS	no		0.08
+
+	DEFAULT_COLOR 150, 30, 0, 170
+	TEXT		"LANGUAT"			0.08,0.124	1.3,1.4
+	LINESHEADER "FE_lines_header"		0.0,0.0		0.9,1.0
+
+	DEFAULT_COLOR 200, 210, 175, 170
+	COMMAND		"setLanguage(english)"		0.1,0.26	"ENG"		"loadsave"
+	COMMAND		"setLanguage(french)"		0.1,0.32	"FRA"		"loadsave"
+	COMMAND		"setLanguage(german)"		0.1,0.38	"GER"		"loadsave"
+	COMMAND		"setLanguage(italian)"		0.1,0.44	"ITA"		"loadsave"
+	COMMAND		"setLanguage(spanish)"		0.1,0.5 	"ESP"		"loadsave"
+
+	BUTTONINFO "MUPD"
+# [UWEP] fixed B*22310 - Initial language selection screen displays wrong prompts
+	BUTTONINFO "SELECT"
+END
+
+
+###############################################################################
+########################## main ###############################################
+###############################################################################
+# FE_title_small parameters: first set is position, 2nd is scale.
+
+RECORD START_PAGE
+
+	PAGENAME 	"start"
+	PARENT		""
+
+	CENTERITEMS	no 		0.10
+
+	TITLE		"FE_title_small"		0.12,0.12		0.52, 0.15
+	LINESHEADER 	"FE_lines_header"		-0.22,0.05	2.0,1.1
+
+	MODIFIER	EFFECT		WARPING  	DISABLE
+
+	LAYEREDBACKGROUND "BKGD_start"
+
+	RANDOMPOS   0.0,0.0
+	RANDOMPOS   0.1,0.0
+	RANDOMPOS   0.0,0.1
+	RANDOMPOS   0.1,0.1
+
+	INSET		"FE_start_eye"		0.2,0.2		0.2,0.2
+
+	CENTERITEMS	right 		0.75
+
+	DEFAULT_COLOR 150, 30, 0, 170
+	DEFAULT_TEXT_SCALE 1.3,1.4
+	STARTLINK	"loadsave"	0.5,0.8		"START"		BANKGRDSWEEP
+END 
+
+RECORD LAYERED_PAGE
+	PAGENAME		"loadsave"
+	PARENT			"start"
+	BK_TRANSITION 		BACKGRDSWEEP
+	
+	CENTERITEMS		no			0.08
+
+	DEFAULT_COLOR 		150, 30, 0, 170
+
+	TEXT			"PROFILE"		0.08,0.124	1.3,1.4	
+	LINESHEADER 		"FE_lines_header"	0.0,0.0		0.9,1.0
+
+	LAYEREDBACKGROUND 	"BKGD_playbright"
+		
+	RANDOMPOS   -0.3,0.0
+	RANDOMPOS   -0.5,0.0
+	RANDOMPOS   -0.3,-0.1
+	RANDOMPOS   -0.5,-0.1
+
+	DEFAULT_COLOR 	200, 210, 175, 170		
+	
+	LINKTOPAGE	"main"			0.1,0.26		"PATIENT"	BACKGRDSWEEP
+	LINKTOPAGE	"new game confirm"	0.1,0.32		"NEWG"		BACKGRDSWEEP
+	LINKTOPAGE	"load game"		0.1,0.38		"LOADG"		BACKGRDSWEEP
+	LINKTOPAGE	"delete game"		0.1,0.44		"DELETEG" 	BACKGRDSWEEP 
+	LINKTOPAGE	"settings"		0.1,0.50		"SETT"		BACKGRDSWEEP
+	COMMAND		"QuitGame"		0.1,0.56		"QUIT"		"loadsave"	
+	LINKTOPAGE	"select episode1"	0.1,0.74		"DEV SELECTION"	BACKGRDSWEEP
+	
+
+	
+END
+
+RECORD LAYERED_PAGE
+	PAGENAME	"main"
+	PARENT		"loadsave"
+	BK_TRANSITION	BACKGRDSWEEP
+	
+	CENTERITEMS	left		0.10
+	
+	TITLE		"FE_title_small"	0.079,0.1	0.35, 0.1
+	LINESHEADER 	"FE_lines_header"	0.0,0.0		0.9,1.0
+	
+	LAYEREDBACKGROUND "BKGD_mainmenu"
+	
+	RANDOMPOS   -0.3,0.0
+	RANDOMPOS   -0.5,0.0
+	RANDOMPOS   -0.3,-0.1
+	RANDOMPOS   -0.5,-0.1
+	
+	COMMAND		"play game"			0.08,0.26		"PLAY"		"new game"
+	COMMAND		"scene select test"		0.08,0.32		"SELSCE"	"scene selection"
+	#LINKTOPAGE	"scene selection"		0.08,0.32		"SELSCE"	BACKGRDSWEEP
+	#LINKTOPAGE	"settings"			0.08,0.40		"SETT"		BACKGRDSWEEP
+	
+	#LINKTOPAGE	"new game"			0.08,0.44		"new game"
+	#LINKTOPAGE	"load game"			0.08,0.50		"load game"
+
+	
+	COMMAND		"Cancel"			0.1,0.90		"BACK"	"loadsave"
+
+	
+END
+
+RECORD PAGE
+	PAGENAME	"scene select test"
+	PARENT		"main"
+	CENTERITEMS	middle		0.5
+
+	# [UWEP] fixed quit page for R*N's HUD design
+	DEFAULT_TEXT_FONT 1
+	TEXT		"PROGRES"		0.2,0.37	1.2,1.2
+	
+	# [UWEP] fixed quit page for R*N's HUD design
+	DEFAULT_TEXT_FONT 2	
+	LINKTOPAGE	"main"				0.4,0.45	"NO"	BACKGRDSWEEP
+	LINKTOPAGE	"scene selection"	0.4,0.51	"YES"		BACKGRDSWEEP
+	
+
+END
+
+
+#RECORD PAGE
+#	PAGENAME	"main"
+#	BKGANIM		"main_bkgrnd_anim"		0.25,0.05 	0.7,0.9
+#	PARENT		""
+#	CENTERITEMS	left		0.08
+#	
+#	COMMAND		"play game"			0.08,0.26		"PLAY"		"play brightness"
+#	LINKTOPAGE	"new game"			0.08,0.32		"NEWG"
+#	LINKTOPAGE	"scene selection"		0.08,0.38		"SELSCE"
+#	LINKTOPAGE	"load game"			0.08,0.44		"LOADG"
+#
+#	LINKTOPAGE	"settings"			0.08,0.50		"SETT"
+#	
+#	COMMAND		"play from hub"			0.08,0.62		"PLAY FROM HUB"	""
+#	LINKTOPAGE	"select episode1"		0.08,0.68		"DEV SELECTION"
+#	
+#	PIC		"manh_logo_256"			0.08,0.10		0.35,0.1	
+#	
+#	BUTTONINFO	"MUPD"
+#	BUTTONINFO	"SELECT"
+#END
+
+
+###############################################################################
+########################## SCENE SELECTION ####################################
+###############################################################################
+
+RECORD SCENESELECTION_PAGE
+	PAGENAME	"scene selection"
+	BKGANIM		"selection_bkgrnd_anim"		0.63,0 	0.37,1
+	PARENT		"main"
+	BK_TRANSITION	BACKGRDSWEEP
+	
+	LAYEREDBACKGROUND 	"BKGD_episodel"
+
+	RANDOMPOS   -0.4,0.0
+	RANDOMPOS   -0.6,0.0
+	RANDOMPOS   -0.4,-0.1
+	RANDOMPOS   -0.6,-0.1
+	
+	LINESHEADER 	"FE_lines_header"	0.0,0.0		0.9,1.0
+
+	DEFAULT_COLOR 150, 30, 0, 170
+	TEXT		"SEL"			0.08,0.124	1.3,1.4
+
+	PIC		"levelPic"		0.50,0.45	0.35,0.47
+
+	DEFAULT_COLOR 200, 210, 175, 170
+	EPISODE		"levelName"		0.10,0.26 	""	
+	EPISODE		"levelName"		0.10,0.36	"" 
+	EPISODE		"levelName"		0.10,0.46	"" 
+	EPISODE		"levelName"		0.10,0.56	"" 
+	EPISODE		"levelName"		0.10,0.66 	"" 
+	
+
+	SELECTIONTRANSITIONTIME	0.2
+	SELECTIONTRANSITION	"a00"
+
+	# 			"string in table"	"picName"	"command to execute on selection"	"level name"
+# 	ADDTOSELECTIONLIST	"B00_TestJumpnClimb"	"a01"		"load level(B00_TestJumpnClimb)"	"B00_TestJumpnClimb"
+	ADDTOSELECTIONLIST	"EXETUT"		"none"		"Execution Tutorial"			"Execution_Tutorial"
+	ADDTOSELECTIONLIST	"LVL_1"			"a01"		"load level(A01_Escape_Asylum)"		"A01_Escape_Asylum"
+	ADDTOSELECTIONLIST	"LVL_2"			"a02"		"load level(A02_The_Old_House)"		"A02_The_Old_House"
+	ADDTOSELECTIONLIST	"LVL_4"			"a04"		"load level(A04_SM_Nightclub)"		"A04_SM_Nightclub"
+	ADDTOSELECTIONLIST	"LVL_7"			"a07"		"load level(A07_Tolerance_Zone)"	"A07_Tolerance_Zone"
+	ADDTOSELECTIONLIST	"LVL_14"		"a14"		"load level(A14_SugarFactory)"		"A14_SugarFactory"
+
+	ADDTOSELECTIONLIST	"LVL_7B"		"a07B"		"load level(A07_2Tolerance_Zone)"	"A07_2Tolerance_Zone"
+	ADDTOSELECTIONLIST	"LVL_10"		"a10"		"load level(A10_Brothel)"		"A10_Brothel"
+	ADDTOSELECTIONLIST	"LVL_12"		"a12"		"load level(A12_Plaza)"			"A12_Plaza"
+	ADDTOSELECTIONLIST	"LVL_6"			"a06"		"load level(A06_CIA_Trap)"		"A06_CIA_Trap"
+	ADDTOSELECTIONLIST	"LVL_9"			"a09"		"load level(A09_Burn)"			"A09_Burn"
+
+	ADDTOSELECTIONLIST	"LVL_11"		"a11"		"load level(A11_Medicine_Lab)"		"A11_Medicine_Lab"
+	ADDTOSELECTIONLIST	"LVL_16"		"a16"		"load level(A16_TV_Studio)"		"A16_TV_Studio"
+	ADDTOSELECTIONLIST	"LVL_17"		"a17"		"load level(A17_Creepy_Farm)"		"A17_Creepy_Farm"
+	ADDTOSELECTIONLIST	"LVL_3"			"a03"		"load level(A03_Neighbourhood)"		"A03_Neighbourhood"
+	ADDTOSELECTIONLIST	"LVL_18"		"a18"		"load level(A18_Manor)"			"A18_Manor"
+
+	ADDTOSELECTIONLIST	"LVL_15"		"a15"		"load level(A15_Cemetery)"	"A15_Cemetery"
+		
+#	ADDTOSELECTIONLIST	"LVL_E1"		"a20"		"load level(A20_E1)"		"A20_E1"
+#	ADDTOSELECTIONLIST	"LVL_E2"		"a20"		"load level(A20_E2)"		"A20_E2"
+	
+# [UWEP]
+# B*23511 - [VIE] Add bonus levels to level selection screen
+# B*23513 - [VIE] Make unlocking of bonus levels possible
+# added bonus levels
+
+# [GARETH] B*24340 : [VIE] Please disable the bonus levels for pre-submission
+#	NEXTGROUP
+	
+#	ADDTOSELECTIONLIST	"LVL_22"		"a22"		"load level(A22_Bonus1)"	"A22_Bonus1"
+#	ADDTOSELECTIONLIST	"LVL_23"		"a23"		"load level(A23_Bonus2)"	"A23_Bonus2"
+#	ADDTOSELECTIONLIST	"LVL_24"		"a24"		"load level(A24_Bonus3)"	"A24_Bonus3"
+#	ADDTOSELECTIONLIST	"LVL_25"		"a25"		"load level(A25_Bonus4)"	"A25_Bonus4"
+
+COMMAND		"Previous"			0.10,0.80	"PREV"	
+COMMAND		"Next"				0.50,0.80	"NEXT"
+
+COMMAND		"Cancel"			0.1,0.90	"BACK"		"main"
+END
+
+
+###############################################################################
+########################## PLAY MENU ##########################################
+###############################################################################
+RECORD LAYERED_PAGE
+	PAGENAME	"play brightness"
+	PARENT		"main"
+	
+
+
+
+	CENTERITEMS	left		0.08
+	
+	LAYEREDBACKGROUND 	"BKGD_playbright"
+
+	RANDOMPOS	0.5,0.5
+	RANDOMPOS   0.25,0.25
+	RANDOMPOS   0.17,0.7
+	
+	LINESHEADER 	"FE_lines_header"	0.0,0.0		0.9,1.0
+	
+	CENTERITEMS	left		0.08
+	DEFAULT_COLOR 150, 30, 0, 170
+	TEXT		"BRIGHNT"		0.7,0.124		1.3,1.4
+	
+	CENTERITEMS	no		0.0
+	
+	DEFAULT_COLOR 200, 210, 175, 170	
+	# [UWEP] slider should be in font 1 ('default')
+	DEFAULT_TEXT_FONT 2
+	SLIDER_BRIGHT	"brightness slider"	0,0  ""		0.5,0.42 	0.5,0.25 0.075,0.12 0.575,0.25 0.075,0.12 "play difficulty"
+	
+	CENTERITEMS	left		0.08
+	# [UWEP] the brightness info text is now a FLEXTEXT item that automagically wraps lines
+	DEFAULT_VALIGN JUSTIFY
+	FLEXTEXT		"BRINFO"		0.1,0.25	0.33,0.22 0.8,0.8
+	CENTERITEMS	no		0.08
+
+	DEFAULT_TEXT_FONT 2
+
+	COMMAND		"Apply"				0.1,0.90	"APPLY"		"play difficulty"
+	COMMAND		"Cancel"			0.25,0.90	"BACK"		"main"
+
+
+END
+
+#RECORD PAGE
+#	PAGENAME	"play brightness"
+#	BKGANIM		"pills_bkgrnd_anim"		0.3,0 	0.7,0.97
+#	PARENT		"main"
+#
+#	CENTERITEMS	left		0.08
+#	TEXT		"BRIGHNT"		0.7,0.124		1.3,1.4
+#
+#	CENTERITEMS	no		0.0
+#	
+#	# [UWEP] slider should be in font 1 ('default')
+#	DEFAULT_TEXT_FONT 1
+#	SLIDER_BRIGHT	"brightness slider"	0,0  ""		0.5,0.42 	0.5,0.25 0.075,0.12 0.575,0.25 0.075,0.12 "play difficulty"
+#	
+#	# [UWEP] all other items should be in font 2 again ('menu')
+#	DEFAULT_TEXT_FONT 2
+#	
+#	CENTERITEMS	left		0.08
+#	# [UWEP] the brightness info text is now a FLEXTEXT item that automagically wraps lines
+#	DEFAULT_VALIGN JUSTIFY
+#	FLEXTEXT		"BRINFO"		0.1,0.25	0.33,0.22 0.8,0.8
+#	
+#	BUTTONINFO "MLR"
+#	BUTTONINFO "SELECT"
+#	BUTTONINFO "BACKT"	
+#END
+
+RECORD PAGE
+	PAGENAME	"play difficulty"
+	BKGANIM		"pills_bkgrnd_anim"		0.3,0 	0.7,0.97
+	PARENT		"play brightness"
+
+	LINESHEADER 	"FE_lines_header"	0.0,0.0		0.9,1.0
+
+        CENTERITEMS	no		0.08
+	DEFAULT_COLOR 150, 30, 0, 170
+	TEXT		"DIFFT"			0.08,0.124		1.3,1.4
+
+	DEFAULT_COLOR 200, 210, 175, 170
+	COMMAND		"set difficulty to fetish"	0.1,0.26	"EASY"		"play saveslots"
+	COMMAND		"set difficulty to hardcore"	0.1,0.32	"NORMAL"	"play saveslots"
+
+	COMMAND		"Cancel"			0.1,0.90	"BACK"	"play brightness"
+
+	
+END
+
+RECORD SAVEGAMES_PAGE
+	PAGENAME	"play saveslots"
+	BKGANIM		"pills_bkgrnd_anim"		0.3,0 	0.7,0.97
+	PARENT		"play difficulty"
+
+	LINESHEADER 	"FE_lines_header"	0.0,0.0		0.9,1.0
+
+        CENTERITEMS	no		0.08
+	DEFAULT_COLOR 150, 30, 0, 170
+	TEXT		"SAVEG"		0.08,0.124	1.3,1.4
+
+	DEFAULT_COLOR 200, 210, 175, 170
+	SAVEANDRUN	"slot"	0.1,0.26		"SLOT_0"	"main"
+	SAVEANDRUN	"slot"	0.1,0.32		"SLOT_1"	"main"
+	SAVEANDRUN	"slot"	0.1,0.38		"SLOT_2"	"main"
+	SAVEANDRUN	"slot"	0.1,0.44		"SLOT_3"	"main"
+	SAVEANDRUN	"slot"	0.1,0.5			"SLOT_4"	"main"
+	SAVEANDRUN	"slot"	0.1,0.56		"SLOT_5"	"main"
+	SAVEANDRUN	"slot"	0.1,0.62		"SLOT_6"	"main"
+	SAVEANDRUN	"slot"	0.1,0.68		"SLOT_7"	"main"
+
+  CENTERITEMS	no		0.0
+
+	# [UWEP] changed save slot info font and position  
+ 	DEFAULT_TEXT_FONT 1
+	SLOTINFO	"" 		0.55,0.8  		0.9,0.97	0.06
+
+
+	DEFAULT_TEXT_FONT 2
+
+	COMMAND		"Cancel"	0.1,0.90		"BACK"	"play difficulty"
+
+
+END
+
+###############################################################################
+########################## LOAD GAME MENU #####################################
+###############################################################################
+
+RECORD SAVEGAMES_PAGE
+	PAGENAME	"load game"
+	BKGANIM		"main_bkgrnd_anim"	-0.01,-0.01 	1.02,1.02
+	PARENT		"loadsave"
+
+	LINESHEADER 	"FE_lines_header"	0.0,0.0		0.9,1.0
+
+	DEFAULT_COLOR 150, 30, 0, 170		
+	TEXT		"LOADGT"		0.08,0.124	 1.3,1.4
+	
+	DEFAULT_TEXT_SCALE 0.87,0.96
+
+	DEFAULT_COLOR 200, 210, 175, 170	
+	LOADGAME	"slot"		0.1,0.26		"SLOT_0"	0.9,1.05		
+	LOADGAME	"slot"		0.1,0.32		"SLOT_1"	0.9,1.05		
+	LOADGAME	"slot"		0.1,0.38		"SLOT_2"	0.9,1.05		
+	LOADGAME	"slot"		0.1,0.44		"SLOT_3"	0.9,1.05		
+	LOADGAME	"slot"		0.1,0.5			"SLOT_4"	0.9,1.05		
+	LOADGAME	"slot"		0.1,0.56		"SLOT_5"	0.9,1.05		
+	LOADGAME	"slot"		0.1,0.62		"SLOT_6"	0.9,1.05		
+	LOADGAME	"slot"		0.1,0.68		"SLOT_7"	0.9,1.05		
+	
+	# [UWEP] changed save slot info font and position  
+ 	DEFAULT_TEXT_FONT 1
+	SLOTINFO	"" 		0.55,2.2  		0.9,0.97	0.06
+
+	DEFAULT_TEXT_FONT 2
+
+	COMMAND		"Cancel"	0.1,0.90		"BACK"	"loadsave"
+
+	
+END
+
+###############################################################################
+########################## DELETE GAME MENU #####################################
+###############################################################################
+
+RECORD SAVEGAMES_PAGE
+	PAGENAME	"delete game"
+	BKGANIM		"main_bkgrnd_anim"	-0.01,-0.01 	1.02,1.02
+	PARENT		"loadsave"
+
+	LINESHEADER 	"FE_lines_header"	0.0,0.0		0.9,1.0
+
+	DEFAULT_COLOR 150, 30, 0, 170		
+	TEXT		"DELETET"		0.08,0.124	 1.3,1.4
+	
+	DEFAULT_TEXT_SCALE 0.87,0.96
+
+	DEFAULT_COLOR 200, 210, 175, 170	
+	DELETEGAME	"slot"		0.1,0.26		"SLOT_0"	0.9,1.05		
+	DELETEGAME	"slot"		0.1,0.32		"SLOT_1"	0.9,1.05		
+	DELETEGAME	"slot"		0.1,0.38		"SLOT_2"	0.9,1.05		
+	DELETEGAME	"slot"		0.1,0.44		"SLOT_3"	0.9,1.05		
+	DELETEGAME	"slot"		0.1,0.5			"SLOT_4"	0.9,1.05		
+	DELETEGAME	"slot"		0.1,0.56		"SLOT_5"	0.9,1.05		
+	DELETEGAME	"slot"		0.1,0.62		"SLOT_6"	0.9,1.05		
+	DELETEGAME	"slot"		0.1,0.68		"SLOT_7"	0.9,1.05		
+	
+	# [UWEP] changed save slot info font and position  
+ 	DEFAULT_TEXT_FONT 1
+	SLOTINFO	"" 		0.55,2.2  		0.9,0.97	0.06
+
+	DEFAULT_TEXT_FONT 2
+
+
+	COMMAND		"Cancel"	0.1,0.90		"BACK"	"loadsave"
+
+	
+END
+
+###############################################################################
+########################## NEW GAME MENU ######################################
+###############################################################################
+
+RECORD CONFIRMNEWGAME_PAGE
+	PAGENAME	"new game confirm"
+	BKGANIM		"main_bkgrnd_anim"	-0.01,-0.01 	1.02,1.02
+	PARENT		"loadsave"
+	BK_TRANSITION	BACKGRDSWEEP
+
+	CENTERITEMS	middle		0.5
+
+	DEFAULT_TEXT_FONT 1
+	TEXT		"XNEWGAM"		0.2,0.37	0.9,1.1
+	
+	DEFAULT_TEXT_FONT 2	
+	LINKTOPAGE	"new game"		0.4,0.45	"YES"		BACKGRDSWEEP
+	LINKTOPAGE	"loadsave"		0.4,0.51	"NO"		BACKGRDSWEEP
+
+	DEFAULTLINK     "new game"
+
+	
+END
+
+RECORD LAYERED_PAGE
+	PAGENAME	"new game"
+	PARENT		"loadsave"
+	BK_TRANSITION	BACKGRDSWEEP
+
+
+
+	CENTERITEMS	left		0.08
+
+	LAYEREDBACKGROUND	"BKGD_settings"
+
+	RANDOMPOS   -0.2,0.4
+	RANDOMPOS   -0.3,0.4
+	RANDOMPOS   -0.2,0.5
+	RANDOMPOS   -0.3,0.5
+
+	MODIFIER	EFFECT		WARPING  	DISABLE
+	LINESHEADER 	"FE_lines_header"	0.0,0.0		0.9,1.0
+
+	DEFAULT_COLOR 150, 30, 0, 170
+	TEXT		"BRIGHNT"		0.7,0.124	1.3,1.4
+
+	DEFAULT_COLOR 200, 210, 175, 170	
+	CENTERITEMS	no		0.0
+	# [UWEP] slider should be in font 1 ('default')
+	DEFAULT_TEXT_FONT 1
+	SLIDER_BRIGHT	"brightness slider"	0,0  ""		0.57,0.42 	0.57,0.26 0.075,0.13 0.645,0.26 0.075,0.13 "load difficulty"
+	
+	# [UWEP] all other items should be in font 2 again ('menu')
+	DEFAULT_TEXT_FONT 2
+
+	CENTERITEMS	left		0.1
+	# [UWEP] the brightness info text is now a FLEXTEXT item that automagically wraps lines
+	DEFAULT_VALIGN JUSTIFY
+	DEFAULT_TEXT_FONT 1
+	FLEXTEXT		"BRINFO"		0.1,0.25	0.45,0.23 0.89,0.99
+	CENTERITEMS	no	  	0.8
+
+	DEFAULT_TEXT_FONT 2
+		
+	COMMAND		"Apply"				0.1,0.90	"APPLY"		"load difficulty"
+	COMMAND	"Cancel"			0.25,0.90	"BACK"		"loadsave"
+
+		
+END
+
+RECORD LAYERED_PAGE
+	PAGENAME	"load difficulty"
+	#BACKGROUND	"front_load_bkgrnd02"		0.3,0 	0.7,0.97
+	PARENT		"new game"
+	BK_TRANSITION	BACKGRDHOLD
+
+	CENTERITEMS	no		0.08
+
+	LAYEREDBACKGROUND	"BKGD_settings"
+
+	RANDOMPOS   -0.2,0.0
+	RANDOMPOS   -0.3,0.0
+	RANDOMPOS   -0.2,-0.1
+	RANDOMPOS   -0.3,-0.1
+
+	LINESHEADER 	"FE_lines_header"	0.0,0.0		0.9,1.0
+
+	DEFAULT_COLOR 150, 30, 0, 170
+	TEXT		"DIFFT"			0.08,0.124	1.3,1.4
+
+	DEFAULT_COLOR 200, 210, 175, 170
+	COMMAND		"set difficulty to fetish"	0.1,0.26	"EASY"		"new game saveslots"	
+	COMMAND		"set difficulty to hardcore"	0.1,0.32	"NORMAL"	"new game saveslots"
+
+	COMMAND		"Cancel"			0.1,0.90	"BACK"	"new game"
+	
+	
+END
+
+RECORD SAVEGAMES_PAGE
+	PAGENAME	"new game saveslots"
+	BKGANIM		"main_bkgrnd_anim"	-0.01,-0.01 	1.02,1.02
+	PARENT		"load difficulty"	
+#[UWEP] fixed B*24677 - Upon initiating a new play through you are forced to save if memory card is present.
+	ALLOWSKIP NEWGAME
+
+	LINESHEADER 	"FE_lines_header"	0.0,0.0		0.9,1.0
+
+	DEFAULT_COLOR 150, 30, 0, 170	
+	TEXT		"SAVEGT"		0.08,0.124	1.3,1.4
+
+	DEFAULT_COLOR 200, 210, 175, 170	
+	SAVEANDRUN	"slot"		0.1,0.26		"SLOT_0"	"load difficulty"		1,1
+	SAVEANDRUN	"slot"		0.1,0.32		"SLOT_1"	"load difficulty"		1,1
+	SAVEANDRUN	"slot"		0.1,0.38		"SLOT_2"	"load difficulty"		1,1
+	SAVEANDRUN	"slot"		0.1,0.44		"SLOT_3"	"load difficulty"		1,1
+	SAVEANDRUN	"slot"		0.1,0.5			"SLOT_4"	"load difficulty"		1,1
+	SAVEANDRUN	"slot"		0.1,0.56		"SLOT_5"	"load difficulty"		1,1
+	SAVEANDRUN	"slot"		0.1,0.62		"SLOT_6"	"load difficulty"		1,1
+	SAVEANDRUN	"slot"		0.1,0.68		"SLOT_7"	"load difficulty"		1,1
+	
+	# [UWEP] changed save slot info font and position  
+ 	DEFAULT_TEXT_FONT 1
+	SLOTINFO	"" 		0.55,2.2  		0.9,0.97	0.06
+
+	DEFAULT_TEXT_FONT 2
+
+	COMMAND		"Cancel"	0.1,0.90		"BACK"	"load difficulty"
+
+
+END
+
+###############################################################################
+########################## SETTINGS MENU ######################################
+###############################################################################
+RECORD LAYERED_PAGE
+	PAGENAME	"settings"
+	PARENT		"loadsave"
+	BK_TRANSITION	BACKGRDSWEEP
+	
+	CENTERITEMS	no 0.10
+	
+	LAYEREDBACKGROUND	"BKGD_settings"
+	
+	RANDOMPOS   -0.2,0.0
+	RANDOMPOS   -0.3,0.0
+	RANDOMPOS   -0.2,-0.1
+	RANDOMPOS   -0.3,-0.1
+	
+	LINESHEADER "FE_lines_header"		0.0,0.0		0.9,1.0
+
+	DEFAULT_COLOR 150, 30, 0, 170	
+	TEXT		"SETTT"				0.08,0.124	1.3,1.4
+
+	DEFAULT_COLOR 200, 210, 175, 170	
+	LINKTOPAGE	"difficulty"			0.1,0.26	"DIFF"		BACKGRDHOLD
+	LINKTOPAGE	"controls"			0.1,0.32	"CONTR"		BACKGRDHOLD
+	LINKTOPAGE	"audio"				0.1,0.38	"AUDIO"		BACKGRDHOLD
+	LINKTOPAGE	"video"				0.1,0.44	"VIDEO"		BACKGRDHOLD
+	LINKTOPAGE	"brightness"			0.1,0.5		"BRIGHTN"	BACKGRDHOLD
+	LINKTOPAGE	"language"			0.1,0.56	"LANGUA"	BACKGRDHOLD
+	LINKTOPAGE	"default settings"		0.1,0.72    	"DEFSET"	BACKGRDHOLD
+
+	COMMAND		"Cancel"			0.1,0.90	"BACK"	"loadsave"
+
+
+
+END
+
+RECORD LAYERED_PAGE
+	PAGENAME	"difficulty"
+	BACKGROUND	"front_sett_bkgrnd02"		0.6,0 	0.37,0.97
+	PARENT		"settings"
+	BK_TRANSITION	BACKGRDHOLD
+
+	CENTERITEMS	no		0.08
+
+	LAYEREDBACKGROUND	"BKGD_settings"
+
+	MODIFIER	EFFECT	WARPING		DISABLE
+	MODIFIER	EFFECT	ALPHAGHOST	DISABLE
+	MODIFIER	EFFECT	BOLDGHOST	DISABLE
+
+	LINESHEADER "FE_lines_header"		0.0,0.0		0.9,1.0
+
+	DEFAULT_COLOR 150, 30, 0, 170
+	TEXT		"DIFFT"			0.08,0.124		1.3,1.4
+
+	DEFAULT_COLOR 200, 210, 175, 170
+	COMMAND		"set difficulty to fetish"	0.1,0.26	"EASY"		"settings"
+	COMMAND		"set difficulty to hardcore"	0.1,0.32	"NORMAL"	"settings"
+	
+	COMMAND		"Cancel"			0.1,0.90	"BACK"	"settings"
+
+END
+
+RECORD LAYERED_CONTROLLER_PAGE
+	PAGENAME	"controls"
+	PARENT		"settings"
+	BK_TRANSITION	BACKGRDHOLD
+	
+	CENTERITEMS	no			0.08
+
+	LAYEREDBACKGROUND			"BKGD_settings"
+
+	MODIFIER	EFFECT	WARPING		DISABLE
+	MODIFIER	EFFECT	ALPHAGHOST	DISABLE
+	MODIFIER	EFFECT	BOLDGHOST	DISABLE
+
+	LINESHEADER 	"FE_lines_header"	0.0,0.0			0.9,1.0
+
+	DEFAULT_COLOR 	150, 30, 0, 170
+	TEXT		"CONTS"			0.08,0.124		1.3,1.4
+						
+	DEFAULT_COLOR 	200, 210, 175, 170
+
+	SWITCH		"invert aim"		0.1,0.20	"INVERTA"		0.47,0.0 	"OFF"  0.56,0.0 	"ON"
+	SWITCH		"exectype"		0.1,0.25	"EXECTYP"		0.47,0.0 	"OFF"  0.56,0.0 	"ON"
+
+	SLIDER		"lookx"			0.1,0.35	"TARGETX"			0.47,0
+	SLIDER		"looky"			0.1,0.40	"TARGETY"			0.47,0
+	
+#	LINKTOPAGE	"keymappings"		0.1,0.55	"KEYMAP"		BACKGRDHOLD
+	LINKTOPAGE	"movementkeys"		0.1,0.55	"MOVMAP"		BACKGRDHOLD
+	LINKTOPAGE	"actionkeys"		0.1,0.60	"ACTMAP"		BACKGRDHOLD
+
+	CENTERITEMS	no			0.0
+	
+	COMMAND		"Apply"				0.1,0.90	"APPLY"		"settings"
+	COMMAND		"Cancel"			0.25,0.90	"BACK"		"settings"
+
+	
+END
+
+RECORD LAYERED_PAGE
+	PAGENAME	"keymappings"
+	PARENT		"controls"
+	BK_TRANSITION	BACKGRDHOLD
+
+	CENTERITEMS 	no			0.08
+
+	LAYEREDBACKGROUND			"BKGD_settings"
+
+	MODIFIER	EFFECT	WARPING		DISABLE
+	MODIFIER	EFFECT	ALPHAGHOST	DISABLE
+	MODIFIER	EFFECT	BOLDGHOST	DISABLE
+
+	LINESHEADER 	"FE_lines_header"	0.0,0.0			0.9,1.0
+
+	DEFAULT_COLOR 	150, 30, 0, 170
+	TEXT		"MAPPIN"		0.08,0.124		1.3,1.4
+						
+	DEFAULT_COLOR 	200, 210, 175, 170
+
+	SWITCH		"controltype"		0.1,0.25	"CTLCFG"		0.36,0.0		"KEY1"  0.46,0.0 	"KEY2"	
+
+	COMMAND		"Apply"				0.0,0.70	"APPLY"			"controls"
+	COMMAND		"Cancel"			0.5,0.90	"BACK"			"controls"
+	
+
+
+	
+END
+
+
+RECORD LAYERED_PAGE
+	PAGENAME	"movementkeys"
+	PARENT		"controls"
+	BK_TRANSITION	BACKGRDHOLD
+	
+	CENTERITEMS	no			0.08
+
+	LAYEREDBACKGROUND			"BKGD_settings"
+
+	MODIFIER	EFFECT	WARPING		DISABLE
+	MODIFIER	EFFECT	ALPHAGHOST	DISABLE
+	MODIFIER	EFFECT	BOLDGHOST	DISABLE
+
+	LINESHEADER 	"FE_lines_header"	0.0,0.0			0.9,1.0
+
+	DEFAULT_COLOR 	150, 30, 0, 170
+	TEXT		"MOVMAP_T"		0.08,0.124		1.3,1.4
+						
+	DEFAULT_COLOR 	200, 210, 175, 170
+
+	SWITCH		"controltype"		0.1,0.25	"CTLCFG"		0.36,0.0		"KEY1"  0.46,0.0 	"KEY2"	
+
+	
+	KEYBINDING  	"A_FWD_PC"	0.1,0.35 	"ACTION_MOVE_FORWARD"	0.7,0.7
+	KEYBINDING	"A_BACK_PC" 	0.1,0.40	"ACTION_MOVE_BACKWARDS"	0.7,0.7
+	KEYBINDING	"A_STRFL_PC" 	0.1,0.45	"ACTION_MOVE_LEFT"	0.7,0.7
+	KEYBINDING	"A_STRFR_PC" 	0.1,0.50	"ACTION_MOVE_RIGHT"	0.7,0.7
+	KEYBINDING	"A_WALLH_PC" 	0.1,0.55	"ACTION_WALLSQUASH"	0.7,0.7
+	KEYBINDING  	"A_CLIMB_PC"	0.1,0.60	"ACTION_JUMP"		0.7,0.7
+
+	KEYBINDING	"A_PEEKL_PC" 	0.52,0.35	"ACTION_PEEKL"		0.7,0.7
+	KEYBINDING	"A_PEEKR_PC" 	0.52,0.40	"ACTION_PEEKR"		0.7,0.7
+	KEYBINDING	"A_SNEAK_PC" 	0.52,0.45	"ACTION_SNEAK"		0.7,0.7
+	KEYBINDING	"A_RUN_PC" 	0.52,0.55	"ACTION_RUN"		0.7,0.7
+	KEYBINDING	"A_CRAWL_PC" 	0.52,0.60	"ACTION_CRAWL"		0.7,0.7
+
+
+	COMMAND		"Apply"				0.1,0.90	"APPLY"		"controls"
+#	COMMAND		"Cancel"			0.25,0.90	"BACK"		"controls"
+
+END
+
+RECORD LAYERED_PAGE
+	PAGENAME	"actionkeys"
+	PARENT		"controls"
+	BK_TRANSITION	BACKGRDHOLD
+	
+	CENTERITEMS	no			0.08
+
+	LAYEREDBACKGROUND			"BKGD_settings"
+
+	MODIFIER	EFFECT	WARPING		DISABLE
+	MODIFIER	EFFECT	ALPHAGHOST	DISABLE
+	MODIFIER	EFFECT	BOLDGHOST	DISABLE
+
+	LINESHEADER 	"FE_lines_header"	0.0,0.0			0.9,1.0
+
+	DEFAULT_COLOR 	150, 30, 0, 170
+	TEXT		"ACTMAP_T"		0.08,0.124		1.3,1.4
+						
+	DEFAULT_COLOR 	200, 210, 175, 170
+
+	SWITCH		"controltype"		0.1,0.25	"CTLCFG"		0.36,0.0		"KEY1"  0.46,0.0 	"KEY2"	
+	
+	KEYBINDING  	"USE"		0.1,0.35	"ACTION_USE"		0.7,0.7
+	KEYBINDING	"A_LKBK_PC" 	0.1,0.40	"ACTION_LOOKBACK"	0.7,0.7
+	KEYBINDING	"A_RLOAD_PC" 	0.1,0.45	"ACTION_RELOAD"		0.7,0.7
+	KEYBINDING  	"A_PICUP_PC"	0.1,0.50	"ACTION_PICKUP"		0.7,0.7
+	KEYBINDING	"A_DROP_PC" 	0.1,0.55	"ACTION_DROP"		0.7,0.7
+	KEYBINDING	"A_FIREW_PC" 	0.1,0.60	"ACTION_PUNCH"		0.7,0.7
+#	KEYBINDING	"A_FIREW_PC" 	0.1,0.65	"ACTION_SHOOT"		0.7,0.7
+	KEYBINDING	"A_BLOCK_PC" 	0.1,0.65	"ACTION_BLOCK"		0.7,0.7
+	KEYBINDING  	"A_MENU_PC"	0.1,0.70 	"ACTION_MENU"		0.7,0.7
+	KEYBINDING	"A_ZMIN_PC" 	0.1,0.75	"ACTION_ZOOMIN"		0.7,0.7
+
+	KEYBINDING	"A_ZMOUT_PC" 	0.52,0.35	"ACTION_ZOOMOUT"	0.7,0.7
+	KEYBINDING	"A_GUNAM_PC" 	0.52,0.40	"ACTION_ZOOMAIM"	0.7,0.7
+	KEYBINDING	"A_TARGT_PC" 	0.52,0.45	"ACTION_LOCKON"		0.7,0.7
+	KEYBINDING	"A_INV1_PC" 	0.52,0.50	"ACTION_INVENTORY_SLOT1"0.7,0.7
+	KEYBINDING	"A_INV2_PC" 	0.52,0.55	"ACTION_INVENTORY_SLOT2"0.7,0.7
+	KEYBINDING	"A_INV3_PC" 	0.52,0.60	"ACTION_INVENTORY_SLOT3"0.7,0.7
+	KEYBINDING  	"A_INV4_PC"	0.52,0.65	"ACTION_INVENTORY_SLOT4"0.7,0.7
+	KEYBINDING	"A_EXECU_PC" 	0.52,0.70	"ACTION_EXECUTE"	0.7,0.7
+	KEYBINDING	"A_FP_PC" 	0.52,0.75	"ACTION_LOOKAROUND"	0.7,0.7
+
+	COMMAND		"Apply"				0.1,0.90	"APPLY"		"controls"
+#	COMMAND		"Cancel"			0.25,0.90	"BACK"		"controls"
+
+END
+
+RECORD LAYERED_PAGE
+
+	PAGENAME 	"audio"
+	BACKGROUND	"front_sett_bkgrnd02"		0.6,0 	0.37,0.97
+	PARENT		"settings"		
+	BK_TRANSITION	BACKGRDHOLD
+	CENTERITEMS	no		0.08
+
+	LAYEREDBACKGROUND	"BKGD_settings"
+
+	MODIFIER	EFFECT	WARPING		DISABLE
+	MODIFIER	EFFECT	ALPHAGHOST	DISABLE
+	MODIFIER	EFFECT	BOLDGHOST	DISABLE
+
+	LINESHEADER "FE_lines_header"		0.0,0.0		0.9,1.0
+
+	DEFAULT_COLOR 150, 30, 0, 170	
+	TEXT		"AUDIOT"		0.08,0.124		1.3,1.4
+
+	DEFAULT_COLOR 200, 210, 175, 170	
+
+	#################
+	# AUDIO SETTINGS 
+	#################
+	SLIDER		"volumeMusic"			0.1,0.26	"MUSVOL"		0.36,0
+	SLIDER		"volumeSFX"			0.1,0.32	"SFXVOL"		0.36,0
+	SWITCH		"subtitles"			0.1,0.38	"SUBTIT"		0.36,0.0		"OFF"  0.46,0.0 	"ON"	
+
+
+	COMMAND		"Apply"				0.1,0.90	"APPLY"			"settings"
+	COMMAND		"Cancel"			0.25,0.90	"BACK"		"settings"
+END
+
+RECORD LAYERED_PAGE
+
+	PAGENAME 	"video"
+	BACKGROUND	"front_sett_bkgrnd02"		0.6,0 	0.37,0.97
+	PARENT		"settings"		
+	BK_TRANSITION	BACKGRDHOLD
+	CENTERITEMS	no		0.08
+
+	LAYEREDBACKGROUND	"BKGD_settings"
+
+	MODIFIER	EFFECT	WARPING		DISABLE
+	MODIFIER	EFFECT	ALPHAGHOST	DISABLE
+	MODIFIER	EFFECT	BOLDGHOST	DISABLE
+
+	LINESHEADER "FE_lines_header"		0.0,0.0		0.9,1.0
+
+	DEFAULT_COLOR 150, 30, 0, 170	
+	TEXT		"VIDEOT"		0.08,0.124		1.3,1.4
+
+	DEFAULT_COLOR 200, 210, 175, 170	
+
+	#################
+	# VIDEO SETTINGS 
+	#################
+	SINGLELISTBOX	"RESO"				0.1,0.26	"RESOLU"		0.15,0.0
+	SLIDER		"shadows"			0.1,0.32	"SHADOW"		0.40,0	
+	#SWITCH		"shadows"			0.1,0.32	"SHADOW"		0.40,0.0		"OFF"  0.50,0.0 	"ON"
+	SLIDER		"texturefilter"			0.1,0.38	"TXTQTY"		0.40,0	
+	SLIDER		"lightquality"			0.1,0.44	"LGTQTY"		0.40,0	
+	SLIDER		"antialiasing"			0.1,0.50	"ANTIAL"		0.40,0
+	SWITCH		"noise fx"			0.1,0.56	"NOISEFX"		0.40,0.0		"OFF"  0.50,0.0 	"ON"
+
+	COMMAND		"Apply"				0.1,0.90	"APPLY"			"settings"
+	COMMAND		"Cancel"			0.25,0.90	"BACK"			"settings"
+END
+
+RECORD LAYERED_PAGE
+	PAGENAME	"brightness"
+	BACKGROUND	"front_sett_bkgrnd02"		0.6,0 	0.37,0.97
+	PARENT		"settings"
+	BK_TRANSITION	BACKGRDHOLD
+
+
+	
+	CENTERITEMS	no		0.08
+
+	LINESHEADER "FE_lines_header"		0.0,0.0		0.9,1.0
+
+	LAYEREDBACKGROUND 	"BKGD_settings"
+
+	MODIFIER	EFFECT	WARPING		DISABLE
+	MODIFIER	EFFECT	ALPHAGHOST	DISABLE
+	MODIFIER	EFFECT	BOLDGHOST	DISABLE
+
+	DEFAULT_COLOR 150, 30, 0, 170
+	TEXT		"BRIGHNT"		0.08,0.124	1.3,1.4
+
+	DEFAULT_COLOR 200, 210, 175, 170
+	CENTERITEMS	no		0.0
+	# [UWEP] slider should be in font 1 ('default')
+	DEFAULT_TEXT_FONT 1
+	SLIDER_BRIGHT	"brightness slider"	0,0  ""		0.57,0.42 	0.57,0.26 0.075,0.13 0.645,0.26 0.075,0.13 "settings"
+	
+	# [UWEP] all other items should be in font 2 again ('menu')
+	DEFAULT_TEXT_FONT 2
+
+	CENTERITEMS	left		0.1
+	# [UWEP] the brightness info text is now a FLEXTEXT item that automagically wraps lines
+	DEFAULT_VALIGN JUSTIFY
+	DEFAULT_TEXT_FONT 1
+	FLEXTEXT		"BRINFO"		0.1,0.25	0.45,0.23 0.89,0.99
+
+
+	CENTERITEMS	no		0.8
+
+	DEFAULT_TEXT_FONT 2
+
+	COMMAND		"Apply"				0.1,0.90	"APPLY"			"settings"
+	COMMAND		"Cancel"			0.25,0.90	"BACK"		"settings"
+END
+
+RECORD LAYERED_PAGE
+	PAGENAME	"language"
+	BACKGROUND	"front_sett_bkgrnd02"		0.6,0 	0.37,0.97
+	PARENT		"settings"
+	BK_TRANSITION	BACKGRDHOLD
+
+	CENTERITEMS	no		0.08
+
+	LAYEREDBACKGROUND	"BKGD_settings"
+
+	MODIFIER	EFFECT	WARPING		DISABLE
+	MODIFIER	EFFECT	ALPHAGHOST	DISABLE
+	MODIFIER	EFFECT	BOLDGHOST	DISABLE
+
+	LINESHEADER "FE_lines_header"		0.0,0.0		0.9,1.0
+
+	DEFAULT_COLOR 150, 30, 0, 170
+	TEXT		"LANGUAT"			0.08,0.124	1.3,1.4
+
+	DEFAULT_COLOR 200, 210, 175, 170	
+	COMMAND		"setLanguage(english)"		0.1,0.26	"ENG"		"settings"
+	COMMAND		"setLanguage(french)"		0.1,0.32	"FRA"		"settings"
+	COMMAND		"setLanguage(german)"		0.1,0.38	"GER"		"settings"
+	COMMAND		"setLanguage(italian)"		0.1,0.44	"ITA"		"settings"
+	COMMAND		"setLanguage(spanish)"		0.1,0.5		"ESP"		"settings"
+
+	COMMAND		"Apply"				0.1,0.90	"APPLY"		"settings"
+	COMMAND		"Cancel"			0.25,0.90	"BACK"		"settings"
+
+END
+
+RECORD LAYERED_DEFAULT_SETTINGS_PAGE
+	PAGENAME	"default settings"
+	PARENT		"settings"
+	BK_TRANSITION	BACKGRDHOLD
+
+	LAYEREDBACKGROUND	"BKGD_settings"
+
+	LINESHEADER "FE_lines_header"		0.0,0.0		0.9,1.0
+
+	MODIFIER	EFFECT		WARPING  	DISABLE
+
+	DEFAULT_COLOR 150, 30, 0, 170
+	TEXT		"DEFSETT"				0.08,0.124	1.3,1.4
+
+	DEFAULT_COLOR 200, 210, 175, 170
+	DEFAULT_TEXT_FONT 1	
+#[UWEP] replaced three separate text items that held multiline text with FLEXTEXT item that word wraps automagically
+	FLEXTEXT		"DEFQU"				0.1,0.26	0.45,0.2 0.89,0.99
+
+	DEFAULT_TEXT_FONT 2	
+	LINKTOPAGE	"settings"				0.62,0.25	"QUESNO"	BACKGRDSWEEP
+	COMMAND		"set default settings"			0.73,0.25	"QUESYES"	"settings"	
+
+END
+
+
+###############################################################################
+########################## INGAME MENU ########################################
+###############################################################################
+RECORD INGAMEMAIN_PAGE
+	PAGENAME	"ingame main"
+	PARENT		""
+	
+	# [UWEP] added these lines so that someone can fiddle with it properly
+	# this covers the following bugs:
+	# B*22154 - Pause menu should feature the level name aligned to B1
+	# B*22155 - Pause menu fonts
+	DEFAULT_HALIGN CENTER
+	
+	DEFAULT_TEXT_SCALE 1.3,1.65
+	DEFAULT_COLOR 150, 30, 0, 170
+	
+	LEVELNAMEFLEXTEXT 0.1,0.06 0.8,0.05 0,0
+
+	DEFAULT_TEXT_FONT 1
+	DEFAULT_COLOR 200, 210, 175, 170
+	
+	DEFAULT_HALIGN CENTER
+	DEFAULT_VALIGN TOP
+	DEFAULT_TEXT_EFFECT SHADOW
+
+	DEFAULT_INTRA_PARAGRAPH_HEIGHT	0.68
+
+	DEFAULT_EXTER_PARAGRAPH_HEIGHT  0.88
+
+	GOALFLEXTEXT 0.05,0.16 0.9,0.2 0.85,0.93
+
+	DEFAULT_TEXT_FONT 2
+
+	DEFAULT_TEXT_SCALE 0.8,0.95	
+	
+	CENTERITEMS	middle		0.5	
+	COMMAND		"ingame continue"	0.4,0.50	"CONTINU"		""
+	LINKTOPAGE	"ingame restart 2"	0.4,0.56	"REST2"		BACKGRDSWEEP
+	LINKTOPAGE	"ingame restart 1"	0.4,0.62	"REST1"		BACKGRDSWEEP
+	LINKTOPAGE	"ingame settings"	0.4,0.68	"SETINGS"	BACKGRDSWEEP
+	LINKTOPAGE	"ingame save"		0.4,0.74	"SAVEGAM"	BACKGRDSWEEP
+	LINKTOPAGE	"ingame quit"		0.4,0.80	"QUIT"		BACKGRDSWEEP
+	
+	
+
+END
+
+RECORD SAVEGAMES_PAGE
+	PAGENAME	"ingame save"
+	PARENT		"ingame main"	
+
+	CENTERITEMS	middle		0.5
+
+	DEFAULT_COLOR 150, 30, 0, 170	
+	TEXT		"SAVEGT"		0.08,0.1	1.3,1.4
+
+	CENTERITEMS	left		0.1
+
+	DEFAULT_COLOR 200, 210, 175, 170
+	
+	SAVE	"slot"		0.08,0.26		"SLOT_0"	"load difficulty"		1,1
+	SAVE	"slot"		0.08,0.32		"SLOT_1"	"load difficulty"		1,1
+	SAVE	"slot"		0.08,0.38		"SLOT_2"	"load difficulty"		1,1
+	SAVE	"slot"		0.08,0.44		"SLOT_3"	"load difficulty"		1,1
+	SAVE	"slot"		0.08,0.5		"SLOT_4"	"load difficulty"		1,1
+	SAVE	"slot"		0.08,0.56		"SLOT_5"	"load difficulty"		1,1
+	SAVE	"slot"		0.08,0.62		"SLOT_6"	"load difficulty"		1,1
+	SAVE	"slot"		0.08,0.68		"SLOT_7"	"load difficulty"		1,1
+	
+	CENTERITEMS	no		0.1
+
+	# [UWEP] changed save slot info font and position  
+ 	DEFAULT_TEXT_FONT 1
+	SLOTINFO	"" 		0.55,2.2  		0.9,0.97	0.06
+
+	DEFAULT_TEXT_FONT 2
+	
+	COMMAND		"Cancel"			0.1,0.90	"BACK"		"ingame main"
+END
+
+RECORD SAVEGAMES_PAGE
+	PAGENAME	"ingame completed save"
+
+	CENTERITEMS	middle		0.5	
+
+	DEFAULT_COLOR 150, 30, 0, 170
+	TEXT		"SAVEGT"		0.08,0.1	1.3,1.4
+
+	CENTERITEMS	left		0.1
+
+	DEFAULT_COLOR 200, 210, 175, 170
+	
+	SAVE	"slot"		0.08,0.26		"SLOT_0"	"load difficulty"		1,1
+	SAVE	"slot"		0.08,0.32		"SLOT_1"	"load difficulty"		1,1
+	SAVE	"slot"		0.08,0.38		"SLOT_2"	"load difficulty"		1,1
+	SAVE	"slot"		0.08,0.44		"SLOT_3"	"load difficulty"		1,1
+	SAVE	"slot"		0.08,0.5		"SLOT_4"	"load difficulty"		1,1
+	SAVE	"slot"		0.08,0.56		"SLOT_5"	"load difficulty"		1,1
+	SAVE	"slot"		0.08,0.62		"SLOT_6"	"load difficulty"		1,1
+	SAVE	"slot"		0.08,0.68		"SLOT_7"	"load difficulty"		1,1
+	
+	CENTERITEMS	no		0.1
+
+	# [UWEP] changed save slot info font and position  
+	SLOTINFO	"" 		0.55,2.2  		0.9,0.97	0.06
+	
+	TEXT		"CWSSQ_PC"	0.1,0.90		0.60,0.60	
+
+END
+
+RECORD INGAMECONFIRMQUIT_PAGE
+	PAGENAME	"ingame quit"
+	PARENT		"ingame main"
+	CENTERITEMS	middle		0.5
+
+	# [UWEP] fixed quit page for R*N's HUD design
+	DEFAULT_TEXT_FONT 1
+	TEXT		"XQUIT1"		0.2,0.37	0.9,1.1
+	
+	# [UWEP] fixed quit page for R*N's HUD design
+	DEFAULT_TEXT_FONT 2	
+	LINKTOPAGE	"ingame main"		0.4,0.45	"NO"		BACKGRDSWEEP
+	COMMAND		"quit game"		0.4,0.51	"YES"		"main"
+
+	
+END
+
+RECORD INGAMECONFIRMQUIT_PAGE
+	PAGENAME	"ingame restart 1"
+	PARENT		"ingame main"
+	CENTERITEMS	middle		0.5
+
+	# [UWEP] fixed quit page for R*N's HUD design
+	DEFAULT_TEXT_FONT 1
+	TEXT		"XREST1"		0.2,0.37	0.9,1.1
+	
+	# [UWEP] fixed quit page for R*N's HUD design
+	DEFAULT_TEXT_FONT 2	
+	LINKTOPAGE	"ingame main"		0.4,0.45	"NO"		BACKGRDSWEEP
+	COMMAND		"restart 1"		0.4,0.51	"YES"		"main"
+	
+END
+
+RECORD INGAMECONFIRMQUIT_PAGE
+	PAGENAME	"ingame restart 2"
+	PARENT		"ingame main"
+	CENTERITEMS	middle		0.5
+
+	# [UWEP] fixed quit page for R*N's HUD design
+	DEFAULT_TEXT_FONT 1
+	TEXT		"XREST2"		0.2,0.37	0.9,1.1
+	
+	# [UWEP] fixed quit page for R*N's HUD design
+	DEFAULT_TEXT_FONT 2	
+	LINKTOPAGE	"ingame main"		0.4,0.45	"NO"		BACKGRDSWEEP
+	COMMAND		"restart 2"		0.4,0.51	"YES"		"main"
+	
+	
+END
+
+RECORD PAGE
+	PAGENAME	"ingame settings"
+	PARENT		"ingame main"
+
+	CENTERITEMS	middle		0.5
+	DEFAULT_COLOR 150, 30, 0, 170
+	TEXT		"SETTT"				0.8,0.1		1.3,1.4	
+
+	DEFAULT_COLOR 200, 210, 175, 170		
+	LINKTOPAGE	"ingame controls"			0.4,0.26	"CONTR"		BACKGRDSWEEP
+	LINKTOPAGE	"ingame audio"				0.1,0.32	"AUDIO"		BACKGRDSWEEP
+	LINKTOPAGE	"ingame video"				0.1,0.38	"VIDEO"		BACKGRDSWEEP
+	LINKTOPAGE	"ingame brightness"			0.4,0.44	"BRIGHTN"	BACKGRDSWEEP
+	LINKTOPAGE	"ingame default settings"		0.4,0.50	"DEFSET"	BACKGRDSWEEP
+	
+
+	COMMAND		"Cancel"				0.25,0.90	"BACK"		"ingame main"
+END
+
+RECORD PAGE
+	PAGENAME	"keymappings2"
+	PARENT		"ingame controls"
+
+	COMMAND		"Apply"				0.1,0.90	"APPLY"		"ingame controls"
+	COMMAND		"Cancel"			0.25,0.90	"BACK"		"ingame controls"
+
+	CENTERITEMS	middle		0.5
+	DEFAULT_COLOR 	150, 30, 0, 170
+	TEXT		"MAPPIN"		0.08,0.124		1.3,1.4
+	DEFAULT_COLOR 	200, 210, 175, 170
+
+	
+	SWITCH		"controltype"		0.1,0.25	"CTLCFG"		0.36,0.0		"KEY1"  0.46,0.0 	"KEY2"	
+
+
+	
+END
+
+
+RECORD PAGE
+	PAGENAME	"movementkeys2"
+	PARENT		"ingame controls"
+	
+	CENTERITEMS	middle		0.5
+	DEFAULT_COLOR 	150, 30, 0, 170
+	TEXT		"MOVMAP_T"		0.08,0.124		1.3,1.4
+	DEFAULT_COLOR 	200, 210, 175, 170
+	CENTERITEMS 	no			0.08
+
+	SWITCH		"controltype"		0.1,0.25	"CTLCFG"		0.36,0.0		"KEY1"  0.46,0.0 	"KEY2"	
+
+	KEYBINDING  	"A_FWD_PC"	0.1,0.35 	"ACTION_MOVE_FORWARD"	0.7,0.7
+	KEYBINDING	"A_BACK_PC" 	0.1,0.40	"ACTION_MOVE_BACKWARDS"	0.7,0.7
+	KEYBINDING	"A_STRFL_PC" 	0.1,0.45	"ACTION_MOVE_LEFT"	0.7,0.7
+	KEYBINDING	"A_STRFR_PC" 	0.1,0.50	"ACTION_MOVE_RIGHT"	0.7,0.7
+	KEYBINDING	"A_WALLH_PC" 	0.1,0.55	"ACTION_WALLSQUASH"	0.7,0.7
+	KEYBINDING  	"A_CLIMB_PC"	0.1,0.60	"ACTION_JUMP"		0.7,0.7
+	KEYBINDING	"A_PEEKL_PC" 	0.52,0.35	"ACTION_PEEKL"		0.7,0.7
+	KEYBINDING	"A_PEEKR_PC" 	0.52,0.40	"ACTION_PEEKR"		0.7,0.7
+	KEYBINDING	"A_SNEAK_PC" 	0.52,0.45	"ACTION_SNEAK"		0.7,0.7
+	KEYBINDING	"A_RUN_PC" 	0.52,0.55	"ACTION_RUN"		0.7,0.7
+	KEYBINDING	"A_CRAWL_PC" 	0.52,0.60	"ACTION_CRAWL"		0.7,0.7
+
+	COMMAND		"Apply"			0.1,0.90	"APPLY"		"ingame controls"
+
+END
+
+RECORD PAGE
+	PAGENAME	"actionkeys2"
+	PARENT		"ingame controls"
+	
+	CENTERITEMS	middle		0.5
+	DEFAULT_COLOR 	150, 30, 0, 170
+	TEXT		"ACTMAP_T"		0.08,0.124		1.3,1.4
+	DEFAULT_COLOR 	200, 210, 175, 170
+	CENTERITEMS 	no			0.08	
+
+	SWITCH		"controltype"		0.1,0.25	"CTLCFG"		0.36,0.0		"KEY1"  0.46,0.0 	"KEY2"	
+
+	KEYBINDING  	"USE"		0.1,0.35	"ACTION_USE"		0.7,0.7
+	KEYBINDING	"A_LKBK_PC" 	0.1,0.40	"ACTION_LOOKBACK"	0.7,0.7
+	KEYBINDING	"A_RLOAD_PC" 	0.1,0.45	"ACTION_RELOAD"		0.7,0.7
+	KEYBINDING  	"A_PICUP_PC"	0.1,0.50	"ACTION_PICKUP"		0.7,0.7
+	KEYBINDING	"A_DROP_PC" 	0.1,0.55	"ACTION_DROP"		0.7,0.7
+	KEYBINDING	"A_FIREW_PC" 	0.1,0.60	"ACTION_PUNCH"		0.7,0.7
+	KEYBINDING	"A_BLOCK_PC" 	0.1,0.65	"ACTION_BLOCK"		0.7,0.7
+	KEYBINDING  	"A_MENU_PC"	0.1,0.70 	"ACTION_MENU"		0.7,0.7
+	KEYBINDING	"A_ZMIN_PC" 	0.1,0.75	"ACTION_ZOOMIN"		0.7,0.7
+	KEYBINDING	"A_ZMOUT_PC" 	0.52,0.35	"ACTION_ZOOMOUT"	0.7,0.7
+	KEYBINDING	"A_GUNAM_PC" 	0.52,0.40	"ACTION_ZOOMAIM"	0.7,0.7
+	KEYBINDING	"A_TARGT_PC" 	0.52,0.45	"ACTION_LOCKON"		0.7,0.7
+	KEYBINDING	"A_INV1_PC" 	0.52,0.50	"ACTION_INVENTORY_SLOT1"0.7,0.7
+	KEYBINDING	"A_INV2_PC" 	0.52,0.55	"ACTION_INVENTORY_SLOT2"0.7,0.7
+	KEYBINDING	"A_INV3_PC" 	0.52,0.60	"ACTION_INVENTORY_SLOT3"0.7,0.7
+	KEYBINDING  	"A_INV4_PC"	0.52,0.65	"ACTION_INVENTORY_SLOT4"0.7,0.7
+	KEYBINDING	"A_EXECU_PC" 	0.52,0.70	"ACTION_EXECUTE"	0.7,0.7
+	KEYBINDING	"A_FP_PC" 	0.52,0.75	"ACTION_LOOKAROUND"	0.7,0.7
+
+	COMMAND		"Apply"			0.1,0.90	"APPLY"		"ingame controls"
+
+END
+
+RECORD CONTROLLER_PAGE
+	PAGENAME	"ingame controls"
+	PARENT		"ingame settings"
+
+	COMMAND		"Apply"				0.1,0.90	"APPLY"		"ingame settings"
+	COMMAND		"Cancel"			0.25,0.90	"BACK"		"ingame settings"
+
+	CENTERITEMS	middle		0.5
+	DEFAULT_COLOR 150, 30, 0, 170
+	TEXT		"CONTS"			0.7,0.1		1.3,1.4
+	DEFAULT_COLOR 200, 210, 175, 170
+
+	CENTERITEMS	left		0.195
+	# [CHRISTIANSC] 20038 remove control type B 
+	# [CHRISTIANB] B*22945: re-enable control mode B (ingame menu)
+	#SWITCH		"controller setup"	0.1,0.25	"CONTTYP"		0.47,0.0 	"CTYPE1"  0.56,0.0 	"CTYPE2"
+
+	SWITCH		"invert aim"		0.1,0.25	"INVERTA"		0.47,0.0 	"OFF"  0.56,0.0 	"ON"	
+	SWITCH		"exectype"		0.1,0.35	"EXECTYP"		0.47,0.0 	"OFF"  0.56,0.0 	"ON"
+	SLIDER		"lookx"			0.1,0.45	"TARGETX"			0.47,0
+	SLIDER		"looky"			0.1,0.50	"TARGETY"			0.47,0
+	
+#	LINKTOPAGE	"keymappings2"		0.2,0.60	"KEYMAP"		BACKGRDHOLD
+
+	LINKTOPAGE	"movementkeys2"		0.2,0.60	"MOVMAP"		BACKGRDHOLD
+	LINKTOPAGE	"actionkeys2"		0.2,0.65	"ACTMAP"		BACKGRDHOLD
+
+
+END
+
+RECORD PAGE
+	PAGENAME 	"ingame audio"
+	PARENT		"ingame settings"
+
+
+	COMMAND		"Apply"				0.1,0.90	"APPLY"		"ingame settings"
+	COMMAND		"Cancel"			0.25,0.90	"BACK"		"ingame settings"
+
+	CENTERITEMS	middle			0.5
+	DEFAULT_COLOR	150, 30, 0, 170
+	TEXT		"AUDIOT"		0.7,0.1			1.3,1.4
+
+	DEFAULT_COLOR	200, 210, 175, 170
+	
+	CENTERITEMS	left			0.2
+
+	SLIDER		"volumeMusic"			0.1,0.26	"MUSVOL"		0.3,0
+	SLIDER		"volumeSFX"			0.1,0.32	"SFXVOL"		0.3,0
+	SWITCH		"subtitles"			0.1,0.38	"SUBTIT"		0.3,0.0		"OFF" 0.4,0.0 	"ON"	
+	
+END
+
+RECORD PAGE
+	PAGENAME 	"ingame video"
+	PARENT		"ingame settings"
+
+
+	COMMAND		"Apply"				0.1,0.90	"APPLY"		"ingame settings"
+	COMMAND		"Cancel"			0.25,0.90	"BACK"		"ingame settings"
+
+	CENTERITEMS	middle			0.5
+	DEFAULT_COLOR	150, 30, 0, 170
+	TEXT		"VIDEOT"		0.7,0.1			1.3,1.4
+
+	DEFAULT_COLOR	200, 210, 175, 170
+	
+	CENTERITEMS	left			0.2
+
+	#################
+	# VIDEO SETTINGS 
+	#################
+	SINGLELISTBOX	"RESO"				0.1,0.26	"RESOLU"		0.15,0.0
+	SLIDER		"shadows"			0.1,0.32	"SHADOW"		0.40,0	
+	#SWITCH		"shadows"			0.1,0.32	"SHADOW"		0.40,0.0	"OFF"  0.50,0.0 	"ON"
+	SLIDER		"texturefilter"			0.1,0.38	"TXTQTY"		0.40,0	
+	SLIDER		"lightquality"			0.1,0.44	"LGTQTY"		0.40,0	
+	SLIDER		"antialiasing"			0.1,0.50	"ANTIAL"		0.40,0
+	SWITCH		"noise fx"			0.1,0.56	"NOISEFX"		0.40,0.0	"OFF"  0.50,0.0 	"ON"
+END
+
+RECORD INGAMEBRIGHTNESS_PAGE
+	PAGENAME	"ingame brightness"
+	PARENT		"ingame settings"
+	
+
+	CENTERITEMS	middle		0.5
+	DEFAULT_COLOR 150, 30, 0, 170
+	TEXT		"BRIGHNT"		0.7,0.1		1.3,1.4
+
+	DEFAULT_COLOR 200, 210, 175, 170
+	CENTERITEMS	no		0.0
+	# [UWEP] slider should be in font 1 ('default')
+	DEFAULT_TEXT_FONT 1
+	SLIDER_BRIGHT	"brightness slider"	0,0  ""		0.6933,0.42 	0.6933,0.26 0.075,0.13 0.768334,0.26 0.075,0.13 "ingame settings"
+	
+	# [UWEP] all other items should be in font 2 again ('menu')
+	DEFAULT_TEXT_FONT 2
+
+	CENTERITEMS	left		0.21333
+	# [UWEP] the brightness info text is now a FLEXTEXT item that automagically wraps lines
+	DEFAULT_VALIGN JUSTIFY
+	DEFAULT_TEXT_FONT 1
+	FLEXTEXT		"BRINFO"		0.16,0.25	0.50,0.23 0.89,0.99
+	
+	CENTERITEMS	no		0.8
+
+	DEFAULT_TEXT_FONT 2
+
+	COMMAND		"Apply"				0.1,0.90	"APPLY"		"ingame settings"
+	COMMAND		"Cancel"			0.25,0.90	"BACK"		"ingame settings"
+
+END
+
+RECORD DEFAULT_SETTINGS_PAGE
+	PAGENAME			"ingame default settings"
+	PARENT				"ingame settings"
+	
+	CENTERITEMS			middle			0.5
+	DEFAULT_COLOR			150, 30, 0, 170
+	TEXT				"DEFSETT"		0.08,0.1	1.3,1.4
+
+	DEFAULT_COLOR 200,		210, 175, 170	
+	DEFAULT_TEXT_FONT		1
+	CENTERITEMS			no			0.0
+
+	#[UWEP] replaced three separate text items that held multiline text with FLEXTEXT item that word wraps automagically
+
+	FLEXTEXT	"DEFQU"					0.18,0.26	0.45,0.2	0.89,0.99
+
+	DEFAULT_TEXT_FONT					2
+	LINKTOPAGE	"ingame settings"			0.67,0.26	"QUESNO"	BACKGRDSWEEP
+	COMMAND		"set default settings"			0.78,0.26	"QUESYES"	"ingame settings"
+		
+
+END
+
+RECORD SAVEGAMES_PAGE
+	PAGENAME	"ingame completed save"
+	
+	TEXT		"SAVEG"		0.08,0.1	1.2,1.2
+	
+	SAVE	"slot"		0.08,0.26		"SLOT_0"	"load difficulty"		1,1
+	SAVE	"slot"		0.08,0.32		"SLOT_1"	"load difficulty"		1,1
+	SAVE	"slot"		0.08,0.38		"SLOT_2"	"load difficulty"		1,1
+	SAVE	"slot"		0.08,0.44		"SLOT_3"	"load difficulty"		1,1
+	SAVE	"slot"		0.08,0.5		"SLOT_4"	"load difficulty"		1,1
+	SAVE	"slot"		0.08,0.56		"SLOT_5"	"load difficulty"		1,1
+	SAVE	"slot"		0.08,0.62		"SLOT_6"	"load difficulty"		1,1
+	SAVE	"slot"		0.08,0.68		"SLOT_7"	"load difficulty"		1,1
+	
+	# [UWEP] changed save slot info font and position  
+ 	DEFAULT_TEXT_FONT 1
+	SLOTINFO	"" 		0.4,0.8  		0.6,0.7	0.06
+
+	DEFAULT_TEXT_FONT 2
+
+	COMMAND		"Cancel"	0.1,0.90		"BACK"		"ingame settings"
+
+END
+

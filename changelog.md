@@ -12,6 +12,8 @@
 * Remove Execution Distortion.
 * Change Execution ColorRamp to nothing.
 
+#### global/initscripts/resource26.glg
+* Issue: Core Feature 4 - Level Selection (Monitor images)
 
 #### levels/A01_Escape_Asylum/A01_Escape_Asylum#mls/modified/0#levelscript.srce
 
