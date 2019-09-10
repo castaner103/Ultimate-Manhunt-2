@@ -322,6 +322,28 @@ begin
 		CreateBoxTrigger(pos, pos2, 'triggerChairFly');
 
 
+        { #### MHT #### : Port from PS2 Leak, activate the beating of near dead man }
+        {
+            #### UMH begin ####
+            Issue A01-2 Nurse beating insane
+
+            Add the PS2 beating
+
+            Related Files: /modified/Issue_A01-2_NurseBeatingInsane/
+        }
+
+        SetVector(pos, -13.3137, 0.0, 26.5998);
+        SetVector(pos2, -9.7295, 2.31466, 27.2132);
+        CreateBoxTrigger(pos, pos2, 'triggerNewMeleeTut');
+
+		SetVector(pos, -13.739, 0.0, 40.7047);
+		SetVector(pos2, -13.3013, 1.19097, 44.1915);
+		CreateBoxTrigger(pos, pos2, 'triggerNoiseRem');
+        {
+            Issue A01-2 Nurse beating insane
+            #### UMH end ####
+        }
+
         {
             #### UMH begin ####
             Issue A01-6 JumpScare
