@@ -21,4 +21,6 @@
 * Issue: A01-2: Add Nurse beating insane from PS2
  *levels/A01_Escape_Asylum/A01_Escape_Asylum#mls/modified/Issue_A01-2_NurseBeatingInsane*
 
+#### levels/A01_Escape_Asylum/A01_Escape_Asylum#mls/modified/46#playerscript.srce
 
+* Issue: A01-4 Alternative end cutscene
