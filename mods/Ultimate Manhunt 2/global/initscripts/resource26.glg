@@ -486,7 +486,12 @@ RECORD SCENESELECTION_PAGE
 	DEFAULT_COLOR 150, 30, 0, 170
 	TEXT		"SEL"			0.08,0.124	1.3,1.4
 
+    #### UMH #### Issue Core 4:
+    # -0.105 changed to 0.50 (ps2 value)
+
 	PIC		"levelPic"		0.50,0.45	0.35,0.47
+    #### UMH #### Issue Core 4 END
+
 
 	DEFAULT_COLOR 200, 210, 175, 170
 	EPISODE		"levelName"		0.10,0.26 	""	
@@ -501,7 +506,9 @@ RECORD SCENESELECTION_PAGE
 
 	# 			"string in table"	"picName"	"command to execute on selection"	"level name"
 # 	ADDTOSELECTIONLIST	"B00_TestJumpnClimb"	"a01"		"load level(B00_TestJumpnClimb)"	"B00_TestJumpnClimb"
-	ADDTOSELECTIONLIST	"EXETUT"		"none"		"Execution Tutorial"			"Execution_Tutorial"
+    #### UMH #### Issue Core 4: add a image for tut.
+	ADDTOSELECTIONLIST	"EXETUT"		"a18_mono"		"Execution Tutorial"			"Execution_Tutorial"
+    #### UMH #### Issue Core 4:
 	ADDTOSELECTIONLIST	"LVL_1"			"a01"		"load level(A01_Escape_Asylum)"		"A01_Escape_Asylum"
 	ADDTOSELECTIONLIST	"LVL_2"			"a02"		"load level(A02_The_Old_House)"		"A02_The_Old_House"
 	ADDTOSELECTIONLIST	"LVL_4"			"a04"		"load level(A04_SM_Nightclub)"		"A04_SM_Nightclub"
