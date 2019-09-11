@@ -455,16 +455,16 @@ begin
 						
 		HideEntity(GetEntity('E1_Cell_Door_(D)04'));
 		
-		{AIAddEntity('DyingMan(hunter)');
-		SetPedDoNotDecay(GetEntity('DyingMan(hunter)'), TRUE);}
+		AIAddEntity('DyingMan(hunter)');
+		SetPedDoNotDecay(GetEntity('DyingMan(hunter)'), TRUE);
 	
 		{ Make character unlockonable, invulnerable, unexecutable }
-		{SetPedLockonable(GetEntity('DyingMan(hunter)'), FALSE);
+		SetPedLockonable(GetEntity('DyingMan(hunter)'), FALSE);
 		SetEntityInvulnerable(GetEntity('DyingMan(hunter)'), TRUE);
 		SetHunterExecutable(GetEntity('DyingMan(hunter)'), FALSE);
-		AISetEntityIdleOverride('DyingMan(hunter)', TRUE, TRUE);}
+		AISetEntityIdleOverride('DyingMan(hunter)', TRUE, TRUE);
 		
-		{AIEntityPlayAnim('DyingMan(hunter)', 'ASY_INMATE_IDLE_1');}
+		AIEntityPlayAnim('DyingMan(hunter)', 'ASY_INMATE_IDLE_1');
 
 		sleep(1500);
 
