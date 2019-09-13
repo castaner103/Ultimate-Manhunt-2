@@ -915,6 +915,7 @@ RECORD LAYERED_PAGE
 	LINKTOPAGE	"video"				0.1,0.44	"VIDEO"		BACKGRDHOLD
 	LINKTOPAGE	"brightness"			0.1,0.5		"BRIGHTN"	BACKGRDHOLD
 	LINKTOPAGE	"language"			0.1,0.56	"LANGUA"	BACKGRDHOLD
+	LINKTOPAGE	"umh mod menu"			0.1,0.62	"modifications"	BACKGRDHOLD
 	LINKTOPAGE	"default settings"		0.1,0.72    	"DEFSET"	BACKGRDHOLD
 
 	COMMAND		"Cancel"			0.1,0.90	"BACK"	"loadsave"
@@ -1254,6 +1255,50 @@ RECORD LAYERED_PAGE
 
 END
 
+
+###############################################################################
+########################## UMH MOD MENUS ######################################
+###############################################################################
+
+RECORD LAYERED_PAGE
+	PAGENAME	"umh mod menu"
+	BACKGROUND	"front_sett_bkgrnd02"		0.6,0 	0.37,0.97
+	PARENT		"settings"
+	BK_TRANSITION	BACKGRDHOLD
+
+	CENTERITEMS	no		0.08
+
+	LAYEREDBACKGROUND	"BKGD_settings"
+
+
+	LINESHEADER "FE_lines_header"		0.0,0.0		0.9,1.0
+
+	DEFAULT_COLOR 150, 30, 0, 170
+	TEXT		"Modifications"			0.08,0.124	1.3,1.4
+
+
+	DEFAULT_COLOR 200, 210, 175, 170
+
+	SWITCH		"headshot"		    0.1,0.20	"Headshots"		0.35,0.0 	"firearm"  0.56,0.0 	"only shotgun"
+	SWITCH		"bloodStay"		    0.1,0.25	"Blood on wall/floor"		0.35,0.0 	"disappear"  0.56,0.0 	"keep"
+	SWITCH		"funmode"		    0.1,0.30	"Fun Mode"		0.35,0.0 	"OFF"  0.56,0.0 	"ON"
+
+	DEFAULT_COLOR 150, 30, 0, 170
+	TEXT		"Executions"			0.08,0.37	1.3,1.4
+
+	DEFAULT_COLOR 200, 210, 175, 170
+	SWITCH		"cameraShake"		0.1,0.45	"Camera Shake"		0.35,0.0 	"ON"  0.56,0.0 	"OFF"
+	SWITCH		"flash"		        0.1,0.50	"Red Flash effect"		0.35,0.0 	"ON"  0.56,0.0 	"OFF"
+	SWITCH		"firearm3"		    0.1,0.55	"3-Stage Firearm"		0.35,0.0 	"ON"  0.56,0.0 	"OFF"
+#	SWITCH		"animation"		    0.1,0.60	"Animations"		0.35,0.0 	"Original"  0.56,0.0 	"Ultimate"
+
+
+
+	COMMAND		"Apply"				0.1,0.90	"APPLY"		"settings"
+	COMMAND		"Cancel"			0.25,0.90	"BACK"		"settings"
+
+END
+
 RECORD LAYERED_DEFAULT_SETTINGS_PAGE
 	PAGENAME	"default settings"
 	PARENT		"settings"
@@ -1269,7 +1314,7 @@ RECORD LAYERED_DEFAULT_SETTINGS_PAGE
 	TEXT		"DEFSETT"				0.08,0.124	1.3,1.4
 
 	DEFAULT_COLOR 200, 210, 175, 170
-	DEFAULT_TEXT_FONT 1	
+	DEFAULT_TEXT_FONT 1
 #[UWEP] replaced three separate text items that held multiline text with FLEXTEXT item that word wraps automagically
 	FLEXTEXT		"DEFQU"				0.1,0.26	0.45,0.2 0.89,0.99
 
@@ -1278,6 +1323,7 @@ RECORD LAYERED_DEFAULT_SETTINGS_PAGE
 	COMMAND		"set default settings"			0.73,0.25	"QUESYES"	"settings"	
 
 END
+
 
 
 ###############################################################################
@@ -1701,4 +1747,3 @@ RECORD SAVEGAMES_PAGE
 	COMMAND		"Cancel"	0.1,0.90		"BACK"		"ingame settings"
 
 END
-
