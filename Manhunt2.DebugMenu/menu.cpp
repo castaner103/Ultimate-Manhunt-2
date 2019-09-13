@@ -9,7 +9,6 @@ ManhuntSdk* SDK = new ManhuntSdk();
 MenuEntry MAIN_MENU_WEAPONS{ Types::MENU_ENTRY, "Weapons", "", "weapons" };
 MenuEntry MAIN_MENU_HELPER{ Types::MENU_ENTRY, "Helper", "", "helpers" };
 
-MenuEntry TOGGLE_FUN_MODE{ Types::TOGGLE, "Fun-Mode", "funmode" };
 MenuEntry TOGGLE_FREE_CAM{ Types::TOGGLE, "Free Camera", "freecam" };
 MenuEntry TOGGLE_TEST{ Types::TOGGLE, "test", "TestFunction" };
 
@@ -18,7 +17,6 @@ MenuEntry TOGGLE_GODMODE{ Types::TOGGLE, "GodMode", "GodMode" };
 MenuEntry MenuHome[] = {
 	MAIN_MENU_WEAPONS, 
 	MAIN_MENU_HELPER,
-	TOGGLE_FUN_MODE, 
 	TOGGLE_FREE_CAM, 
 	TOGGLE_TEST, 
 	TOGGLE_GODMODE
@@ -332,8 +330,6 @@ void CMenu::ProcessUserNavigation() {
 			selectedEntry.toggleActive ^= 1;
 
 			if (selectedEntry.toggleActive) selectedEntry.label.append( " ~red~ON~colour~" );
-
-			if (selectedEntry.entityName == "funmode") SDK->ToggleFunMode();
 
 			else if (selectedEntry.entityName == "TestFunction") SDK->TestFunction();
 //			else if (selectedEntry.entityName == "TestFunction2") SDK->TestFunction2();

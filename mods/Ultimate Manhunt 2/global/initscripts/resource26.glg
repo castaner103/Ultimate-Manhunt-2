@@ -1293,11 +1293,51 @@ RECORD LAYERED_PAGE
 #	SWITCH		"animation"		    0.1,0.60	"Animations"		0.35,0.0 	"Original"  0.56,0.0 	"Ultimate"
 
 
+	COMMAND		"Apply"				0.1,0.90	"APPLY"		"settings"
+	COMMAND		"Cancel"			0.25,0.90	"BACK"		"settings"
+
+END
+
+
+RECORD LAYERED_PAGE
+	PAGENAME	"ingame umh mod menu"
+	BACKGROUND	"front_sett_bkgrnd02"		0.6,0 	0.37,0.97
+	PARENT		"ingame main"
+	BK_TRANSITION	BACKGRDHOLD
+
+	CENTERITEMS	no		0.08
+
+	LAYEREDBACKGROUND	"BKGD_settings"
+
+
+	LINESHEADER "FE_lines_header"		0.0,0.0		0.9,1.0
+
+	DEFAULT_COLOR 150, 30, 0, 170
+	TEXT		"Modifications"			0.08,0.124	1.3,1.4
+
+
+	DEFAULT_COLOR 200, 210, 175, 170
+
+	SWITCH		"headshot"		    0.1,0.20	"Headshots"		0.35,0.0 	"firearm"  0.56,0.0 	"only shotgun"
+	SWITCH		"bloodStay"		    0.1,0.25	"Blood on wall/floor"		0.35,0.0 	"disappear"  0.56,0.0 	"keep"
+	SWITCH		"funmode"		    0.1,0.30	"Fun Mode"		0.35,0.0 	"OFF"  0.56,0.0 	"ON"
+
+	DEFAULT_COLOR 150, 30, 0, 170
+	TEXT		"Executions"			0.08,0.37	1.3,1.4
+
+	DEFAULT_COLOR 200, 210, 175, 170
+	SWITCH		"cameraShake"		0.1,0.45	"Camera Shake"		0.35,0.0 	"ON"  0.56,0.0 	"OFF"
+	SWITCH		"flash"		        0.1,0.50	"Red Flash effect"		0.35,0.0 	"ON"  0.56,0.0 	"OFF"
+	SWITCH		"firearm3"		    0.1,0.55	"3-Stage Firearm"		0.35,0.0 	"ON"  0.56,0.0 	"OFF"
+#	SWITCH		"animation"		    0.1,0.60	"Animations"		0.35,0.0 	"Original"  0.56,0.0 	"Ultimate"
+
+
 
 	COMMAND		"Apply"				0.1,0.90	"APPLY"		"settings"
 	COMMAND		"Cancel"			0.25,0.90	"BACK"		"settings"
 
 END
+
 
 RECORD LAYERED_DEFAULT_SETTINGS_PAGE
 	PAGENAME	"default settings"
@@ -1366,8 +1406,9 @@ RECORD INGAMEMAIN_PAGE
 	LINKTOPAGE	"ingame restart 2"	0.4,0.56	"REST2"		BACKGRDSWEEP
 	LINKTOPAGE	"ingame restart 1"	0.4,0.62	"REST1"		BACKGRDSWEEP
 	LINKTOPAGE	"ingame settings"	0.4,0.68	"SETINGS"	BACKGRDSWEEP
-	LINKTOPAGE	"ingame save"		0.4,0.74	"SAVEGAM"	BACKGRDSWEEP
-	LINKTOPAGE	"ingame quit"		0.4,0.80	"QUIT"		BACKGRDSWEEP
+	LINKTOPAGE	"ingame umh mod menu"	0.4,0.74	"modifications"	BACKGRDSWEEP
+	LINKTOPAGE	"ingame save"		0.4,0.80	"SAVEGAM"	BACKGRDSWEEP
+	LINKTOPAGE	"ingame quit"		0.4,0.86	"QUIT"		BACKGRDSWEEP
 	
 	
 

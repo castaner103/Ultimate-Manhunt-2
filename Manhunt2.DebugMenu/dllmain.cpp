@@ -23,6 +23,55 @@ struct CConfig
 
 CConfig config;
 
+
+
+void UpdateFunMode() {
+
+	if (config.funmode == 1) {
+		*(int*)0x76BE40 = 32;
+		*(char*)0x6B26E5 = 1;
+	}
+	else {
+		*(int*)0x76BE40 = 0;
+		*(char*)0x6B26E5 = 0;
+	}
+}
+
+void UpdateCameraShake() {
+	if (config.cameraShake == 1) {
+		Memory::VP::Patch<char>(0x5956CA + 1, 0x85);
+	}
+	else {
+		Memory::VP::Patch<char>(0x5956CA + 1, 0x84);
+	}
+}
+
+void UpdateFlash() {
+	int colRampName = *(int*)0x75C0A8;
+	colRampName = colRampName + 0x208;
+
+	if (config.flash == 1) {
+		//break the colramp name so he can not load it anymore
+		Memory::VP::Patch<char>(colRampName + 2, 0x00);
+
+	}
+	else {
+		//restore the colramp name so he can not load it anymore
+		Memory::VP::Patch<char>(colRampName + 2, 0x5f);
+	}
+}
+
+void UpdateBloodStay() {
+	if (config.bloodStay == 1) {
+		Memory::VP::Patch<char>(0x5E4C10, 0x74);
+	}
+	else {
+		Memory::VP::Patch<char>(0x5E4C10, 0x75);
+	}
+
+}
+
+
 void SaveSettings() {
 	std::ofstream myfile;
 	myfile.open("settings.umh");
@@ -35,6 +84,7 @@ void SaveSettings() {
 	myfile.close();
 }
 
+bool settingsLoaded = false;
 void ReadSettings() {
 	std::ifstream fin("settings.umh");
 	std::string line;
@@ -70,6 +120,12 @@ void ReadSettings() {
 	}
 }
 
+void ApplySettings() {
+	UpdateBloodStay();
+	UpdateCameraShake();
+	UpdateFunMode();
+	UpdateFlash();
+}
 
 void Init()
 {
@@ -79,6 +135,11 @@ void Init()
 	{
 		Sleep(1);
 		menu->ProcessMenu();
+
+		if (*(int*)0x75B334 == 1 && settingsLoaded == false) {
+			ApplySettings();
+			settingsLoaded = true;
+		}
 
 	}
 }
@@ -241,8 +302,6 @@ int __fastcall WrapGetNeoMenuValue(int ptr, int a2, int a3) {
 }
 
 
-//void SetHead
-
 
 int __fastcall UpdateNeoMenuActiveStates(int ptr, int a2, int namePtr, int status) {
 	
@@ -256,54 +315,20 @@ int __fastcall UpdateNeoMenuActiveStates(int ptr, int a2, int namePtr, int statu
 	}
 	else if (strcmp(fieldName, "funmode") == 0) {
 		config.funmode = status;
-
-		if (status == 1) {
-			*(int*)0x76BE40 = 32;
-			*(char*)0x6B26E5 = 1;
-		}
-		else {
-			*(int*)0x76BE40 = 0;
-			*(char*)0x6B26E5 = 0;
-		}
-
+		UpdateFunMode();
 	}
 	else if (strcmp(fieldName, "cameraShake") == 0) {
 		config.cameraShake = status;
-
-		if (status == 1) {
-			Memory::VP::Patch<char>(0x5956CA + 1, 0x85);
-		}
-		else {
-			Memory::VP::Patch<char>(0x5956CA + 1, 0x84);
-		}
-
+		UpdateCameraShake();
 	}
-	
 	else if (strcmp(fieldName, "flash") == 0) {
 		config.flash = status;
+		UpdateFlash();
 
-		int colRampName = *(int*)0x75C0A8;
-		colRampName = colRampName + 0x208;
-		
-		if (status == 1) {
-			//break the colramp name so he can not load it anymore
-			Memory::VP::Patch<char>(colRampName + 2, 0x00);
-			
-		}
-		else {
-			//restore the colramp name so he can not load it anymore
-			Memory::VP::Patch<char>(colRampName + 2, 0x5f);
-		}
 	}
 	else if (strcmp(fieldName, "bloodStay") == 0) {
 		config.bloodStay = status;
-
-		if (status == 1) {
-			Memory::VP::Patch<char>(0x5E4C10, 0x74);
-		}
-		else {
-			Memory::VP::Patch<char>(0x5E4C10, 0x75);
-		}
+		UpdateBloodStay();
 	}
 
 	//update our config file, todo: only call this if required
@@ -332,11 +357,12 @@ extern "C"
 		Memory::VP::Patch(0x40D2A3, 0x412B);
 		printf(". OK\n");
 
-
 		ReadSettings();
+
 		
 		printf("Init SDK Menu ..");
 		CreateThread(nullptr, 0, reinterpret_cast<LPTHREAD_START_ROUTINE>(Init), nullptr, 0, nullptr);
+
 		printf(". OK\n");		
 		
 
@@ -395,7 +421,6 @@ extern "C"
 		for (int i = 0; i < 24; i++) {
 			Memory::VP::Patch<char>(0x6A9984 + i, 0x20);
 		}
-
 
 
 //		Memory::VP::InjectHook(0x4DF464, HookNeoMenuSettings, PATCH_CALL);
