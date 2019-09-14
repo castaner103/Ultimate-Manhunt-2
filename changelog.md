@@ -6,14 +6,9 @@
 * Issue: Core Feature 9 - 60 FPS Patch
 * Issue: Core Feature 24 - Blood stay longer on wall and floor
 
-#### global/resource1.glg
-
-* Remove Execution Camera Shakes.
-* Remove Execution Distortion.
-* Change Execution ColorRamp to nothing.
-
 #### global/initscripts/resource26.glg
 * Issue: Core Feature 4 - Level Selection (Monitor images)
+* Implement a Modification (game) menu
 
 #### levels/A01_Escape_Asylum/A01_Escape_Asylum#mls/modified/0#levelscript.srce
 

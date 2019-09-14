@@ -19,11 +19,22 @@ struct CConfig
 	int flash = 0;
 	int cameraShake = 0;
 	int funmode = 0;
+	int tvpCamera = 0;
+	int debug = 0;
 };
 
 CConfig config;
 
-
+void ResetConfig() {
+	config.headshot = 0;
+	config.bloodStay = 0;
+	config.firearm3 = 0;
+	config.flash = 0;
+	config.cameraShake = 0;
+	config.funmode = 0;
+	config.tvpCamera = 0;
+	config.debug = 0;
+}
 
 void UpdateFunMode() {
 
@@ -81,10 +92,13 @@ void SaveSettings() {
 	myfile << "flash=" << config.flash << "\n";
 	myfile << "cameraShake=" << config.cameraShake << "\n";
 	myfile << "funmode=" << config.funmode << "\n";
+	myfile << "tvpCamera=" << config.tvpCamera << "\n";
+	myfile << "debug=" << config.debug << "\n";
 	myfile.close();
 }
 
 bool settingsLoaded = false;
+bool settingsFlashLoaded = false;
 void ReadSettings() {
 	std::ifstream fin("settings.umh");
 	std::string line;
@@ -101,6 +115,9 @@ void ReadSettings() {
 
 		if (strcmp(attr, "headshot") == 0) {
 			config.headshot = atoi(value);
+		}
+		else if (strcmp(attr, "debug") == 0) {
+			config.debug = atoi(value);
 		}
 		else if (strcmp(attr, "bloodStay") == 0) {
 			config.bloodStay = atoi(value);
@@ -124,8 +141,9 @@ void ApplySettings() {
 	UpdateBloodStay();
 	UpdateCameraShake();
 	UpdateFunMode();
-	UpdateFlash();
+//	UpdateFlash();
 }
+
 
 void Init()
 {
@@ -136,9 +154,11 @@ void Init()
 		Sleep(1);
 		menu->ProcessMenu();
 
-		if (*(int*)0x75B334 == 1 && settingsLoaded == false) {
-			ApplySettings();
-			settingsLoaded = true;
+		//we need to wait in some cases until the level is loaded before we can restore previous settings
+		if (*(CSDKEntity * *)0x789490 != false && settingsFlashLoaded == false) {
+
+			UpdateFlash();
+			settingsFlashLoaded = true;
 		}
 
 	}
@@ -249,25 +269,63 @@ int endCase = 0x55F31D;
 int command;
 char* commandText;
 
-void __declspec(naked) HookNeoMenuCommand() {
-	_asm {
-		mov command, esi
-		pushad
-	}
+void __cdecl HandleNeoMenuChangeLanguageLoadMap(int a1, int a2) {
 
-	commandText = (char*)(*(int*)command);
+	char* cmd = (char*)(*(int*)a2);
 
-//	if (commandText == "mytest") {
-		printf("j %s", commandText);
-
-	//}
-
-	_asm {
-		popad
-		jmp  endCase
-	}
-
+	((void(__cdecl*)(int, int))0x55F1A0)(a1, a2);
 }
+
+
+void __cdecl HandleNeoMenuCommands(int a1, int a2) {
+
+	char* cmd = (char*)(*(int*)a2);
+	
+//	printf("HandleNeoMenuCommands %s\n", cmd);
+
+	bool isCustomCmd = false;
+
+	if (strcmp(cmd, "tvpOriginal") == 0) {
+		isCustomCmd = true;
+		config.tvpCamera = 0;
+	}
+	else if (strcmp(cmd, "tvpStatic") == 0) {
+		isCustomCmd = true;
+		config.tvpCamera = 1;
+	}
+	else if (strcmp(cmd, "tvpPs2Leak") == 0) {
+		isCustomCmd = true;
+		config.tvpCamera = 2;
+	}
+	else if (strcmp(cmd, "tvpPs2Psp") == 0) {
+		isCustomCmd = true;
+		config.tvpCamera = 3;
+	}
+	else if (strcmp(cmd, "tvpWii") == 0) {
+		isCustomCmd = true;
+		config.tvpCamera = 4;
+	}
+	else if (strcmp(cmd, "set default settings") == 0) {
+		ResetConfig();
+	}
+
+	
+
+	if (isCustomCmd) {
+		//send apply msg
+		((void(__thiscall*)(int*, int*, int))0x562B00)((int*)0x75F110, (int*)(a1 + 120), 1);
+
+		SaveSettings();
+
+		return;
+	}
+
+
+	((void(__cdecl*)(int, int))0x55CC60)(a1, a2);
+}
+
+
+
 
 /*
 void __fastcall HookNeoMenuSettings( int GameSettingsPtr) {
@@ -279,6 +337,8 @@ void __fastcall HookNeoMenuSettings( int GameSettingsPtr) {
 int __fastcall WrapGetNeoMenuValue(int ptr, int a2, int a3) {
 	char* fieldName = *(char**)a3;
 
+//	printf("WrapGetNeoMenuValue %s\n", fieldName);
+
 	if (strcmp(fieldName, "headshot") == 0) {
 		return config.headshot;
 	}
@@ -289,11 +349,18 @@ int __fastcall WrapGetNeoMenuValue(int ptr, int a2, int a3) {
 		return config.firearm3;
 	}
 	else if (strcmp(fieldName, "cameraShake") == 0) {
+		printf("camera shake %i", config.cameraShake);
 		return config.cameraShake;
 	}
 	else if (strcmp(fieldName, "funmode") == 0) {
 		return config.funmode;
 	}
+	else if (strcmp(fieldName, "debug") == 0) {
+		return config.debug;
+	}
+//	else if (strcmp(fieldName, "tvpCamera") == 0) {
+//		return config.tvpCamera;
+//	}
 	else if (strcmp(fieldName, "flash") == 0) {
 		return config.flash;
 	}
@@ -326,6 +393,9 @@ int __fastcall UpdateNeoMenuActiveStates(int ptr, int a2, int namePtr, int statu
 		UpdateFlash();
 
 	}
+	else if (strcmp(fieldName, "debug") == 0) {
+		config.debug = status;
+	}
 	else if (strcmp(fieldName, "bloodStay") == 0) {
 		config.bloodStay = status;
 		UpdateBloodStay();
@@ -338,33 +408,163 @@ int __fastcall UpdateNeoMenuActiveStates(int ptr, int a2, int namePtr, int statu
 }
 
 
+
+int __fastcall SetVecPairValues(int input, int a, int data) {
+	
+	int vecPairs = ((int(__thiscall*)(int, int))0x53B920)(input, data);
+
+	if (config.tvpCamera == 1) {
+		*(float*)(data + 36) = 5.5;
+	}
+
+	return vecPairs;
+
+}
+
+
+char* GetReplacementName(char* filename) {
+
+
+	return filename;
+}
+
+int __cdecl WrapReadBinary(char* filename) {
+
+
+	std::string modFilename = filename;
+
+	std::string modFile = "mods/";
+	modFile.append("Ultimate Manhunt 2/");
+
+	//printf("Load: %s\n", filename);
+
+
+	if (strcmp(filename, "global/ini/resource13.glg") == 0 && config.tvpCamera != 0) {
+
+		if (config.tvpCamera == 1) {
+			modFile.append(modFilename);
+			//static cam handled inline in SetVecPairValues
+		}
+		//ps2 leak cams
+		else if (config.tvpCamera == 2) {
+			modFile.append("global/ini/resource13_ps2leak.glg");
+		}
+		else if (config.tvpCamera == 3) {
+			modFile.append("global/ini/resource13_ps2psp.glg");
+		}
+		else if (config.tvpCamera == 4) {
+			modFile.append("global/ini/resource13_wii.glg");
+		}
+	}
+	else {
+		modFile.append(modFilename);
+
+	}
+	
+
+	size_t isSavegame = modFilename.find("MH2_00.sav");
+	if (isSavegame != std::string::npos) {
+		std::string modFileSave = "mods/Ultimate Manhunt 2/MH2_00.sav";
+
+		std::ifstream f(modFileSave);
+		if (f.good()) {
+//			std::cout << "Load Savegame from mod folder" << std::endl;
+
+			filename = new char[modFileSave.length() + 1];
+			strcpy(filename, modFileSave.c_str());;
+
+			return ((int(__cdecl*)(char*))0x53BCC0)(filename);
+		}
+	}
+
+
+	// is the wanted file in our mod folder ?
+	std::ifstream f(modFile.c_str());
+	if (f.good()) {
+		printf("Use custom file : %s\n", modFile.c_str());
+		//copy the string to char*
+		filename = new char[modFile.length() + 1];
+		strcpy(filename, modFile.c_str());;
+	}
+
+	return ((int(__cdecl*)(char*))0x53BCC0)(filename);
+}
+
+FILE __cdecl Wrap2ReadBinary(char* filename, char* mode) {
+
+	std::string modFilename = filename;
+
+	std::string modFile = "mods/";
+	modFile.append("Ultimate Manhunt 2/");
+	modFile.append(modFilename);
+
+	// is the wanted file in our mod folder ?
+	std::ifstream f(modFile.c_str());
+	if (f.good()) {
+//		std::cout << "Replace file : " << filename << std::endl;
+
+		//copy the string to char*
+		filename = new char[modFile.length() + 1];
+		strcpy(filename, modFile.c_str());;
+	}
+
+	return ((FILE(__cdecl*)(char*, char*, int))0x61B338)(filename, mode, 64);
+}
+
 extern "C"
 {
 	__declspec(dllexport) void InitializeASI()
 	{
 
+		ReadSettings();
+		ApplySettings();
 
-		AllocConsole();
-		freopen("CONIN$", "r", stdin);
-		freopen("CONOUT$", "w", stdout);
-		freopen("CONOUT$", "w", stderr);
 
-		//clear the ModLoader output
-		system("CLS");
+		if (config.debug) {
+			AllocConsole();
+			freopen("CONIN$", "r", stdin);
+			freopen("CONOUT$", "w", stdout);
+			freopen("CONOUT$", "w", stderr);
+
+			//clear the ModLoader output
+			system("CLS");
+		}
+
 
 
 		printf("Enable 60 FPS patch ..");
 		Memory::VP::Patch(0x40D2A3, 0x412B);
 		printf(". OK\n");
 
-		ReadSettings();
 
-		
-		printf("Init SDK Menu ..");
-		CreateThread(nullptr, 0, reinterpret_cast<LPTHREAD_START_ROUTINE>(Init), nullptr, 0, nullptr);
 
-		printf(". OK\n");		
-		
+		// Hook another readBinary call
+		Memory::VP::InjectHook(0x57B2E5, Wrap2ReadBinary, PATCH_CALL);
+
+		// Hook the readBinary call
+		Memory::VP::InjectHook(0x418A1E, WrapReadBinary, PATCH_CALL);
+		Memory::VP::InjectHook(0x4B0842, WrapReadBinary, PATCH_CALL);
+		Memory::VP::InjectHook(0x4C3A7C, WrapReadBinary, PATCH_CALL);
+		Memory::VP::InjectHook(0x4C7F68, WrapReadBinary, PATCH_CALL);
+		Memory::VP::InjectHook(0x4C8D87, WrapReadBinary, PATCH_CALL);
+		Memory::VP::InjectHook(0x4CCD10, WrapReadBinary, PATCH_CALL);
+		Memory::VP::InjectHook(0x4CD186, WrapReadBinary, PATCH_CALL);
+		Memory::VP::InjectHook(0x4CD245, WrapReadBinary, PATCH_CALL);
+		Memory::VP::InjectHook(0x4CFEB7, WrapReadBinary, PATCH_CALL);
+		Memory::VP::InjectHook(0x4E9029, WrapReadBinary, PATCH_CALL);
+		Memory::VP::InjectHook(0x4EBB04, WrapReadBinary, PATCH_CALL);
+		Memory::VP::InjectHook(0x53BD0B, WrapReadBinary, PATCH_CALL);
+		Memory::VP::InjectHook(0x53CC17, WrapReadBinary, PATCH_CALL);
+		Memory::VP::InjectHook(0x53EA07, WrapReadBinary, PATCH_CALL);
+		Memory::VP::InjectHook(0x56AEE9, WrapReadBinary, PATCH_CALL);
+		Memory::VP::InjectHook(0x56E550, WrapReadBinary, PATCH_CALL);
+		Memory::VP::InjectHook(0x583EC4, WrapReadBinary, PATCH_CALL);
+		Memory::VP::InjectHook(0x586249, WrapReadBinary, PATCH_CALL);
+		Memory::VP::InjectHook(0x5BC856, WrapReadBinary, PATCH_CALL);
+		Memory::VP::InjectHook(0x5BC86B, WrapReadBinary, PATCH_CALL);
+		Memory::VP::InjectHook(0x5DEA76, WrapReadBinary, PATCH_CALL);
+
+
 
 
 		/*
@@ -400,10 +600,10 @@ extern "C"
 
 
 		printf("Hooking NeoMenu functions ..");
-		
-		Memory::VP::Patch<char>(0x55F24B, 0xE9);
-		Memory::VP::Patch<int>(0x55F24B + 1, (int)HookNeoMenuCommand - ((int)0x55F24B + 5));
 
+		//Memory::VP::InjectHook(0x560078, HandleNeoMenuChangeLanguageLoadMap, PATCH_CALL);
+		Memory::VP::InjectHook(0x560069, HandleNeoMenuCommands, PATCH_CALL);
+		
 		Memory::VP::InjectHook(0x5570B1, WrapGetNeoMenuValue, PATCH_CALL);
 		Memory::VP::InjectHook(0x5571E6, WrapGetNeoMenuValue, PATCH_CALL);
 		Memory::VP::InjectHook(0x55DFA0, WrapGetNeoMenuValue, PATCH_CALL);
@@ -422,9 +622,19 @@ extern "C"
 			Memory::VP::Patch<char>(0x6A9984 + i, 0x20);
 		}
 
+	
+		Memory::VP::InjectHook(0x5CB3FC, SetVecPairValues, PATCH_CALL);
+		Memory::VP::InjectHook(0x5CB445, SetVecPairValues, PATCH_CALL);
 
-//		Memory::VP::InjectHook(0x4DF464, HookNeoMenuSettings, PATCH_CALL);
-		
+
+
+
+		printf("Init SDK Menu ..");
+		CreateThread(nullptr, 0, reinterpret_cast<LPTHREAD_START_ROUTINE>(Init), nullptr, 0, nullptr);
+
+		printf(". OK\n");
+
+
 	}
 }
 
