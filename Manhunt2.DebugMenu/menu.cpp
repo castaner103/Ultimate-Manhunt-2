@@ -223,8 +223,7 @@ void CMenu::ProcessMenu()
 {
 	
 
-	if (System::KeyHit(0x4B)) {
-		printf("jojo");
+	if (System::KeyHit(VK_SPACE)) {
 		SDK->InterrupExecution();
 	}
 
