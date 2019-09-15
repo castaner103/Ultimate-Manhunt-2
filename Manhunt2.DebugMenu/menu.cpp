@@ -222,6 +222,12 @@ void CMenu::BuildMenu() {
 void CMenu::ProcessMenu()
 {
 	
+
+	if (System::KeyHit(0x4B)) {
+		printf("jojo");
+		SDK->InterrupExecution();
+	}
+
 	//Toggle the Menu with F1
 	CMenu::ToggleMenu();
 
@@ -272,6 +278,8 @@ void CMenu::ToggleMenu() {
 
 		NavigationChanged = true;
 	}
+
+
 }
 
 
