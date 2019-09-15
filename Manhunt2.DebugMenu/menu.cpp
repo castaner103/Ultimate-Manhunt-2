@@ -11,6 +11,7 @@ MenuEntry MAIN_MENU_HELPER{ Types::MENU_ENTRY, "Helper", "", "helpers" };
 
 MenuEntry TOGGLE_FREE_CAM{ Types::TOGGLE, "Free Camera", "freecam" };
 MenuEntry TOGGLE_TEST{ Types::TOGGLE, "test", "TestFunction" };
+MenuEntry TOGGLE_NEVERDEAD{ Types::TOGGLE, "Never dead", "neverDead" };
 
 MenuEntry TOGGLE_GODMODE{ Types::TOGGLE, "GodMode", "GodMode" };
 
@@ -19,7 +20,8 @@ MenuEntry MenuHome[] = {
 	MAIN_MENU_HELPER,
 	TOGGLE_FREE_CAM, 
 	TOGGLE_TEST, 
-	TOGGLE_GODMODE
+	TOGGLE_GODMODE,
+	TOGGLE_NEVERDEAD
 };
 
 int MenuHomeCount = sizeof(MenuHome) / sizeof(MenuHome[0]);
@@ -309,8 +311,6 @@ void CMenu::ProcessUserNavigation() {
 			CurrentMenuName = selectedEntry.gotoMenu;
 			Selection = 0;
 
-			printf("Ehhh %s", CurrentMenuName.c_str());
-
 			if (CurrentMenuName == "weapons") {
 				MenuCount = MenuWeaponsCount;
 			}
@@ -331,11 +331,22 @@ void CMenu::ProcessUserNavigation() {
 
 			if (selectedEntry.toggleActive) selectedEntry.label.append( " ~red~ON~colour~" );
 
-			else if (selectedEntry.entityName == "TestFunction") SDK->TestFunction();
-//			else if (selectedEntry.entityName == "TestFunction2") SDK->TestFunction2();
+			if (selectedEntry.entityName == "TestFunction") SDK->TestFunction();
+
 
 			else if (selectedEntry.entityName == "GodMode") {
 				godMode ^= 1;
+
+			}
+			else if (selectedEntry.entityName == "neverDead") {
+				if (selectedEntry.toggleActive == 0) {
+					Memory::VP::Patch<char>(0x5A8165, 0x74);
+				}
+				else {
+					Memory::VP::Patch<char>(0x5A8165, 0x75);
+
+				}
+					
 			}
 			else if (selectedEntry.entityName == "freecam") {
 				if (selectedEntry.toggleActive == 0) {

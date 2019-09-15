@@ -21,7 +21,10 @@ struct CConfig
 	int funmode = 0;
 	int tvpCamera = 0;
 	int debug = 0;
+	int whitenoise = 0;
 };
+
+void DummyReturnVoid() { return; }
 
 CConfig config;
 
@@ -34,17 +37,41 @@ void ResetConfig() {
 	config.funmode = 0;
 	config.tvpCamera = 0;
 	config.debug = 0;
+	config.whitenoise = 0;
 }
+
+void UpdateWhitenoise() {
+	if (config.whitenoise == 1) {
+		//disable whitenoise
+		Memory::VP::InjectHook(0x5C5CED, DummyReturnVoid, PATCH_CALL);
+
+		Memory::VP::Patch<char>(0x5AF74F + 1, 0x00);
+		Memory::VP::Patch<char>(0x5AF734 + 1, 0x00);
+
+
+	}
+	else {
+		Memory::VP::Patch<char>(0x5C5CED, 0xE8);
+		Memory::VP::Patch<char>(0x5C5CED + 1, 0x9E);
+		Memory::VP::Patch<char>(0x5C5CED + 2, 0x9A);
+		Memory::VP::Patch<char>(0x5C5CED + 3, 0xFE);
+		Memory::VP::Patch<char>(0x5C5CED + 4, 0xFF);
+
+		Memory::VP::Patch<char>(0x5AF74F + 1, 0x01);
+		Memory::VP::Patch<char>(0x5AF734 + 1, 0x01);
+	}
+}
+
 
 void UpdateFunMode() {
 
 	if (config.funmode == 1) {
 		*(int*)0x76BE40 = 32;
-		*(char*)0x6B26E5 = 1;
+		*(char*)0x6B26E5 = 0;
 	}
 	else {
 		*(int*)0x76BE40 = 0;
-		*(char*)0x6B26E5 = 0;
+		*(char*)0x6B26E5 = 1;
 	}
 }
 
@@ -94,6 +121,7 @@ void SaveSettings() {
 	myfile << "funmode=" << config.funmode << "\n";
 	myfile << "tvpCamera=" << config.tvpCamera << "\n";
 	myfile << "debug=" << config.debug << "\n";
+	myfile << "whitenoise=" << config.whitenoise << "\n";
 	myfile.close();
 }
 
@@ -131,6 +159,9 @@ void ReadSettings() {
 		else if (strcmp(attr, "funmode") == 0) {
 			config.funmode = atoi(value);
 		}
+		else if (strcmp(attr, "whitenoise") == 0) {
+			config.whitenoise = atoi(value);
+		}
 		else if (strcmp(attr, "flash") == 0) {
 			config.flash = atoi(value);
 		}
@@ -141,6 +172,7 @@ void ApplySettings() {
 	UpdateBloodStay();
 	UpdateCameraShake();
 	UpdateFunMode();
+	UpdateWhitenoise();
 //	UpdateFlash();
 }
 
@@ -358,9 +390,9 @@ int __fastcall WrapGetNeoMenuValue(int ptr, int a2, int a3) {
 	else if (strcmp(fieldName, "debug") == 0) {
 		return config.debug;
 	}
-//	else if (strcmp(fieldName, "tvpCamera") == 0) {
-//		return config.tvpCamera;
-//	}
+	else if (strcmp(fieldName, "whitenoise") == 0) {
+		return config.whitenoise;
+	}
 	else if (strcmp(fieldName, "flash") == 0) {
 		return config.flash;
 	}
@@ -395,6 +427,10 @@ int __fastcall UpdateNeoMenuActiveStates(int ptr, int a2, int namePtr, int statu
 	}
 	else if (strcmp(fieldName, "debug") == 0) {
 		config.debug = status;
+	}
+	else if (strcmp(fieldName, "whitenoise") == 0) {
+		config.whitenoise = status;
+		UpdateWhitenoise();
 	}
 	else if (strcmp(fieldName, "bloodStay") == 0) {
 		config.bloodStay = status;
@@ -511,6 +547,7 @@ FILE __cdecl Wrap2ReadBinary(char* filename, char* mode) {
 	return ((FILE(__cdecl*)(char*, char*, int))0x61B338)(filename, mode, 64);
 }
 
+
 extern "C"
 {
 	__declspec(dllexport) void InitializeASI()
@@ -525,9 +562,6 @@ extern "C"
 			freopen("CONIN$", "r", stdin);
 			freopen("CONOUT$", "w", stdout);
 			freopen("CONOUT$", "w", stderr);
-
-			//clear the ModLoader output
-			system("CLS");
 		}
 
 
@@ -538,6 +572,7 @@ extern "C"
 
 
 
+		printf("Enable ModLoader ..");
 		// Hook another readBinary call
 		Memory::VP::InjectHook(0x57B2E5, Wrap2ReadBinary, PATCH_CALL);
 
@@ -563,9 +598,7 @@ extern "C"
 		Memory::VP::InjectHook(0x5BC856, WrapReadBinary, PATCH_CALL);
 		Memory::VP::InjectHook(0x5BC86B, WrapReadBinary, PATCH_CALL);
 		Memory::VP::InjectHook(0x5DEA76, WrapReadBinary, PATCH_CALL);
-
-
-
+		printf(". OK\n");
 
 		/*
 			3-Stage firearm executions code
@@ -600,7 +633,6 @@ extern "C"
 
 
 		printf("Hooking NeoMenu functions ..");
-
 		//Memory::VP::InjectHook(0x560078, HandleNeoMenuChangeLanguageLoadMap, PATCH_CALL);
 		Memory::VP::InjectHook(0x560069, HandleNeoMenuCommands, PATCH_CALL);
 		
@@ -614,27 +646,35 @@ extern "C"
 		Memory::VP::InjectHook(0x55E4B6, UpdateNeoMenuActiveStates, PATCH_CALL);
 		Memory::VP::InjectHook(0x55E721, UpdateNeoMenuActiveStates, PATCH_CALL);
 
-		printf(". OK\n");
-		
 		//replace the translation output "Key Missing:" to nothing...
 		//we do not translate our keys because of limitations in the gxt / handler so we just remove the prependix
 		for (int i = 0; i < 24; i++) {
 			Memory::VP::Patch<char>(0x6A9984 + i, 0x20);
 		}
 
+		printf(". OK\n");
+		
 	
+		printf("Hooking Timed Vector Pair handler ..");
 		Memory::VP::InjectHook(0x5CB3FC, SetVecPairValues, PATCH_CALL);
 		Memory::VP::InjectHook(0x5CB445, SetVecPairValues, PATCH_CALL);
+		printf(". OK\n");
 
-
-
-
-		printf("Init SDK Menu ..");
+		printf("Init Debug Menu ..");
 		CreateThread(nullptr, 0, reinterpret_cast<LPTHREAD_START_ROUTINE>(Init), nullptr, 0, nullptr);
-
 		printf(". OK\n");
 
 
+
+		
+
+		//keep the colramp from regular gameplay also when execution runs, is this needed !?
+		//Memory::VP::Patch<char>(0x5910FE + 1, 0x03);
+
+
+
+
+		
 	}
 }
 
