@@ -97,9 +97,11 @@ MenuEntry WEAPON_MATCHBOOK{ Types::WEAPON, "Matchbook", "Matchbook_(CT)", "", 14
 
 
 MenuEntry HELPER_A01_JUMPSCARE{ Types::SET_PLAYER_POS, "Port to Jumpscare", "Jumpscare", "", 0, false };
+MenuEntry HELPER_SPAWN{ Types::TRIGGER, "Spawn a hunter", "spawn", "", 0, false };
 
 MenuEntry AnyHelpers[] = {
-	HELPER_A01_JUMPSCARE
+	HELPER_A01_JUMPSCARE,
+	HELPER_SPAWN
 };
 
 MenuEntry AnyWeapons[] = { 
@@ -376,6 +378,13 @@ void CMenu::ProcessUserNavigation() {
 
 				SDK->MoveEntity(player, pos);
 			}
+		}
+		else if (selectedEntry.type == Types::TRIGGER) {
+			if (selectedEntry.entityName == "spawn") {
+				printf("spawn");
+				SDK->SpawnHunterNearByPlayer("TVLoonie01(hunter)");
+			}
+
 		}
 		else if (selectedEntry.type == Types::WEAPON) {
 			SDK->Spawn(selectedEntry.id, selectedEntry.needAmmo, selectedEntry.entityName.c_str());

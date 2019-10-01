@@ -102,9 +102,14 @@ void UpdateFlash() {
 void UpdateBloodStay() {
 	if (config.bloodStay == 1) {
 		Memory::VP::Patch<char>(0x5E4C10, 0x74);
+		Memory::VP::Patch<char>(0x5E4388, 0x75);
+		Memory::VP::Patch<char>(0x5E42C8, 0x75);
+			
 	}
 	else {
 		Memory::VP::Patch<char>(0x5E4C10, 0x75);
+		Memory::VP::Patch<char>(0x5E4388, 0x74);
+		Memory::VP::Patch<char>(0x5E42C8, 0x74);
 	}
 
 }
@@ -547,6 +552,15 @@ FILE __cdecl Wrap2ReadBinary(char* filename, char* mode) {
 	return ((FILE(__cdecl*)(char*, char*, int))0x61B338)(filename, mode, 64);
 }
 
+unsigned int __cdecl GetTexturByName(char* textureName) {
+
+	textureName = "mangler";
+
+	printf("textureName: %s", textureName);
+	
+		return ((unsigned int(__cdecl*)(char*))0x57A190)(textureName);
+
+}
 
 extern "C"
 {
@@ -664,17 +678,18 @@ extern "C"
 		CreateThread(nullptr, 0, reinterpret_cast<LPTHREAD_START_ROUTINE>(Init), nullptr, 0, nullptr);
 		printf(". OK\n");
 
+		printf("Replace FPS camera Menu.");
+	//	Memory::VP::InjectHook(0x598D40, ManhuntSdk::HookEnableFPSCamera, PATCH_JUMP);
+	//	Memory::VP::InjectHook(0x598EB0, ManhuntSdk::HookDisableFPSCamera, PATCH_JUMP);
+		printf(". OK\n");
 
 
 		
 
-		//keep the colramp from regular gameplay also when execution runs, is this needed !?
-		//Memory::VP::Patch<char>(0x5910FE + 1, 0x03);
+
+	//	Memory::VP::InjectHook(0x57A454, GetTexturByName, PATCH_CALL);
 
 
-
-
-		
 	}
 }
 

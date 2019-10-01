@@ -157,7 +157,7 @@ CSDKEntity* ManhuntSdk::SpawnHunterNearByPlayer(const char* name) {
 	AiAddEntity(name);
 
 	CSDKEntity* hunter = GetEntity(name);
-	
+
 	CSDKVector3 pos = GetCurrentPosition();
 
 	pos.z += 0.7;
@@ -338,7 +338,8 @@ void ManhuntSdk::HookEnableFPSCamera( int ptr)
 
 	*(CCamera*)(*(int*)0x789490 + 4256) = cam;
 
-	SetPlayerVisible(false);
+
+//	SetPlayerVisible(false);
 }
 
 void ManhuntSdk::HookDisableFPSCamera(int playerPointer)
@@ -352,7 +353,7 @@ void ManhuntSdk::HookDisableFPSCamera(int playerPointer)
 
 	//Disable the FPS camera (mode)
 	*(char*)(playerPointer + 4280) = 0;
-	SetPlayerVisible(true);
+//	SetPlayerVisible(true);
 
 	*(int*)ptrMovement &= 0xFFFBFFFF;
 	*(int*)ptrMovement |= 0x8000u;
