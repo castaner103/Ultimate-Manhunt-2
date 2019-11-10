@@ -1,4 +1,4 @@
-// dllmain.cpp : Defines the entry point for the DLL application.
+﻿// dllmain.cpp : Defines the entry point for the DLL application.
 
 #define LOWORD(_dw)     ((WORD)(((DWORD_PTR)(_dw)) & 0xffff))
 #define HIWORD(_dw)     ((WORD)((((DWORD_PTR)(_dw)) >> 16) & 0xffff))
@@ -306,13 +306,40 @@ int endCase = 0x55F31D;
 int command;
 char* commandText;
 
+/*
 void __cdecl HandleNeoMenuChangeLanguageLoadMap(int a1, int a2) {
 
 	char* cmd = (char*)(*(int*)a2);
+	printf("\n\ncmd ->%s<-", cmd);
 
-	((void(__cdecl*)(int, int))0x55F1A0)(a1, a2);
+	if (strcmp(cmd, "setLanguage(chinese)") == 0) {
+		printf("1");
+			
+		int set = *(int*)0x7604C8;
+
+		((int(__fastcall*)(int, int, int))0x56C0A0)((int)& set, 1, 1);
+
+		printf("2");
+		int v4 = *(int*)0x75F110;
+//		v4 = GetGameSettingsPointer();
+		
+		printf("3");
+		((int(__fastcall*)(int))0x562AB0)((int)v4);
+		//sub_562AB0((int)v4);
+
+		printf("4");
+		((void(__fastcall*)(int, int*, char))0x562B00)(v4, (int*)(a1 + 120), 1);
+//		sub_562B00(v4, (_DWORD*)(a1 + 120), 1);
+		printf("5");
+	}
+	else {
+		printf("ne");
+		((void(__cdecl*)(int, int))0x55F1A0)(a1, a2);
+
+	}
+
 }
-
+*/
 
 void __cdecl HandleNeoMenuCommands(int a1, int a2) {
 
@@ -477,7 +504,7 @@ int __cdecl WrapReadBinary(char* filename) {
 	std::string modFile = "mods/";
 	modFile.append("Ultimate Manhunt 2/");
 
-	//printf("Load: %s\n", filename);
+	printf("Load: %s\n", filename);
 
 
 	if (strcmp(filename, "global/ini/resource13.glg") == 0 && config.tvpCamera != 0) {
@@ -535,6 +562,8 @@ FILE __cdecl Wrap2ReadBinary(char* filename, char* mode) {
 
 	std::string modFilename = filename;
 
+	printf("Load: %s\n", filename);
+
 	std::string modFile = "mods/";
 	modFile.append("Ultimate Manhunt 2/");
 	modFile.append(modFilename);
@@ -554,13 +583,44 @@ FILE __cdecl Wrap2ReadBinary(char* filename, char* mode) {
 
 unsigned int __cdecl GetTexturByName(char* textureName) {
 
-	textureName = "mangler";
+//	textureName = "mangler";
 
 	printf("textureName: %s", textureName);
 	
 		return ((unsigned int(__cdecl*)(char*))0x57A190)(textureName);
 
 }
+
+
+
+
+int __fastcall sub_5ED660(int mem, int count1, int count2, int pedHeadAndOrPlayerBitmask, int bitModel4, int a6, int a7, int a8, int a9, float a10, float a11, float a12, float a13, float a14, int a15, float a16)
+{
+	printf("Count 2: %i\n", count2);
+	printf("a6: %i\n", a6);
+	printf("a7: %i\n", a7);
+
+	return ((int(__thiscall*)(int, int, int, int, int, int, int, int, int, float, float, float, float, float, int, float))0x5ED660)(mem, count1, count2, pedHeadAndOrPlayerBitmask, bitModel4, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16);
+}
+
+
+int* __cdecl AllocateMemory(int a1)
+{
+	int v1; // eax@1
+
+	v1 = ((int(__cdecl*)())0x580E30)();
+
+	int* result = ((int* (__thiscall*)(int, int))0x580C30)(v1, a1);
+
+	//Big data can cause a error, just use then the internal malloc
+	if (result == 0) {
+		return (int*)malloc(a1);
+	}
+
+	return result;
+}
+
+
 
 extern "C"
 {
@@ -569,20 +629,26 @@ extern "C"
 
 		ReadSettings();
 		ApplySettings();
-
-
+		
 		if (config.debug) {
 			AllocConsole();
 			freopen("CONIN$", "r", stdin);
 			freopen("CONOUT$", "w", stdout);
 			freopen("CONOUT$", "w", stderr);
 		}
-
-
-
+				
 		printf("Enable 60 FPS patch ..");
 		Memory::VP::Patch(0x40D2A3, 0x412B);
 		printf(". OK\n");
+
+
+
+		//Memory::VP::Patch<char>(0x57D066, 0x60);
+		
+		
+
+		Memory::VP::InjectHook(0x580ED0, AllocateMemory, PATCH_JUMP);
+		
 
 
 
@@ -647,7 +713,7 @@ extern "C"
 
 
 		printf("Hooking NeoMenu functions ..");
-		//Memory::VP::InjectHook(0x560078, HandleNeoMenuChangeLanguageLoadMap, PATCH_CALL);
+	//	Memory::VP::InjectHook(0x560078, HandleNeoMenuChangeLanguageLoadMap, PATCH_CALL);
 		Memory::VP::InjectHook(0x560069, HandleNeoMenuCommands, PATCH_CALL);
 		
 		Memory::VP::InjectHook(0x5570B1, WrapGetNeoMenuValue, PATCH_CALL);
@@ -678,16 +744,16 @@ extern "C"
 		CreateThread(nullptr, 0, reinterpret_cast<LPTHREAD_START_ROUTINE>(Init), nullptr, 0, nullptr);
 		printf(". OK\n");
 
-		printf("Replace FPS camera Menu.");
+		//printf("Replace FPS camera Menu.");
 	//	Memory::VP::InjectHook(0x598D40, ManhuntSdk::HookEnableFPSCamera, PATCH_JUMP);
 	//	Memory::VP::InjectHook(0x598EB0, ManhuntSdk::HookDisableFPSCamera, PATCH_JUMP);
-		printf(". OK\n");
+		//printf(". OK\n");
 
 
 		
 
 
-	//	Memory::VP::InjectHook(0x57A454, GetTexturByName, PATCH_CALL);
+		//Memory::VP::InjectHook(0x57A454, GetTexturByName, PATCH_CALL);
 
 
 	}
