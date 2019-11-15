@@ -306,11 +306,11 @@ int endCase = 0x55F31D;
 int command;
 char* commandText;
 
-/*
+
 void __cdecl HandleNeoMenuChangeLanguageLoadMap(int a1, int a2) {
 
 	char* cmd = (char*)(*(int*)a2);
-	printf("\n\ncmd ->%s<-", cmd);
+	printf("Neo cmd %s\n", cmd);
 
 	if (strcmp(cmd, "setLanguage(chinese)") == 0) {
 		printf("1");
@@ -333,19 +333,18 @@ void __cdecl HandleNeoMenuChangeLanguageLoadMap(int a1, int a2) {
 		printf("5");
 	}
 	else {
-		printf("ne");
 		((void(__cdecl*)(int, int))0x55F1A0)(a1, a2);
 
 	}
 
 }
-*/
+
 
 void __cdecl HandleNeoMenuCommands(int a1, int a2) {
 
 	char* cmd = (char*)(*(int*)a2);
 	
-//	printf("HandleNeoMenuCommands %s\n", cmd);
+	printf("HandleNeoMenuCommands %s\n", cmd);
 
 	bool isCustomCmd = false;
 
@@ -401,7 +400,7 @@ void __fastcall HookNeoMenuSettings( int GameSettingsPtr) {
 int __fastcall WrapGetNeoMenuValue(int ptr, int a2, int a3) {
 	char* fieldName = *(char**)a3;
 
-//	printf("WrapGetNeoMenuValue %s\n", fieldName);
+	printf("WrapGetNeoMenuValue %s\n", fieldName);
 
 	if (strcmp(fieldName, "headshot") == 0) {
 		return config.headshot;
@@ -646,7 +645,7 @@ extern "C"
 		//Memory::VP::Patch<char>(0x57D066, 0x60);
 		
 		
-
+		//overwrite the MH Alloc function to allow bigger textures
 		Memory::VP::InjectHook(0x580ED0, AllocateMemory, PATCH_JUMP);
 		
 
@@ -713,7 +712,7 @@ extern "C"
 
 
 		printf("Hooking NeoMenu functions ..");
-	//	Memory::VP::InjectHook(0x560078, HandleNeoMenuChangeLanguageLoadMap, PATCH_CALL);
+		Memory::VP::InjectHook(0x560078, HandleNeoMenuChangeLanguageLoadMap, PATCH_CALL);
 		Memory::VP::InjectHook(0x560069, HandleNeoMenuCommands, PATCH_CALL);
 		
 		Memory::VP::InjectHook(0x5570B1, WrapGetNeoMenuValue, PATCH_CALL);
@@ -721,6 +720,7 @@ extern "C"
 		Memory::VP::InjectHook(0x55DFA0, WrapGetNeoMenuValue, PATCH_CALL);
 		Memory::VP::InjectHook(0x55E58E, WrapGetNeoMenuValue, PATCH_CALL);
 		Memory::VP::InjectHook(0x5625B6, WrapGetNeoMenuValue, PATCH_CALL);
+
 
 		Memory::VP::InjectHook(0x55DEAA, UpdateNeoMenuActiveStates, PATCH_CALL);
 		Memory::VP::InjectHook(0x55E4B6, UpdateNeoMenuActiveStates, PATCH_CALL);

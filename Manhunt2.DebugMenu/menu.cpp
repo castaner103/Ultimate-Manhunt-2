@@ -257,6 +257,23 @@ void CMenu::ProcessMenu()
 }
 
 void CMenu::ToggleMenu() {
+
+	if (System::KeyHit(VK_F2)) {
+
+
+		//change to bunny model
+		*(int*)0x757580 = 1;
+	//	((int(__cdecl*)())0x4E93B0)();
+
+		SDK->SetPlayerVisible(false);
+		((signed int(__cdecl*)())0x4EC430)();
+		SDK->SetPlayerVisible(true);
+		
+
+
+		
+	}
+
 	if (System::KeyHit(VK_F1)) {
 		DisplayMenu ^= 1;
 
