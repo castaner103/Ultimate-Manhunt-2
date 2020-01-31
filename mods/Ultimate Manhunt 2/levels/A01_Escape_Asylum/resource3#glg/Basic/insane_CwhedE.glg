@@ -1,0 +1,10 @@
+
+RECORD insane_CwhedE
+    CLASS EC_BASIC
+    MATERIAL MATERIAL_PED
+    ANIMATION_BLOCK PlayerAnims
+    MODEL insane_Cwhed
+    COLLISION_DATA hunter
+    LOD_DATA 0,50,0,-1
+    LOCKED
+END

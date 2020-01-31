@@ -1,0 +1,7 @@
+
+RECORD leg_hedC
+    CLASS EC_PEDHEAD
+    MODEL leg_hedC
+    LOD_DATA 0,20,0,-1
+    BND_SPH_BOOST 1.0
+END

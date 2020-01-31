@@ -1,0 +1,12 @@
+
+RECORD real_asylum_elev
+    CLASS EC_MOVER
+    MODEL real_asylum_elev
+    COLLISION_DATA asylum_elevator
+    LOD_DATA 0,40,0,-1
+    MATERIAL MATERIAL_METALRAILING
+    PHYSICS LIFT_PHYS
+    ATTACH_ENTITY_NAME buttonInsideElev(S)
+    ATTACH_ENTITY_TO_HELPER SWITCHPOS
+    DONT_LIGHT
+END

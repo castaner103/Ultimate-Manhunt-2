@@ -1,0 +1,6 @@
+
+RECORD Gen_Save_Point
+    CLASS EC_TRIGGER
+    MODEL CJ_Save_Point(VHSTape)
+    LOD_DATA 0,40,0,-1
+END

@@ -1,0 +1,5 @@
+
+RECORD Trigger
+    CLASS EC_TRIGGER
+    LOD_DATA 0,20,0,-1
+END

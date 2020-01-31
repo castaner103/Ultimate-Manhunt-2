@@ -1,0 +1,12 @@
+
+RECORD dead_mutilated
+    CLASS EC_BASIC
+    MODEL dead_mutilated
+    COLLISION_DATA dead_mutilated
+    LOD_DATA 1,15,0,-1
+    MATERIAL MATERIAL_GORE
+    ARMOUR_CLASS ARM_INVULNERABLE
+    HIT_POINTS 100
+    DONT_LIGHT
+    LOCKED
+END

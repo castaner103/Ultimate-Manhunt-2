@@ -1,0 +1,12 @@
+
+RECORD office_plant_small_hanf
+    CLASS EC_BASIC
+    MODEL office_plant_small_hanf
+    COLLISION_DATA office_plant_small_hanf
+    LOD_DATA 0,40,0,-1
+    MATERIAL MATERIAL_WOOD
+    ARMOUR_CLASS ARM_INVULNERABLE
+    HIT_POINTS 100
+    LOCKED
+    TRANSPARENT
+END

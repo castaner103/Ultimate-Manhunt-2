@@ -1,0 +1,10 @@
+
+RECORD Truck_Asyl_Endcutscene
+    CLASS EC_BASIC
+    MODEL Truck_Asyl_Endcutscene
+    LOD_DATA 0,40,0,-1
+    MATERIAL MATERIAL_PED
+    ANIMATION_BLOCK Asylum_RM_CUTSCENES_ENTETIES
+    LOCKED
+    BND_SPH_BOOST 15.0
+END

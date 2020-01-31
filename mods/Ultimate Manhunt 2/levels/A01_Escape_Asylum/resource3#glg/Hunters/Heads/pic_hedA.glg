@@ -1,0 +1,7 @@
+
+RECORD pic_hedA
+    CLASS EC_PEDHEAD
+    MODEL pic_hedA
+    LOD_DATA 0,20,0,-1
+    BND_SPH_BOOST 1.5
+END

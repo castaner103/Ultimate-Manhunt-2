@@ -1,0 +1,10 @@
+
+RECORD asy_bodCwhedE
+    CLASS EC_BASIC
+    MATERIAL MATERIAL_PED
+    ANIMATION_BLOCK PlayerAnims
+    MODEL asy_bodCwhed
+    COLLISION_DATA hunter
+    LOD_DATA 0,50,0,-1
+    LOCKED
+END

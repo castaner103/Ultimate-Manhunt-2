@@ -1,0 +1,12 @@
+
+RECORD asylum_cell_door_slide_(SD)
+    CLASS EC_SLIDEDOOR
+    MODEL asylum_cell_door_slide_(SD)
+    COLLISION_DATA asylum_cell_door_slide_(SD)
+    LOD_DATA 0,40,0,-1
+    MATERIAL MATERIAL_METALRAILING
+    ARMOUR_CLASS ARM_INVULNERABLE
+    HIT_POINTS 100
+    PHYSICS LIFT_PHYS
+    TRANSPARENT
+END

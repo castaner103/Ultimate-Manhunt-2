@@ -1,0 +1,8 @@
+
+RECORD Gen_Skip_(CN)
+    CLASS EC_BASIC
+    MODEL Gen_Skip_(CN)
+    COLLISION_DATA Gen_Skip_(CN)
+    LOD_DATA 0,45,0,-1
+    LOCKED
+END

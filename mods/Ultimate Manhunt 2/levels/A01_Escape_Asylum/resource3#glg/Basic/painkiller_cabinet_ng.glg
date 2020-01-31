@@ -1,0 +1,11 @@
+
+RECORD painkiller_cabinet_ng
+    CLASS EC_BASIC
+    MODEL painkiller_cabinet_ng
+    COLLISION_DATA painkiller_cabinet_ng
+    LOD_DATA 0,20,0,-1
+    MATERIAL MATERIAL_WOOD
+    ARMOUR_CLASS ARM_INVULNERABLE
+    HIT_POINTS 100
+    LOCKED
+END

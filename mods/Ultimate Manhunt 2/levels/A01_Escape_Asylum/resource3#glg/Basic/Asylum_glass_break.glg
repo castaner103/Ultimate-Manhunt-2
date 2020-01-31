@@ -1,0 +1,14 @@
+
+RECORD Asylum_glass_break
+    CLASS EC_BASIC
+    MATERIAL MATERIAL_GLASSHARD
+    MODEL Asylum_glass_break
+    COLLISION_DATA Asylum_glass_break
+    LOD_DATA 0,20,0,-1
+    HIT_POINTS 1
+    ARMOUR_CLASS ARM_NONE
+    SPAWN Shard_(CT)
+    LOCKED
+    TRANSPARENT
+    SMASHABLE
+END

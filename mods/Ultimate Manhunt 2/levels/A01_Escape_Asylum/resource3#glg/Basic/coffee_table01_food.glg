@@ -1,0 +1,11 @@
+
+RECORD coffee_table01_food
+    CLASS EC_BASIC
+    MODEL coffee_table01_food
+    COLLISION_DATA coffee_table01_food
+    LOD_DATA 0,40,0,-1
+    MATERIAL MATERIAL_WOOD
+    ARMOUR_CLASS ARM_INVULNERABLE
+    HIT_POINTS 100
+    LOCKED
+END

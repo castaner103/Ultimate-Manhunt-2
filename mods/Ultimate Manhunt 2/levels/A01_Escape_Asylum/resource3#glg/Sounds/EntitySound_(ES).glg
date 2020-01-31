@@ -1,0 +1,6 @@
+
+RECORD EntitySound_(ES)
+    CLASS EC_ENTITYSOUND
+    LOD_DATA 0,20,0,-1
+    LOCKED
+END

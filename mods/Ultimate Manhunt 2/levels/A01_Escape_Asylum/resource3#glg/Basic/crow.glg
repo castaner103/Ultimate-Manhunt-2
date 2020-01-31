@@ -1,0 +1,5 @@
+
+RECORD crow
+    CLASS EC_BASIC
+    MODEL CJ_CROW
+END

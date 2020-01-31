@@ -1,0 +1,7 @@
+
+RECORD Basement_Lamp_(L)
+    CLASS EC_ENTITYLIGHT
+    MODEL Basement_Lamp_(L)
+    LOD_DATA 0,40,0,-1
+    LOCKED
+END

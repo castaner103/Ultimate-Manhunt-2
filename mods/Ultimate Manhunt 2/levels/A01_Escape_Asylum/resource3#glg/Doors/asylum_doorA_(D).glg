@@ -1,0 +1,9 @@
+
+RECORD asylum_doorA_(D)
+    CLASS EC_DOOR
+    MATERIAL MATERIAL_WOOD
+    MODEL asylum_doorA_(D)
+    COLLISION_DATA asylum_doorA_(D)
+    LOD_DATA 0,40,0,-1
+    PHYSICS SWINGDOOR_PHYS_90
+END

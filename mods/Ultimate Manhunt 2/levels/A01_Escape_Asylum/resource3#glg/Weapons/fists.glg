@@ -1,0 +1,12 @@
+
+RECORD fists
+    CLASS EC_WEAPON
+    COLLECTABLE_TYPE CT_FISTS
+    ANIMATION_BLOCK EntityAnims
+    MODEL fist_poly_hunter
+    WEAPON fists
+    KICK_WEAPON kick_fists
+    OBSTRUCT_WEAPON obstruct_melee
+    FIRE_SPEED 1.0f
+    HAND_ANIM Hands_Fists
+END

@@ -1,0 +1,5 @@
+
+RECORD rat
+    CLASS EC_BASIC
+    MODEL cockroach
+END

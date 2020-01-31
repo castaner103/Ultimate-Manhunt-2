@@ -1,0 +1,7 @@
+
+RECORD asy_hedA
+    CLASS EC_PEDHEAD
+    MODEL asy_hedA
+    LOD_DATA 0,20,0,-1
+    BND_SPH_BOOST 1.0
+END

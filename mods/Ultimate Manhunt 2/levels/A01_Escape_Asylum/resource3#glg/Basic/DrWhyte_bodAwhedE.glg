@@ -1,0 +1,10 @@
+
+RECORD DrWhyte_bodAwhedE
+    CLASS EC_BASIC
+    MATERIAL MATERIAL_PED
+    ANIMATION_BLOCK GenHunterAnims
+    MODEL why_bodWhed
+    COLLISION_DATA hunter
+    LOD_DATA 0,50,0,-1
+    LOCKED
+END

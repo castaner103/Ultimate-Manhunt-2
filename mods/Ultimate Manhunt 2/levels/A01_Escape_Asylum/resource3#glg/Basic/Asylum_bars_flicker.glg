@@ -1,0 +1,13 @@
+
+RECORD Asylum_bars_flicker
+    CLASS EC_BASIC
+    MODEL Asylum_bars_flicker
+    COLLISION_DATA Asylum_bars_flicker
+    LOD_DATA 0,20,0,-1
+    MATERIAL MATERIAL_METALRAILING
+    ARMOUR_CLASS ARM_INVULNERABLE
+    HIT_POINTS 100
+    LOCKED
+    TRANSPARENT
+    DONT_LIGHT
+END

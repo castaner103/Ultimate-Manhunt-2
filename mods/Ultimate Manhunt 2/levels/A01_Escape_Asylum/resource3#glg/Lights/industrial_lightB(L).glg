@@ -1,0 +1,12 @@
+
+RECORD industrial_lightB(L)
+    CLASS EC_ENTITYLIGHT
+    MODEL industrial_lightB(L)
+    COLLISION_DATA industrial_lightB(L)
+    MATERIAL MATERIAL_GLASSHARD
+    ARMOUR_CLASS ARM_INVULNERABLE
+    LOD_DATA 0,40,0,-1
+    HIT_POINTS 100
+    LOCKED
+    DONT_LIGHT
+END

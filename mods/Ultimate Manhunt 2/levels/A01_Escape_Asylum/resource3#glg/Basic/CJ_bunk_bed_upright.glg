@@ -1,0 +1,11 @@
+
+RECORD CJ_bunk_bed_upright
+    CLASS EC_BASIC
+    MODEL CJ_bunk_bed_upright
+    COLLISION_DATA CJ_bunk_bed_upright
+    LOD_DATA 0,20,0,-1
+    MATERIAL MATERIAL_METAL
+    ARMOUR_CLASS ARM_INVULNERABLE
+    HIT_POINTS 100
+    LOCKED
+END

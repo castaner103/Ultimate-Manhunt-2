@@ -1,0 +1,9 @@
+
+RECORD Bow_StreetLight_(L)
+    CLASS EC_ENTITYLIGHT
+    MATERIAL MATERIAL_STREETLIGHT
+    MODEL Bow_StreetLight_(L)
+    COLLISION_DATA Bow_StreetLight_(L)
+    LOD_DATA 0,40,0,-1
+    LOCKED
+END
