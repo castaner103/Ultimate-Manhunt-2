@@ -1,9 +1,0 @@
-
-RECORD headThrowerShot
-    CLASS EC_SHOT
-    MODEL fist_poly_hunter
-    MATERIAL MATERIAL_CAN
-    COLLISION_DATA grenade
-    PHYSICS GRENADE_PHYS
-    LOD_DATA 0,20,0,-1
-END

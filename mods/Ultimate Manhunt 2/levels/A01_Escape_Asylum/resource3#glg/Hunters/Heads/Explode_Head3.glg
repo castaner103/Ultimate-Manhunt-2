@@ -1,8 +1,0 @@
-
-RECORD Explode_Head3
-    CLASS EC_PEDHEAD
-    MODEL DedHed3
-    LOD_DATA 0,20,0,-1
-    EXPLODEABLE
-    BND_SPH_BOOST 1.5
-END

@@ -1,0 +1,20 @@
+
+#FORCE
+RECORD dummy
+    COLLISION_DATA visplayer
+    COLLISION_DATA deadped
+    COLLISION_DATA crouch
+    COLLISION_DATA climb
+    COLLISION_DATA grabledge
+    COLLISION_DATA crawl
+    COLLISION_DATA stand
+    COLLISION_DATA jump
+    COLLISION_DATA dive
+    COLLISION_DATA crouch_to_crawl1
+    COLLISION_DATA crouch_to_crawl2
+    COLLISION_DATA crouch_to_crawl1_small
+    COLLISION_DATA crouch_to_crawl2_small
+    COLLISION_DATA crouch_to_stand
+    COLLISION_DATA crawl_to_crouch
+    COLLISION_DATA crawl_to_crouch_small
+END

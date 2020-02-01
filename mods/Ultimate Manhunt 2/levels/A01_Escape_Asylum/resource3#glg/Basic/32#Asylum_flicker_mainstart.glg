@@ -1,0 +1,14 @@
+
+RECORD Asylum_flicker_mainstart
+    CLASS EC_BASIC
+    MODEL Asylum_flicker_mainstart
+    LOD_DATA 0,70,0,-1
+    LOD_DATA 1,70,0,-1
+    MATERIAL MATERIAL_NONE
+    ARMOUR_CLASS ARM_INVULNERABLE
+    HIT_POINTS 100
+    LOCKED
+    TRANSPARENT
+    DONT_LIGHT
+    DEPTHOFFSET 5.0
+END
