@@ -1,0 +1,223 @@
+{
+    "frameTimeCount": 20.000000596046448,
+    "bones": [
+        {
+            "boneId": 1095,
+            "frameType": 1,
+            "startTime": 19.9951171875,
+            "frames": {
+                "frames": [
+                    {
+                        "quat": [
+                            1,
+                            0,
+                            0,
+                            0
+                        ]
+                    }
+                ],
+                "lastFrameTime": 20.000000596046448
+            }
+        },
+        {
+            "boneId": 1096,
+            "frameType": 1,
+            "startTime": 19.9951171875,
+            "frames": {
+                "frames": [
+                    {
+                        "quat": [
+                            1,
+                            0,
+                            0,
+                            0
+                        ]
+                    }
+                ],
+                "lastFrameTime": 20.000000596046448
+            }
+        },
+        {
+            "boneId": 1040,
+            "frameType": 1,
+            "startTime": 19.9951171875,
+            "frames": {
+                "frames": [
+                    {
+                        "quat": [
+                            1,
+                            0,
+                            0,
+                            0
+                        ]
+                    }
+                ],
+                "lastFrameTime": 20.000000596046448
+            }
+        },
+        {
+            "boneId": 1001,
+            "frameType": 1,
+            "startTime": 19.9951171875,
+            "frames": {
+                "frames": [
+                    {
+                        "quat": [
+                            1,
+                            0,
+                            0,
+                            0
+                        ]
+                    }
+                ],
+                "lastFrameTime": 20.000000596046448
+            }
+        },
+        {
+            "boneId": 1003,
+            "frameType": 1,
+            "startTime": 19.9951171875,
+            "frames": {
+                "frames": [
+                    {
+                        "quat": [
+                            1,
+                            0,
+                            0,
+                            0
+                        ]
+                    }
+                ],
+                "lastFrameTime": 20.000000596046448
+            }
+        },
+        {
+            "boneId": 1039,
+            "frameType": 1,
+            "startTime": 19.9951171875,
+            "frames": {
+                "frames": [
+                    {
+                        "quat": [
+                            1,
+                            0,
+                            0,
+                            0
+                        ]
+                    }
+                ],
+                "lastFrameTime": 20.000000596046448
+            }
+        },
+        {
+            "boneId": 1020,
+            "frameType": 1,
+            "startTime": 19.9951171875,
+            "frames": {
+                "frames": [
+                    {
+                        "quat": [
+                            1,
+                            0,
+                            0,
+                            0
+                        ]
+                    }
+                ],
+                "lastFrameTime": 20.000000596046448
+            }
+        },
+        {
+            "boneId": 1021,
+            "frameType": 1,
+            "startTime": 19.9951171875,
+            "frames": {
+                "frames": [
+                    {
+                        "quat": [
+                            1,
+                            0,
+                            0,
+                            0
+                        ]
+                    }
+                ],
+                "lastFrameTime": 20.000000596046448
+            }
+        },
+        {
+            "boneId": 1057,
+            "frameType": 1,
+            "startTime": 19.9951171875,
+            "frames": {
+                "frames": [
+                    {
+                        "quat": [
+                            1,
+                            0,
+                            0,
+                            0
+                        ]
+                    }
+                ],
+                "lastFrameTime": 20.000000596046448
+            }
+        },
+        {
+            "boneId": 1093,
+            "frameType": 1,
+            "startTime": 19.9951171875,
+            "frames": {
+                "frames": [
+                    {
+                        "quat": [
+                            1,
+                            0,
+                            0,
+                            0
+                        ]
+                    }
+                ],
+                "lastFrameTime": 20.000000596046448
+            }
+        },
+        {
+            "boneId": 1074,
+            "frameType": 1,
+            "startTime": 19.9951171875,
+            "frames": {
+                "frames": [
+                    {
+                        "quat": [
+                            1,
+                            0,
+                            0,
+                            0
+                        ]
+                    }
+                ],
+                "lastFrameTime": 20.000000596046448
+            }
+        },
+        {
+            "boneId": 1075,
+            "frameType": 1,
+            "startTime": 19.9951171875,
+            "frames": {
+                "frames": [
+                    {
+                        "quat": [
+                            1,
+                            0,
+                            0,
+                            0
+                        ]
+                    }
+                ],
+                "lastFrameTime": 20.000000596046448
+            }
+        }
+    ],
+    "unknown5": "00004040",
+    "entry": []
+}
