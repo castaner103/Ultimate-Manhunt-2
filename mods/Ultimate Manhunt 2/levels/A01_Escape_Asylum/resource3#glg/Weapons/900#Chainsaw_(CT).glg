@@ -5,7 +5,7 @@ RECORD Chainsaw_(CT)
     ANIMATION_BLOCK EntityAnims
     HOLSTER_SLOT BACK
     MODEL chainsaw
-    WEAPON chainsaw
+    WEAPON chainsaw_player
     KICK_WEAPON kick_fists
     OBSTRUCT_WEAPON obstruct_1handedGun
     COLLISION_DATA GenCollectable
