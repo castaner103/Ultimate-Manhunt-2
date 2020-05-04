@@ -625,21 +625,6 @@ int __cdecl ChangeHudWeaponIconIfNoFists( int weaponId)
 }
 */
 
-int* __cdecl AllocateMemory(int a1)
-{
-	int v1 = ((int(__cdecl*)())0x580E30)();
-
-	int* result = ((int* (__thiscall*)(int, int))0x580C30)(v1, a1);
-
-	//Big data can cause a error, just use then the internal malloc
-	if (result == 0) {
-		printf("MH Mem alloc fail, use malloc");
-		return (int*)malloc(a1);
-	}
-
-	return result;
-}
-
 
 
 void HandleHudWeaponIcon()
@@ -940,13 +925,16 @@ extern "C"
 			freopen("CONOUT$", "w", stdout);
 			freopen("CONOUT$", "w", stderr);
 		}
-				
+
+		printf("Remove legal screen ..");
+		Memory::VP::Patch(0x53FC68, 0);
+		Memory::VP::Patch(0x53FC50, 0);
+		Memory::VP::Patch(0x53FC6F, 0);
+		printf(". OK\n");
+
 		printf("Enable 60 FPS patch ..");
 		Memory::VP::Patch(0x40D2A3, 0x412B);
 		printf(". OK\n");
-		
-		//overwrite the MH Alloc function to allow bigger textures
-		//Memory::VP::InjectHook(0x580ED0, AllocateMemory, PATCH_JUMP);
 
 //		Memory::VP::InjectHook(0x5890A0, CalcHash, PATCH_JUMP);
 //		Memory::VP::InjectHook(0x7D8610, crc32, PATCH_JUMP);
@@ -969,7 +957,7 @@ extern "C"
 
 
 
-		//patch heap to 512MB. this can not be done here, exe need to be patched manuel!
+		//patch heap to 512MB. this can not be done here, exe need to be patched (thx to MAJEST1C_R3 !)
 //			Memory::VP::Patch<char>(0x580950 + 4, 0x1f);
 
 
