@@ -24,7 +24,9 @@ struct CConfig
 	int whitenoise = 0;
 };
 
-void DummyReturnVoid() { return; }
+void DummyReturnVoid() { 
+	printf("Dummy Called");
+	return; }
 
 CConfig config;
 
@@ -250,6 +252,8 @@ signed int __fastcall OverwriteGetHardcodedExecutoinLevel(int ptr)
 	return result;
 }
 
+
+	
 
 int explodeHead_ebx;
 int explodeHead_unk;
@@ -528,22 +532,22 @@ int __cdecl WrapReadBinary(char* filename) {
 
 	}
 	
-
+	//use local save game file
 	size_t isSavegame = modFilename.find("MH2_00.sav");
 	if (isSavegame != std::string::npos) {
-		std::string modFileSave = "mods/Ultimate Manhunt 2/MH2_00.sav";
-
-		std::ifstream f(modFileSave);
-		if (f.good()) {
-//			std::cout << "Load Savegame from mod folder" << std::endl;
-
-			filename = new char[modFileSave.length() + 1];
-			strcpy(filename, modFileSave.c_str());;
-
-			return ((int(__cdecl*)(char*))0x53BCC0)(filename);
-		}
+		modFile = "mods/Ultimate Manhunt 2/MH2_00.sav";
 	}
 
+	//we use our execution animation file
+	size_t isExecutionFile = modFilename.find("strmanim_pc.bin");
+	if (isExecutionFile != std::string::npos) {
+		modFile = "mods/Ultimate Manhunt 2/strmanim_pc.bin";
+	}
+
+	size_t isAnimFile = modFilename.find("allanims_pc.IFP");
+	if (isAnimFile != std::string::npos) {
+		modFile = "mods/Ultimate Manhunt 2/allanims_pc.ifp";
+	}
 
 	// is the wanted file in our mod folder ?
 	std::ifstream f(modFile.c_str());
@@ -566,6 +570,12 @@ FILE __cdecl Wrap2ReadBinary(char* filename, char* mode) {
 	std::string modFile = "mods/";
 	modFile.append("Ultimate Manhunt 2/");
 	modFile.append(modFilename);
+
+	size_t isAnimFile = modFilename.find("allanims_pc.IFP");
+	if (isAnimFile != std::string::npos) {
+		modFile = "mods/Ultimate Manhunt 2/allanims_pc.ifp";
+	}
+
 
 	// is the wanted file in our mod folder ?
 	std::ifstream f(modFile.c_str());
@@ -602,22 +612,317 @@ int __fastcall sub_5ED660(int mem, int count1, int count2, int pedHeadAndOrPlaye
 	return ((int(__thiscall*)(int, int, int, int, int, int, int, int, int, float, float, float, float, float, int, float))0x5ED660)(mem, count1, count2, pedHeadAndOrPlayerBitmask, bitModel4, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16);
 }
 
+int __fastcall GetHudWeaponIcon(int graphicPtr, int a, int weaponId)
+{
+	return *(int*)(graphicPtr + 984);
+}
+
+/*
+int __cdecl ChangeHudWeaponIconIfNoFists( int weaponId)
+{
+	printf("CALLED");
+	return ((int(__cdecl*)(int, int))0x54C150)(weaponId, 1);
+}
+*/
 
 int* __cdecl AllocateMemory(int a1)
 {
-	int v1; // eax@1
-
-	v1 = ((int(__cdecl*)())0x580E30)();
+	int v1 = ((int(__cdecl*)())0x580E30)();
 
 	int* result = ((int* (__thiscall*)(int, int))0x580C30)(v1, a1);
 
 	//Big data can cause a error, just use then the internal malloc
 	if (result == 0) {
+		printf("MH Mem alloc fail, use malloc");
 		return (int*)malloc(a1);
 	}
 
 	return result;
 }
+
+
+
+void HandleHudWeaponIcon()
+{
+
+		int v0; // ebp@3
+		int v1; // esi@3
+		int v2; // edi@3
+		int v3; // ecx@3
+		int v4; // edx@3
+		signed int v5; // eax@21
+		signed int v6; // eax@44
+		int v7; // edi@52
+		signed int v8; // esi@52
+		int v9; // eax@62
+		int v10; // ebx@62
+		int v11; // esi@65
+		int v12; // edi@65
+		float v13; // ST20_4@70
+		double v14; // st6@68
+		float v15; // ST18_4@70
+		int v16; // eax@74
+		int v17; // [sp+8h] [bp-Ch]@3
+		int v18; // [sp+Ch] [bp-8h]@3
+		int v19; // [sp+10h] [bp-4h]@0
+
+		if (*(int*)0x75CF40)
+		{
+			((int(*)())0x54C210)();
+			//sub_54C210();
+			*(int*)0x75CF40 = 0;
+		}
+		v0 = *(int*)0x789490;
+		v1 = *(int*)(*(int*)0x789490 + 448);
+		v2 = *(int*)(*(int*)0x789490 + 444);
+		*(int*)0x75CF84 = *(int*)(*(int*)(v2 + 12) + 4);
+		*(int*)0x75CF88 = *(int*)(*(int*)(v2 + 12) + 8);
+		v3 = *(int*)(*(int*)(v2 + 12) + 12);
+		*(int*)0x75CF8C = *(int*)(*(int*)(v2 + 12) + 12);
+		v4 = *(int*)(*(int*)(v2 + 12) + 16);
+		v17 = v2;
+		v18 = v1;
+		*(int*)0x75CF90 = *(int*)(*(int*)(v2 + 12) + 16);
+		if (*(int*)0x75CF84 || *(int*)0x75CF88 || (*(int*)0x75CDEC = 1, v4))
+			* (int*)0x75CDEC = 0;
+		if (*(int*)0x75CF00)
+			goto LABEL_82;
+		if (*(int*)0x75CF94 && !*(int*)0x75CF84)
+		{
+			((int(__fastcall*)(int, int))0x599D50)(*(int*)0x789490, 0);
+//			sub_599D50(*(int*)0x789490, 0);
+			v3 = *(int*)0x75CF8C;
+		}
+		if (*(int*)0x75CF98 && !*(int*)0x75CF88)
+		{
+			((int(__fastcall*)(int, int))0x599D50)(v0, 0);
+//			sub_599D50(v0, 0);
+			v3 = *(int*)0x75CF8C;
+		}
+		if (*(int*)0x75CF9C && !v3)
+		{
+			((int(__fastcall*)(int, int))0x599D50)(v0, 0);
+//			sub_599D50(v0, 0);
+			v3 = *(int*)0x75CF8C;
+		}
+		if (*(int*)0x75CFA0 && !*(int*)0x75CF90)
+		{
+			((int(__fastcall*)(int, int))0x599D50)(v0, 0);
+//			sub_599D50(v0, 0);
+			v3 = *(int*)0x75CF8C;
+		}
+		if (*(int*)0x75CF00)
+		{
+		LABEL_82:
+			*(int*)0x75CF38 = *(int*)0x75CF04;
+		LABEL_43:
+			*(int*)0x75CF80 = 1;
+			goto LABEL_44;
+		}
+		v5 = 0;
+		if (!*(int*)0x75CF74 && v1)
+			v5 = 1;
+		if (*(int*)0x75CF38 == 3 && !v3)
+			v5 = 1;
+		if (*(int*)0x75CF84 != *(int*)0x75CF94)
+		{
+			if (v5)
+				* (int*)0x75CF38 = 1;
+			*(int*)0x75CF80 = 1;
+		}
+		if (*(int*)0x75CF88 != *(int*)0x75CF98)
+		{
+			if (v5)
+				* (int*)0x75CF38 = 2;
+			*(int*)0x75CF80 = 1;
+		}
+		if (v3 != *(int*)0x75CF9C)
+		{
+			if (v5)
+				* (int*)0x75CF38 = 3;
+			*(int*)0x75CF80 = 1;
+		}
+		if (*(int*)0x75CF90 != *(int*)0x75CFA0)
+		{
+			if (v5)
+				* (int*)0x75CF38 = 4;
+			goto LABEL_43;
+		}
+	LABEL_44:
+		*(int*)0x75CF94 = *(int*)0x75CF84;
+		*(int*)0x75CF98 = *(int*)0x75CF88;
+		v6 = 0;
+		*(int*)0x75CF9C = v3;
+		*(int*)0x75CFA0 = *(int*)0x75CF90;
+		*(int*)0x75CF74 = v1;
+		if (!v3)
+			v6 = 1;
+		if (!*(int*)0x75CF00 || *(int*)0x75CF04)
+		{
+			if (!v6)
+				goto LABEL_51;
+		}
+		else
+		{
+			*(int*)0x75CF38 = 3;
+		}
+		*(int*)0x75CF58 = 16;
+		*(int*)0x75CF68 = ((int(__fastcall*)(int, int))0x569130)((int)&*(int*)0x75BDB8, 16);
+		printf("1");
+
+	LABEL_51:
+		if (*(int*)0x75CF80)
+		{
+			((int(__cdecl*)())0x54C210)();
+			//sub_54C210();
+			((int(__cdecl*)())0x54C070)();
+			//sub_54C070();
+			v7 = v19;
+			v8 = 0;
+			do
+			{
+				if (v8)
+				{
+					switch (v8)
+					{
+					case 1:
+						v7 = *(int*)0x75CF88;
+						break;
+					case 2:
+						v7 = *(int*)0x75CF8C;
+						break;
+					case 3:
+						v7 = *(int*)0x75CF90;
+						break;
+					}
+				}
+				else
+				{
+					v7 = *(int*)0x75CF84;
+				}
+				if (v7)
+				{
+
+					v9 = ((int(__fastcall*)(int))0x54C070)(v7);
+					//v9 = sub_526960(v7);
+					v10 = ((int(__cdecl*)(int, int))0x54C150)(v9, 0);
+//					v10 = sub_54C150(v9, 0);
+
+					int* stuff = *(int**)0x75CF50;
+					stuff[v8] = ((int(__fastcall*)(int))0x54C150)(v7);
+					// dword_75CF50[v8] = GetEntityId(entityId);
+
+					int* stuff2 = *(int**)0x75CF60;
+					stuff2[v8] = v10;
+					//dword_75CF60[v8] = v10;
+				}
+				++v8;
+			} while (v8 < 4);
+			v2 = v17;
+			*(int*)0x75CF80 = 0;
+		}
+		printf("2");
+		v11 = *(int*)0x75CF38;
+		printf("3");
+
+		//v12 = *(int*)(*(int*)(v2 + 12) + 4 * *(int*)0x75CF38);
+
+		printf("4");
+		if (!((bool(__cdecl*)())0x53DEE0)())
+//		if (!sub_53DEE0())
+		{
+			if (false)
+			//if (v12)
+			{
+				if (v18 != v11)
+				{
+					v14 = *(float*)0x6ECE68;
+					if (*(float*)0x6ECE68 <= 0.0)
+						v14 = 0.000099999997;
+					v15 = v14;
+					*(float*)0x75CFA4 = v15 + *(float*)0x75CFA4;
+					v13 = *(float*)0x76EB48 + *(float*)0x76EB44;
+					if (v13 < (double) * (float*)0x75CFA4)
+					{
+						*(float*)0x75CFA4 = 0.0;
+						((signed int(__fastcall*)(int, int, int))0x506BE0)(v0, v11, 0);
+//						sub_506BE0(v0, v11, 0);
+					}
+				}
+			}
+			else
+			{
+				((signed int(__fastcall*)(int, int, int))0x506BE0)(v0, 0, 0);
+//				sub_506BE0(v0, 0, 0);
+			}
+		}
+
+		printf("5");
+		
+		if (*(int*)0x75CF44)
+		{
+			*(int*)0x75CF44 = 0;
+			v16 = 0;
+			while (*(int*)(0x75CF20 + v16) != v11)
+			//while (*(int*)0x75CF20[v16] != v11)
+			{
+				if (++v16 >= 4)
+				{
+					*(int*)0x75CF7C = 0;
+					*(int*)0x75CF00 = 0;
+					return;
+				}
+			}
+			*(int*)0x75CF34 = v16 + 1;
+		}
+		*(int*)0x75CF7C = 0;
+		*(int*)0x75CF00 = 0;
+
+		
+}
+
+int __cdecl CalcHash(char const* str)
+{
+	int hash = 0;
+	for (char const* c = str; *c; ++c) {
+		char chr = (unsigned char)(*c - 97) <= 25 ? *c - 32 : *c;
+		hash = hash * 33 + chr;
+	}
+
+	std::ofstream myfile;
+	myfile.open("hashes.txt", std::fstream::out | std::fstream::app);
+	myfile << str << "\n";
+	myfile.close();
+
+	return hash;
+}
+
+int __fastcall crc32(int* self, int a, char* a2)
+{
+	char* v2; // edi@1
+	char v3; // al@1
+	unsigned int v4; // esi@1
+	int* i; // ebx@1
+
+	std::ofstream myfile;
+	myfile.open("crc32.txt", std::fstream::out | std::fstream::app);
+	myfile << a2 << "\n";
+	myfile.close();
+
+
+	v2 = a2;
+	v3 = *a2;
+	v4 = -1;
+	for (i = self; v3; ++v2)
+	{
+		v4 = i[(unsigned __int8)(v4 ^ tolower(v3))] ^ (v4 >> 8);
+		v3 = v2[1];
+	}
+	return ~v4;
+}
+
+
+
 
 
 
@@ -639,23 +944,39 @@ extern "C"
 		printf("Enable 60 FPS patch ..");
 		Memory::VP::Patch(0x40D2A3, 0x412B);
 		printf(". OK\n");
-
-
-
-		//Memory::VP::Patch<char>(0x57D066, 0x60);
-		
 		
 		//overwrite the MH Alloc function to allow bigger textures
-		Memory::VP::InjectHook(0x580ED0, AllocateMemory, PATCH_JUMP);
-		
+		//Memory::VP::InjectHook(0x580ED0, AllocateMemory, PATCH_JUMP);
 
+//		Memory::VP::InjectHook(0x5890A0, CalcHash, PATCH_JUMP);
+//		Memory::VP::InjectHook(0x7D8610, crc32, PATCH_JUMP);
+
+		//skip vecpair handling
+	//	Memory::VP::InjectHook(0x5CB6DE, 0x5CB6CB, PATCH_JUMP);
+
+
+		//interactive skip icon drawer
+//		Memory::VP::InjectHook(0x5B5DE0, 0x5B5E6B, PATCH_JUMP);
+
+	//	Memory::VP::InjectHook(0x5A997A, 0x5A998B, PATCH_JUMP);
+
+		
+//		Memory::VP::InjectHook(0x5A987A, 0x5A98A8, PATCH_JUMP);
+
+
+		//amount of brain bits
+		Memory::VP::Patch<char>(0x523A9C + 2, 0x1e);
+
+
+
+		//patch heap to 512MB. this can not be done here, exe need to be patched manuel!
+//			Memory::VP::Patch<char>(0x580950 + 4, 0x1f);
 
 
 		printf("Enable ModLoader ..");
-		// Hook another readBinary call
-		Memory::VP::InjectHook(0x57B2E5, Wrap2ReadBinary, PATCH_CALL);
 
 		// Hook the readBinary call
+		Memory::VP::InjectHook(0x57B2E5, Wrap2ReadBinary, PATCH_CALL);
 		Memory::VP::InjectHook(0x418A1E, WrapReadBinary, PATCH_CALL);
 		Memory::VP::InjectHook(0x4B0842, WrapReadBinary, PATCH_CALL);
 		Memory::VP::InjectHook(0x4C3A7C, WrapReadBinary, PATCH_CALL);
@@ -678,6 +999,11 @@ extern "C"
 		Memory::VP::InjectHook(0x5BC86B, WrapReadBinary, PATCH_CALL);
 		Memory::VP::InjectHook(0x5DEA76, WrapReadBinary, PATCH_CALL);
 		printf(". OK\n");
+
+
+
+			//	Memory::VP::InjectHook(0x5455F4, HandleHudWeaponIcon, PATCH_CALL);
+		
 
 		/*
 			3-Stage firearm executions code
@@ -750,6 +1076,13 @@ extern "C"
 		//printf(". OK\n");
 
 
+		
+//		Memory::VP::Patch<char>(0x54C1E4 + 2, 0x63);
+	//	Memory::VP::Patch<char>(0x5285D0 + 2, 0x63);
+
+//		Memory::VP::Patch<char>(0x55B292 + 1, 0x63);
+		
+		
 		
 
 

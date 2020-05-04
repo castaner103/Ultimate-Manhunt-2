@@ -224,6 +224,20 @@ void CMenu::BuildMenu() {
 void CMenu::ProcessMenu()
 {
 	
+	if (System::KeyHit(VK_F4)) {
+
+		int hunter = ((int(__cdecl*)(char*))0x4E9130)("TVLoonie01(hunter)");
+
+		int newHead = ((int(__cdecl*)(char*))0x4E9130)("Explode_Head3");
+		
+		int newHeadEntity = ((int(__cdecl*)(int))0x4E12A0)(newHead);
+
+		*(int*)(hunter + 692) = newHeadEntity;
+
+		
+//		((int(__fastcall*)(int, int))0x522E00)(newHeadEntity, hunter);
+
+	}
 
 	if (System::KeyHit(VK_SPACE)) {
 		SDK->InterrupExecution();
