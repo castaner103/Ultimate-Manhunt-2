@@ -926,15 +926,15 @@ extern "C"
 			freopen("CONOUT$", "w", stderr);
 		}
 
-		printf("Remove legal screen ..");
-		Memory::VP::Patch(0x53FC68, 0);
-		Memory::VP::Patch(0x53FC50, 0);
-		Memory::VP::Patch(0x53FC6F, 0);
-		printf(". OK\n");
+//		printf("Remove legal screen ..");
+//		Memory::VP::Patch(0x53FC68, 0);
+//		Memory::VP::Patch(0x53FC50, 0);
+//		Memory::VP::Patch(0x53FC6F, 0);
+//		printf(". OK\n");
 
-		printf("Enable 60 FPS patch ..");
-		Memory::VP::Patch(0x40D2A3, 0x412B);
-		printf(". OK\n");
+//		printf("Enable 60 FPS patch ..");
+//		Memory::VP::Patch(0x40D2A3, 0x412B);
+//		printf(". OK\n");
 
 //		Memory::VP::InjectHook(0x5890A0, CalcHash, PATCH_JUMP);
 //		Memory::VP::InjectHook(0x7D8610, crc32, PATCH_JUMP);
